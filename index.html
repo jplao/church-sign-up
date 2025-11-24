@@ -98,6 +98,36 @@
             border-radius: 0 0 20px 20px;
         }
 
+        /* Loading indicator */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2em;
+            color: #92400e;
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        /* Error message */
+        .error-message {
+            background: #fee2e2;
+            border: 2px solid #dc2626;
+            color: #991b1b;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
         /* Hidden admin button */
         .admin-toggle {
             position: fixed;
@@ -331,8 +361,7 @@
 
         .edit-mass-btn,
         .delete-mass-btn,
-        .edit-header-btn,
-        .edit-note-btn {
+        .edit-header-btn {
             display: none;
         }
 
@@ -353,8 +382,7 @@
 
         .admin-mode .edit-mass-btn,
         .admin-mode .delete-mass-btn,
-        .admin-mode .edit-header-btn,
-        .admin-mode .edit-note-btn {
+        .admin-mode .edit-header-btn {
             display: block;
         }
 
@@ -455,70 +483,6 @@
             color: #9ca3af;
             font-style: italic;
             font-size: 0.9em;
-        }
-
-        .note-red {
-            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
-            color: white;
-            text-align: center;
-            padding: 20px;
-            font-size: 1.3em;
-            font-weight: bold;
-            margin: 30px -20px -20px -20px;
-            position: relative;
-            border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(220, 38, 38, 0.4);
-        }
-
-        .note-red::before {
-            content: "🍁";
-            position: absolute;
-            left: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.3em;
-            animation: spin 4s linear infinite;
-        }
-
-        .note-red::after {
-            content: "🍁";
-            position: absolute;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.3em;
-            animation: spin 4s linear infinite reverse;
-        }
-
-        @keyframes spin {
-            from { transform: translateY(-50%) rotate(0deg); }
-            to { transform: translateY(-50%) rotate(360deg); }
-        }
-
-        .edit-note-btn {
-            position: absolute;
-            top: 50%;
-            right: 70px;
-            transform: translateY(-50%);
-            background-color: rgba(255,255,255,0.3);
-            color: white;
-            border: 2px solid white;
-            padding: 6px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.8em;
-            font-weight: 600;
-            display: none;
-            transition: all 0.2s;
-        }
-
-        .admin-mode .edit-note-btn {
-            display: block;
-        }
-
-        .edit-note-btn:hover {
-            background-color: rgba(255,255,255,0.5);
-            transform: translateY(-50%) scale(1.05);
         }
 
         /* Modal styles */
@@ -743,17 +707,6 @@
                 font-size: 0.8em;
             }
 
-            .note-red {
-                font-size: 1em;
-                padding: 15px;
-                margin: 25px -15px -15px -15px;
-            }
-
-            .note-red::before,
-            .note-red::after {
-                display: none;
-            }
-
             .admin-toggle {
                 width: 55px;
                 height: 55px;
@@ -793,8 +746,7 @@
             }
 
             .admin-mode .mass-header,
-            .admin-mode .header-green,
-            .admin-mode .note-red {
+            .admin-mode .header-green {
                 padding-bottom: 50px;
             }
 
@@ -815,12 +767,6 @@
             .admin-mode .edit-header-btn {
                 top: 10px;
                 right: 10px;
-            }
-
-            .admin-mode .edit-note-btn {
-                top: 50%;
-                right: 60px;
-                transform: translateY(-50%);
             }
         }
 
@@ -850,6 +796,8 @@
             <h2 id="headerDate">NOVEMBER 27-28, 2025</h2>
         </div>
 
+        <div id="loadingMessage" class="loading">Loading sign-ups</div>
+        <div id="errorMessage" class="error-message" style="display: none;"></div>
         <div id="massesContainer"></div>
     </div>
 
@@ -861,8 +809,7 @@
         <h3>🦃 Admin Controls</h3>
         <button onclick="toggleAdminMode()" id="editModeBtn">✏️ Edit Mode</button>
         <button onclick="addNewMass()">+ Add Mass</button>
-        <button onclick="exportData()">📥 Download</button>
-        <button onclick="importData()">📤 Upload</button>
+        <button onclick="refreshData()">🔄 Refresh Data</button>
         <button onclick="clearAllData()">🗑️ Clear All</button>
     </div>
 
@@ -930,14 +877,21 @@
         </div>
     </div>
 
-    <input type="file" id="fileInput" style="display: none;" accept=".json">
-
     <script>
+        // ============================================
+        // CONFIGURATION - REPLACE THIS URL WITH YOUR GOOGLE SHEETS WEB APP URL
+        // ============================================
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzLqT2EoyOaaKBF7kNVeG02asyj4rZSvXHyK0HywZO7SpP2MCglpuodpvFMWbO1aRl66A/exec';
+        
+        // ============================================
+        // Global variables
+        // ============================================
         let currentMass = '';
         let currentPosition = 0;
         let currentRow = 0;
         let currentEditingMassId = '';
         let adminModeActive = false;
+        let allData = null;
 
         // Default masses
         const defaultMasses = [
@@ -947,100 +901,130 @@
             { id: 'fri5pm', day: 'Friday, November 28, 2025', time: '5:00 pm', note: 'Will have collection' }
         ];
 
-        // Initialize data structure
-        function initializeData() {
-            if (!localStorage.getItem('thanksgivingMasses')) {
-                localStorage.setItem('thanksgivingMasses', JSON.stringify(defaultMasses));
+        // ============================================
+        // Google Sheets API Functions
+        // ============================================
+        
+        async function fetchDataFromSheets() {
+            try {
+                const response = await fetch(GOOGLE_SHEETS_URL);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data from Google Sheets');
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                showError('Unable to load data. Please check your internet connection and try again.');
+                return null;
             }
-            if (!localStorage.getItem('thanksgivingVolunteers')) {
-                localStorage.setItem('thanksgivingVolunteers', JSON.stringify({}));
+        }
+
+        async function saveDataToSheets(data) {
+            try {
+                const response = await fetch(GOOGLE_SHEETS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                // Note: no-cors mode doesn't give us access to the response,
+                // so we assume success and refresh data
+                await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for save
+                return true;
+            } catch (error) {
+                console.error('Error saving data:', error);
+                showError('Unable to save data. Please try again.');
+                return false;
             }
-            if (!localStorage.getItem('thanksgivingHeader')) {
-                localStorage.setItem('thanksgivingHeader', JSON.stringify({
-                    title: 'THANKSGIVING MASSES',
-                    date: 'NOVEMBER 27-28, 2025'
-                }));
-            }
         }
 
-        // Load data
-        function loadMasses() {
-            const stored = localStorage.getItem('thanksgivingMasses');
-            return stored ? JSON.parse(stored) : defaultMasses;
+        // ============================================
+        // UI Helper Functions
+        // ============================================
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
         }
 
-        function saveMasses(masses) {
-            localStorage.setItem('thanksgivingMasses', JSON.stringify(masses));
+        function hideError() {
+            document.getElementById('errorMessage').style.display = 'none';
         }
 
-        function loadVolunteers() {
-            const stored = localStorage.getItem('thanksgivingVolunteers');
-            return stored ? JSON.parse(stored) : {};
+        function showLoading() {
+            document.getElementById('loadingMessage').style.display = 'block';
+            document.getElementById('massesContainer').style.display = 'none';
         }
 
-        function saveVolunteers(volunteers) {
-            localStorage.setItem('thanksgivingVolunteers', JSON.stringify(volunteers));
+        function hideLoading() {
+            document.getElementById('loadingMessage').style.display = 'none';
+            document.getElementById('massesContainer').style.display = 'block';
         }
 
-        function loadHeader() {
-            const stored = localStorage.getItem('thanksgivingHeader');
-            return stored ? JSON.parse(stored) : { title: 'THANKSGIVING MASSES', date: 'NOVEMBER 27-28, 2025' };
-        }
-
-        function saveHeader(header) {
-            localStorage.setItem('thanksgivingHeader', JSON.stringify(header));
-        }
-
-        function loadNote() {
-            return localStorage.getItem('thanksgivingNote') || 'NOTE: ADDITIONAL MASSES AS NEEDED';
-        }
-
-        function saveNote(note) {
-            localStorage.setItem('thanksgivingNote', note);
-        }
-
-        // Toggle admin panel
-        function toggleAdminPanel() {
-            const panel = document.getElementById('adminPanel');
-            panel.classList.toggle('show');
-        }
-
-        // Toggle admin mode (shows edit buttons)
-        function toggleAdminMode() {
-            adminModeActive = !adminModeActive;
-            const btn = document.getElementById('editModeBtn');
+        // ============================================
+        // Data Management Functions
+        // ============================================
+        
+        async function loadAllData() {
+            showLoading();
+            hideError();
             
-            if (adminModeActive) {
-                document.body.classList.add('admin-mode');
-                btn.textContent = '✓ Exit Edit Mode';
-                alert('✏️ Edit mode activated! Click "Exit Edit Mode" to hide the edit buttons.');
+            const data = await fetchDataFromSheets();
+            
+            if (data) {
+                allData = data;
+                displayHeader();
+                displayMasses();
+                hideLoading();
             } else {
-                document.body.classList.remove('admin-mode');
-                btn.textContent = '✏️ Edit Mode';
-                alert('Edit mode deactivated.');
+                // Use default data if sheets unavailable
+                allData = {
+                    masses: defaultMasses,
+                    volunteers: {},
+                    header: { title: 'THANKSGIVING MASSES', date: 'NOVEMBER 27-28, 2025' }
+                };
+                displayHeader();
+                displayMasses();
+                hideLoading();
             }
         }
 
-        // Display header
+        async function saveAllData() {
+            const success = await saveDataToSheets(allData);
+            if (success) {
+                // Refresh to show latest data
+                await loadAllData();
+            }
+        }
+
+        async function refreshData() {
+            await loadAllData();
+            toggleAdminPanel();
+            alert('✅ Data refreshed!');
+        }
+
+        // ============================================
+        // Display Functions
+        // ============================================
+        
         function displayHeader() {
-            const header = loadHeader();
-            document.getElementById('headerTitle').textContent = header.title;
-            document.getElementById('headerDate').textContent = header.date;
+            if (!allData || !allData.header) return;
+            document.getElementById('headerTitle').textContent = allData.header.title;
+            document.getElementById('headerDate').textContent = allData.header.date;
         }
 
-        // Display note
-        function displayNote() {
-            document.getElementById('noteText').textContent = loadNote();
-        }
-
-        // Display all masses
         function displayMasses() {
-            const masses = loadMasses();
-            const volunteers = loadVolunteers();
+            if (!allData || !allData.masses) return;
+            
             const container = document.getElementById('massesContainer');
             container.innerHTML = '';
 
-            masses.forEach(mass => {
+            allData.masses.forEach(mass => {
                 const massDiv = document.createElement('div');
                 massDiv.className = 'mass-section';
                 massDiv.innerHTML = `
@@ -1085,18 +1069,17 @@
                 container.appendChild(massDiv);
             });
 
-            // Display volunteers
             displayVolunteers();
         }
 
-        // Display volunteers
         function displayVolunteers() {
-            const volunteers = loadVolunteers();
+            if (!allData || !allData.volunteers) return;
+            
             const slots = document.querySelectorAll('.slot-content');
             
             slots.forEach(slot => {
                 const id = slot.id;
-                const name = volunteers[id];
+                const name = allData.volunteers[id];
                 const parent = slot.parentElement;
                 
                 if (name) {
@@ -1110,26 +1093,45 @@
             });
         }
 
-        // Add new mass
-        function addNewMass() {
-            const masses = loadMasses();
+        // ============================================
+        // Admin Functions
+        // ============================================
+        
+        function toggleAdminPanel() {
+            const panel = document.getElementById('adminPanel');
+            panel.classList.toggle('show');
+        }
+
+        function toggleAdminMode() {
+            adminModeActive = !adminModeActive;
+            const btn = document.getElementById('editModeBtn');
+            
+            if (adminModeActive) {
+                document.body.classList.add('admin-mode');
+                btn.textContent = '✓ Exit Edit Mode';
+                alert('✏️ Edit mode activated! Click "Exit Edit Mode" to hide the edit buttons.');
+            } else {
+                document.body.classList.remove('admin-mode');
+                btn.textContent = '✏️ Edit Mode';
+                alert('Edit mode deactivated.');
+            }
+        }
+
+        async function addNewMass() {
             const newId = 'mass' + Date.now();
-            masses.push({
+            allData.masses.push({
                 id: newId,
                 day: 'New Day',
                 time: '12:00 pm',
                 note: ''
             });
-            saveMasses(masses);
-            displayMasses();
+            await saveAllData();
             toggleAdminPanel();
         }
 
-        // Edit mass
         function editMass(massId) {
             currentEditingMassId = massId;
-            const masses = loadMasses();
-            const mass = masses.find(m => m.id === massId);
+            const mass = allData.masses.find(m => m.id === massId);
             
             if (mass) {
                 document.getElementById('massDay').value = mass.day;
@@ -1139,75 +1141,80 @@
             }
         }
 
-        // Handle edit mass form
-        document.getElementById('editMassForm').addEventListener('submit', function(e) {
+        document.getElementById('editMassForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const masses = loadMasses();
-            const massIndex = masses.findIndex(m => m.id === currentEditingMassId);
+            const massIndex = allData.masses.findIndex(m => m.id === currentEditingMassId);
             
             if (massIndex !== -1) {
-                masses[massIndex].day = document.getElementById('massDay').value;
-                masses[massIndex].time = document.getElementById('massTime').value;
-                masses[massIndex].note = document.getElementById('massNote').value;
-                saveMasses(masses);
-                displayMasses();
+                allData.masses[massIndex].day = document.getElementById('massDay').value;
+                allData.masses[massIndex].time = document.getElementById('massTime').value;
+                allData.masses[massIndex].note = document.getElementById('massNote').value;
+                await saveAllData();
                 closeModal('editMassModal');
             }
         });
 
-        // Delete mass
-        function deleteMass(massId) {
+        async function deleteMass(massId) {
             if (confirm('Are you sure you want to delete this mass time? All volunteer sign-ups for this mass will also be deleted.')) {
-                const masses = loadMasses();
-                const volunteers = loadVolunteers();
-                
                 // Remove mass
-                const updatedMasses = masses.filter(m => m.id !== massId);
-                saveMasses(updatedMasses);
+                allData.masses = allData.masses.filter(m => m.id !== massId);
                 
                 // Remove volunteers for this mass
-                Object.keys(volunteers).forEach(key => {
+                Object.keys(allData.volunteers).forEach(key => {
                     if (key.startsWith(massId + '-')) {
-                        delete volunteers[key];
+                        delete allData.volunteers[key];
                     }
                 });
-                saveVolunteers(volunteers);
                 
-                displayMasses();
+                await saveAllData();
             }
         }
 
-        // Edit header
         function editHeader() {
-            const header = loadHeader();
-            document.getElementById('headerTitleInput').value = header.title;
-            document.getElementById('headerDateInput').value = header.date;
+            document.getElementById('headerTitleInput').value = allData.header.title;
+            document.getElementById('headerDateInput').value = allData.header.date;
             document.getElementById('editHeaderModal').style.display = 'block';
         }
 
-        document.getElementById('editHeaderForm').addEventListener('submit', function(e) {
+        document.getElementById('editHeaderForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            saveHeader({
+            allData.header = {
                 title: document.getElementById('headerTitleInput').value,
                 date: document.getElementById('headerDateInput').value
-            });
-            displayHeader();
+            };
+            await saveAllData();
             closeModal('editHeaderModal');
         });
 
-        // Volunteer modal
+        async function clearAllData() {
+            if (confirm('⚠️ Are you sure you want to clear ALL data? This cannot be undone!')) {
+                if (confirm('Really? This will delete all masses and volunteer sign-ups!')) {
+                    allData = {
+                        masses: defaultMasses,
+                        volunteers: {},
+                        header: { title: 'THANKSGIVING MASSES', date: 'NOVEMBER 27-28, 2025' }
+                    };
+                    await saveAllData();
+                    alert('✅ All data cleared!');
+                    toggleAdminPanel();
+                }
+            }
+        }
+
+        // ============================================
+        // Volunteer Functions
+        // ============================================
+        
         function openVolunteerModal(mass, position, row) {
             currentMass = mass;
             currentPosition = position;
             currentRow = row;
             
             const slotId = `${mass}-${position}-${row}`;
-            const volunteers = loadVolunteers();
-            const existingName = volunteers[slotId];
+            const existingName = allData.volunteers[slotId];
             
             const modal = document.getElementById('volunteerModal');
-            const form = document.getElementById('volunteerForm');
             const nameInput = document.getElementById('volunteerName');
             const removeContainer = document.getElementById('removeButtonContainer');
             
@@ -1229,120 +1236,55 @@
             nameInput.focus();
         }
 
-        document.getElementById('volunteerForm').addEventListener('submit', function(e) {
+        document.getElementById('volunteerForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const name = document.getElementById('volunteerName').value.trim();
             if (!name) return;
             
             const slotId = `${currentMass}-${currentPosition}-${currentRow}`;
-            const volunteers = loadVolunteers();
-            volunteers[slotId] = name;
-            saveVolunteers(volunteers);
+            allData.volunteers[slotId] = name;
             
-            displayVolunteers();
+            await saveAllData();
             closeModal('volunteerModal');
         });
 
-        function removeVolunteer() {
+        async function removeVolunteer() {
             if (confirm('Are you sure you want to remove this sign-up?')) {
                 const slotId = `${currentMass}-${currentPosition}-${currentRow}`;
-                const volunteers = loadVolunteers();
-                delete volunteers[slotId];
-                saveVolunteers(volunteers);
+                delete allData.volunteers[slotId];
                 
-                displayVolunteers();
+                await saveAllData();
                 closeModal('volunteerModal');
             }
         }
 
-        // Export data
-        function exportData() {
-            const data = {
-                masses: loadMasses(),
-                volunteers: loadVolunteers(),
-                header: loadHeader(),
-                exportDate: new Date().toISOString()
-            };
-            
-            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `thanksgiving-signup-${new Date().toISOString().split('T')[0]}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-            toggleAdminPanel();
-        }
-
-        // Import data
-        function importData() {
-            document.getElementById('fileInput').click();
-            toggleAdminPanel();
-        }
-
-        document.getElementById('fileInput').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                try {
-                    const data = JSON.parse(event.target.result);
-                    
-                    if (confirm('This will replace all current data. Continue?')) {
-                        if (data.masses) saveMasses(data.masses);
-                        if (data.volunteers) saveVolunteers(data.volunteers);
-                        if (data.header) saveHeader(data.header);
-                        
-                        displayHeader();
-                        displayMasses();
-                        alert('✅ Data imported successfully!');
-                    }
-                } catch (err) {
-                    alert('❌ Error reading file. Please make sure it is a valid JSON file.');
-                }
-            };
-            reader.readAsText(file);
-            e.target.value = '';
-        });
-
-        // Clear all data
-        function clearAllData() {
-            if (confirm('⚠️ Are you sure you want to clear ALL data? This cannot be undone!')) {
-                if (confirm('Really? This will delete all masses and volunteer sign-ups!')) {
-                    localStorage.removeItem('thanksgivingMasses');
-                    localStorage.removeItem('thanksgivingVolunteers');
-                    localStorage.removeItem('thanksgivingHeader');
-                    initializeData();
-                    displayHeader();
-                    displayMasses();
-                    alert('✅ All data cleared!');
-                    toggleAdminPanel();
-                }
-            }
-        }
-
-        // Close modal
+        // ============================================
+        // Modal Functions
+        // ============================================
+        
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
         }
 
-        // Close modal when clicking outside
         window.onclick = function(event) {
             if (event.target.classList.contains('modal')) {
                 event.target.style.display = 'none';
             }
-            // Close admin panel when clicking outside
             if (!event.target.closest('.admin-panel') && !event.target.closest('.admin-toggle')) {
                 document.getElementById('adminPanel').classList.remove('show');
             }
         }
 
+        // ============================================
         // Initialize
-        initializeData();
-        displayHeader();
-        displayMasses();
+        // ============================================
+        
+        // Load data when page loads
+        loadAllData();
+        
+        // Refresh data every 30 seconds to show updates from other users
+        setInterval(loadAllData, 30000);
     </script>
 </body>
 </html>
