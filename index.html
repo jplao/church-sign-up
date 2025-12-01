@@ -16,12 +16,12 @@
             background: 
                 repeating-linear-gradient(
                     45deg,
-                    #f0f9ff 0px,
-                    #f0f9ff 20px,
-                    #e0f2fe 20px,
-                    #e0f2fe 40px
+                    #fef3f3 0px,
+                    #fef3f3 20px,
+                    #fee2e2 20px,
+                    #fee2e2 40px
                 ),
-                linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+                linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
             padding: 15px;
             line-height: 1.6;
             position: relative;
@@ -30,7 +30,7 @@
 
         /* Festive background pattern with emojis */
         body::before {
-            content: "❄️ 🎄 ⭐ 🎅 🔔 ❄️ 🎄 ⭐ 🎅 🔔 ❄️ 🎄 ⭐ 🎅 🔔 ❄️ 🎄 ⭐";
+            content: "❄️ 🎄 🦌 ⛄ ⭐ ❄️ 🎄 🦌 ⛄ ⭐ ❄️ 🎄 🦌 ⛄ ⭐ ❄️ 🎄 🦌";
             position: fixed;
             top: 0;
             left: 0;
@@ -45,7 +45,7 @@
         }
 
         body::after {
-            content: "❄️ 🎄 ⭐ 🎅 🔔 ❄️ 🎄 ⭐ 🎅 🔔 ❄️ 🎄 ⭐ 🎅 🔔 ❄️ 🎄 ⭐";
+            content: "❄️ 🎄 🦌 ⛄ ⭐ ❄️ 🎄 🦌 ⛄ ⭐ ❄️ 🎄 🦌 ⛄ ⭐ ❄️ 🎄 🦌";
             position: fixed;
             bottom: 0;
             left: 0;
@@ -73,7 +73,7 @@
 
         /* Decorative border pattern */
         .container::before {
-            content: "🎄 ⭐ 🎅 ❄️ 🔔 🎁 🎄 ⭐ 🎅 ❄️ 🔔 🎁";
+            content: "⛄ 🎄 ❄️ 🦌 ⭐ 🎁 ⛄ 🎄 ❄️ 🦌 ⭐ 🎁";
             position: absolute;
             top: -2px;
             left: 0;
@@ -86,7 +86,7 @@
         }
 
         .container::after {
-            content: "🎄 ⭐ 🎅 ❄️ 🔔 🎁 🎄 ⭐ 🎅 ❄️ 🔔 🎁";
+            content: "⛄ 🎄 ❄️ 🦌 ⭐ 🎁 ⛄ 🎄 ❄️ 🦌 ⭐ 🎁";
             position: absolute;
             bottom: -2px;
             left: 0;
@@ -219,28 +219,28 @@
         }
 
         .header-red::before {
-            content: "⭐";
+            content: "❄️";
             position: absolute;
             left: 30px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 1.5em;
-            animation: twinkle 2s infinite;
+            font-size: 2em;
+            animation: snowfall 4s ease-in-out infinite;
         }
 
         .header-red::after {
-            content: "⭐";
+            content: "❄️";
             position: absolute;
             right: 30px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 1.5em;
-            animation: twinkle 2s infinite 0.5s;
+            font-size: 2em;
+            animation: snowfall 4s ease-in-out infinite 2s;
         }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
-            50% { opacity: 0.5; transform: translateY(-50%) scale(1.2); }
+        @keyframes snowfall {
+            0%, 100% { opacity: 1; transform: translateY(-50%) rotate(0deg); }
+            50% { opacity: 0.7; transform: translateY(-40%) rotate(180deg); }
         }
 
         .header-green {
@@ -256,21 +256,22 @@
 
         .header-green::before,
         .header-green::after {
-            content: "🎄";
+            content: "🦌";
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             font-size: 4em;
-            animation: sway 3s ease-in-out infinite;
+            animation: prance 3s ease-in-out infinite;
         }
 
         .header-green::before { left: 20px; }
-        .header-green::after { right: 20px; }
+        .header-green::after { right: 20px; transform: translateY(-50%) scaleX(-1); }
 
-        @keyframes sway {
+        @keyframes prance {
             0%, 100% { transform: translateY(-50%) rotate(0deg); }
-            25% { transform: translateY(-50%) rotate(-3deg); }
-            75% { transform: translateY(-50%) rotate(3deg); }
+            25% { transform: translateY(-55%) rotate(-3deg); }
+            50% { transform: translateY(-50%) rotate(0deg); }
+            75% { transform: translateY(-55%) rotate(3deg); }
         }
 
         .edit-header-btn {
@@ -334,33 +335,27 @@
             border-bottom: 3px solid #16a34a;
         }
 
-        .mass-header::before {
-            content: "🔔";
+        .mass-header::before,
+        .mass-header::after {
             position: absolute;
-            left: 20px;
             top: 50%;
             transform: translateY(-50%);
             font-size: 2em;
-            animation: ring 2s ease-in-out infinite;
+            animation: bob 3s ease-in-out infinite;
+        }
+
+        .mass-header::before {
+            left: 20px;
         }
 
         .mass-header::after {
-            content: "🔔";
-            position: absolute;
             right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2em;
-            animation: ring 2s ease-in-out infinite 0.5s;
+            animation-delay: 1.5s;
         }
 
-        @keyframes ring {
-            0%, 100% { transform: translateY(-50%) rotate(0deg); }
-            10% { transform: translateY(-50%) rotate(-15deg); }
-            20% { transform: translateY(-50%) rotate(15deg); }
-            30% { transform: translateY(-50%) rotate(-10deg); }
-            40% { transform: translateY(-50%) rotate(10deg); }
-            50% { transform: translateY(-50%) rotate(0deg); }
+        @keyframes bob {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-55%) scale(1.05); }
         }
 
         .edit-mass-btn,
@@ -423,6 +418,101 @@
             font-weight: 600;
         }
 
+        .announcement-notice {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde047 100%);
+            border: 3px solid #eab308;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 15px 20px;
+            position: relative;
+        }
+
+        .announcement-notice::before {
+            content: "⚠️";
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        .announcement-text {
+            color: #713f12;
+            font-weight: 600;
+            font-size: 1.05em;
+            display: inline;
+        }
+
+        .announcement-cancelled {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border: 3px solid #dc2626;
+        }
+
+        .announcement-cancelled::before {
+            content: "❌";
+        }
+
+        .edit-announcement-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #eab308;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8em;
+            font-weight: 600;
+            display: none;
+            transition: all 0.2s;
+        }
+
+        .admin-mode .edit-announcement-btn {
+            display: block;
+        }
+
+        .edit-announcement-btn:hover {
+            background-color: #ca8a04;
+            transform: scale(1.05);
+        }
+
+        .reorder-btn {
+            position: absolute;
+            left: 10px;
+            background-color: #6b7280;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: 600;
+            display: none;
+            transition: all 0.2s;
+            width: 40px;
+        }
+
+        .reorder-up {
+            top: 10px;
+        }
+
+        .reorder-down {
+            top: 50px;
+        }
+
+        .admin-mode .reorder-btn {
+            display: block;
+        }
+
+        .reorder-btn:hover:not(:disabled) {
+            background-color: #4b5563;
+            transform: scale(1.1);
+        }
+
+        .reorder-btn:disabled {
+            background-color: #d1d5db;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
         .volunteer-table {
             width: 100%;
             border-collapse: collapse;
@@ -478,9 +568,10 @@
         }
 
         .volunteer-name.filled {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            background: linear-gradient(135deg, #fef9c3 0%, #fde047 100%);
             font-weight: 600;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid #eab308;
         }
 
         .empty-slot {
@@ -516,7 +607,7 @@
         }
 
         .modal-content::before {
-            content: "⭐ 🎄 ⭐";
+            content: "❄️ 🎄 ❄️";
             position: absolute;
             top: -20px;
             left: 50%;
@@ -820,7 +911,7 @@
     <!-- Volunteer Sign-up Modal -->
     <div id="volunteerModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header" id="modalTitle">⭐ Sign Up for Position</div>
+            <div class="modal-header" id="modalTitle">❄️ Sign Up for Position</div>
             <form id="volunteerForm">
                 <div class="form-group">
                     <label for="volunteerName">Your Name:</label>
@@ -881,11 +972,34 @@
         </div>
     </div>
 
+    <!-- Edit Announcement Modal -->
+    <div id="editAnnouncementModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">📢 Edit Announcement</div>
+            <form id="editAnnouncementForm">
+                <div class="form-group">
+                    <label for="announcementText">Announcement Message:</label>
+                    <textarea id="announcementText" placeholder="e.g., ⚠️ Please note: This mass has been cancelled due to weather. or leave blank for no announcement"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="isCancelled" style="width: auto; margin-right: 8px;">
+                        Mark as CANCELLED (red alert)
+                    </label>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('editAnnouncementModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Announcement</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
         // ============================================
         // CONFIGURATION - REPLACE THIS URL WITH YOUR GOOGLE SHEETS WEB APP URL
         // ============================================
-        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzLqT2EoyOaaKBF7kNVeG02asyj4rZSvXHyK0HywZO7SpP2MCglpuodpvFMWbO1aRl66A/exec';
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzYBkx3enpegMWAtw52yN-AJexvsGyCMY3vY-OaSoutMcwZMazqHmiyuzZBSs0RAt27Wg/exec';
         
         // ============================================
         // Global variables
@@ -894,16 +1008,17 @@
         let currentPosition = 0;
         let currentRow = 0;
         let currentEditingMassId = '';
+        let currentEditingAnnouncementMassId = '';
         let adminModeActive = false;
         let allData = null;
 
         // Default masses
         const defaultMasses = [
-            { id: 'xmas-eve-4pm', day: 'Tuesday, December 24, 2025', time: '4:00 pm', note: 'Christmas Eve - Family Mass' },
-            { id: 'xmas-eve-7pm', day: 'Tuesday, December 24, 2025', time: '7:00 pm', note: 'Christmas Eve' },
-            { id: 'xmas-eve-midnight', day: 'Tuesday, December 24, 2025', time: 'Midnight', note: 'Christmas Eve - Midnight Mass' },
-            { id: 'xmas-day-9am', day: 'Wednesday, December 25, 2025', time: '9:00 am', note: 'Christmas Day' },
-            { id: 'xmas-day-11am', day: 'Wednesday, December 25, 2025', time: '11:00 am', note: 'Christmas Day' }
+            { id: 'xmas-eve-4pm', day: 'Tuesday, December 24, 2025', time: '4:00 pm', note: 'Christmas Eve - Family Mass', announcement: '' },
+            { id: 'xmas-eve-7pm', day: 'Tuesday, December 24, 2025', time: '7:00 pm', note: 'Christmas Eve', announcement: '' },
+            { id: 'xmas-eve-midnight', day: 'Tuesday, December 24, 2025', time: 'Midnight', note: 'Christmas Eve - Midnight Mass', announcement: '' },
+            { id: 'xmas-day-9am', day: 'Wednesday, December 25, 2025', time: '9:00 am', note: 'Christmas Day', announcement: '' },
+            { id: 'xmas-day-11am', day: 'Wednesday, December 25, 2025', time: '11:00 am', note: 'Christmas Day', announcement: '' }
         ];
 
         // ============================================
@@ -1025,48 +1140,103 @@
             const container = document.getElementById('massesContainer');
             container.innerHTML = '';
 
-            allData.masses.forEach(mass => {
+            // Array of different winter/Christmas emoji pairs
+            const emojiPairs = [
+                ['⛄', '⛄'],  // snowmen
+                ['🦌', '🦌'],  // reindeer
+                ['❄️', '❄️'],  // snowflakes
+                ['⭐', '⭐'],  // stars
+                ['🎄', '🎄'],  // trees
+                ['🎁', '🎁'],  // gifts
+                ['🕯️', '🕯️'],  // candles
+                ['🔔', '🔔']   // bells
+            ];
+
+            allData.masses.forEach((mass, index) => {
                 const massDiv = document.createElement('div');
                 massDiv.className = 'mass-section';
+                
+                // Select emoji pair for this mass (cycles through the array)
+                const emoji = emojiPairs[index % emojiPairs.length];
+                
+                // Check if mass is cancelled
+                const isCancelled = mass.announcement && (
+                    mass.announcement.toLowerCase().includes('cancel') || 
+                    mass.isCancelled === true
+                );
+                
+                // Build announcement HTML if exists
+                let announcementHTML = '';
+                if (mass.announcement) {
+                    announcementHTML = `
+                        <div class="announcement-notice ${isCancelled ? 'announcement-cancelled' : ''}">
+                            <button class="edit-announcement-btn" onclick="editAnnouncement('${mass.id}')">Edit</button>
+                            <span class="announcement-text">${mass.announcement}</span>
+                        </div>
+                    `;
+                }
+                
+                // Build volunteer table HTML only if not cancelled
+                let volunteerTableHTML = '';
+                if (!isCancelled) {
+                    volunteerTableHTML = `
+                        <table class="volunteer-table">
+                            <tr>
+                                <td>1</td>
+                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 1, 0)">
+                                    <span class="slot-content" id="${mass.id}-1-0"></span>
+                                </td>
+                                <td>3</td>
+                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 3, 0)">
+                                    <span class="slot-content" id="${mass.id}-3-0"></span>
+                                </td>
+                                <td>5</td>
+                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 5, 0)">
+                                    <span class="slot-content" id="${mass.id}-5-0"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 2, 0)">
+                                    <span class="slot-content" id="${mass.id}-2-0"></span>
+                                </td>
+                                <td>4</td>
+                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 4, 0)">
+                                    <span class="slot-content" id="${mass.id}-4-0"></span>
+                                </td>
+                                <td>6</td>
+                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 6, 0)">
+                                    <span class="slot-content" id="${mass.id}-6-0"></span>
+                                </td>
+                            </tr>
+                        </table>
+                    `;
+                }
+                
+                // Add reorder buttons (only in admin mode)
+                const reorderButtons = `
+                    <button class="reorder-btn reorder-up" onclick="moveMassUp(${index})" ${index === 0 ? 'disabled' : ''}>↑</button>
+                    <button class="reorder-btn reorder-down" onclick="moveMassDown(${index})" ${index === allData.masses.length - 1 ? 'disabled' : ''}>↓</button>
+                `;
+                
                 massDiv.innerHTML = `
-                    <div class="mass-header">
+                    <div class="mass-header" data-emoji-left="${emoji[0]}" data-emoji-right="${emoji[1]}">
+                        <style>
+                            #mass-${index} .mass-header::before { content: "${emoji[0]}"; }
+                            #mass-${index} .mass-header::after { content: "${emoji[1]}"; }
+                        </style>
+                        ${reorderButtons}
                         <button class="delete-mass-btn" onclick="deleteMass('${mass.id}')">Delete</button>
                         <button class="edit-mass-btn" onclick="editMass('${mass.id}')">Edit</button>
+                        <button class="edit-announcement-btn" onclick="editAnnouncement('${mass.id}')" style="top: 50px; right: 10px;">📢 Note</button>
                         <h3>${mass.day}</h3>
                         <p><strong>${mass.time}</strong></p>
                         ${mass.note ? `<p>${mass.note}</p>` : ''}
                     </div>
-                    <table class="volunteer-table">
-                        <tr>
-                            <td>1</td>
-                            <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 1, 0)">
-                                <span class="slot-content" id="${mass.id}-1-0"></span>
-                            </td>
-                            <td>3</td>
-                            <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 3, 0)">
-                                <span class="slot-content" id="${mass.id}-3-0"></span>
-                            </td>
-                            <td>5</td>
-                            <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 5, 0)">
-                                <span class="slot-content" id="${mass.id}-5-0"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 2, 0)">
-                                <span class="slot-content" id="${mass.id}-2-0"></span>
-                            </td>
-                            <td>4</td>
-                            <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 4, 0)">
-                                <span class="slot-content" id="${mass.id}-4-0"></span>
-                            </td>
-                            <td>6</td>
-                            <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 6, 0)">
-                                <span class="slot-content" id="${mass.id}-6-0"></span>
-                            </td>
-                        </tr>
-                    </table>
+                    ${announcementHTML}
+                    ${volunteerTableHTML}
                 `;
+                massDiv.id = `mass-${index}`;
                 container.appendChild(massDiv);
             });
 
@@ -1124,7 +1294,8 @@
                 id: newId,
                 day: 'New Day',
                 time: '12:00 pm',
-                note: ''
+                note: '',
+                announcement: ''
             });
             await saveAllData();
             toggleAdminPanel();
@@ -1170,6 +1341,26 @@
             }
         }
 
+        async function moveMassUp(index) {
+            if (index > 0) {
+                // Swap with previous item
+                const temp = allData.masses[index];
+                allData.masses[index] = allData.masses[index - 1];
+                allData.masses[index - 1] = temp;
+                await saveAllData();
+            }
+        }
+
+        async function moveMassDown(index) {
+            if (index < allData.masses.length - 1) {
+                // Swap with next item
+                const temp = allData.masses[index];
+                allData.masses[index] = allData.masses[index + 1];
+                allData.masses[index + 1] = temp;
+                await saveAllData();
+            }
+        }
+
         function editHeader() {
             document.getElementById('headerTitleInput').value = allData.header.title;
             document.getElementById('headerDateInput').value = allData.header.date;
@@ -1184,6 +1375,41 @@
             };
             await saveAllData();
             closeModal('editHeaderModal');
+        });
+
+        function editAnnouncement(massId) {
+            currentEditingAnnouncementMassId = massId;
+            const mass = allData.masses.find(m => m.id === massId);
+            
+            if (mass) {
+                document.getElementById('announcementText').value = mass.announcement || '';
+                // Check cancelled checkbox based on flag or text content
+                const isCancelled = mass.isCancelled === true || 
+                    (mass.announcement && mass.announcement.toLowerCase().includes('cancel'));
+                document.getElementById('isCancelled').checked = isCancelled;
+                document.getElementById('editAnnouncementModal').style.display = 'block';
+            }
+        }
+
+        document.getElementById('editAnnouncementForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const massIndex = allData.masses.findIndex(m => m.id === currentEditingAnnouncementMassId);
+            
+            if (massIndex !== -1) {
+                let announcement = document.getElementById('announcementText').value.trim();
+                const isCancelled = document.getElementById('isCancelled').checked;
+                
+                // Add cancelled prefix if checkbox is checked and not already there
+                if (isCancelled && announcement && !announcement.toLowerCase().includes('cancel')) {
+                    announcement = '❌ CANCELLED: ' + announcement;
+                }
+                
+                allData.masses[massIndex].announcement = announcement;
+                allData.masses[massIndex].isCancelled = isCancelled;
+                await saveAllData();
+                closeModal('editAnnouncementModal');
+            }
         });
 
         async function clearAllData() {
@@ -1217,7 +1443,7 @@
             const nameInput = document.getElementById('volunteerName');
             const removeContainer = document.getElementById('removeButtonContainer');
             
-            document.getElementById('modalTitle').textContent = `⭐ Sign Up for Position ${position}`;
+            document.getElementById('modalTitle').textContent = `❄️ Sign Up for Position ${position}`;
             
             if (existingName) {
                 nameInput.value = existingName;
