@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St. Irenaeus Church Sign Up - Ash Wednesday</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    #faf5ff 0px,
+                    #faf5ff 20px,
+                    #f3e8ff 20px,
+                    #f3e8ff 40px
+                ),
+                linear-gradient(135deg, #e9d5ff 0%, #d8b4fe 100%);
+            padding: 15px;
+            line-height: 1.6;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Festive background pattern with emojis */
+        body::before {
+            content: "✝️ 🕊️ ⛪ 🙏 ✝️ 🕊️ ⛪ 🙏 ✝️ 🕊️ ⛪ 🙏";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 3px solid #9333ea;
+            z-index: 0;
+            opacity: 0.9;
+        }
+
+        body::after {
+            content: "✝️ 🕊️ ⛪ 🙏 ✝️ 🕊️ ⛪ 🙏 ✝️ 🕊️ ⛪ 🙏";
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+            background: rgba(255, 255, 255, 0.95);
+            border-top: 3px solid #ec4899;
+            z-index: 0;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 8px 30px rgba(147, 51, 234, 0.3);
+            border-radius: 20px;
+            border: 5px solid #9333ea;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Decorative border pattern */
+        .container::before {
+            content: "✝️ 🕊️ ⛪ 🙏 ✝️ 🕊️ ⛪ 🙏";
+            position: absolute;
+            top: -2px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 20px;
+            background: white;
+            padding: 5px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .container::after {
+            content: "✝️ 🕊️ ⛪ 🙏 ✝️ 🕊️ ⛪ 🙏";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 20px;
+            background: white;
+            padding: 5px;
+            border-radius: 0 0 20px 20px;
+        }
+
+        /* Loading indicator */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2em;
+            color: #991b1b;
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        /* Error message */
+        .error-message {
+            background: #fee2e2;
+            border: 2px solid #dc2626;
+            color: #991b1b;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        /* Hidden admin button */
+        .admin-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #9333ea 0%, #7e22ce 100%);
+            color: white;
+            border: 3px solid #6b21a8;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 28px;
+            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.5);
+            z-index: 1001;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .admin-toggle:hover {
+            transform: scale(1.15) rotate(90deg);
+            box-shadow: 0 6px 20px rgba(147, 51, 234, 0.7);
+        }
+
+        .admin-panel {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background: white;
+            border: 4px solid #9333ea;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            z-index: 1000;
+            min-width: 220px;
+        }
+
+        .admin-panel.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .admin-panel h3 {
+            color: #7e22ce;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            text-align: center;
+        }
+
+        .admin-panel button {
+            width: 100%;
+            background: linear-gradient(135deg, #9333ea 0%, #7e22ce 100%);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            transition: all 0.2s;
+        }
+
+        .admin-panel button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(147, 51, 234, 0.4);
+        }
+
+        .header-red {
+            background: linear-gradient(135deg, #9333ea 0%, #7e22ce 100%);
+            color: white;
+            text-align: center;
+            padding: 25px 20px;
+            font-size: 2em;
+            font-weight: bold;
+            margin: 30px -20px 25px -20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(147, 51, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-red::before {
+            content: "🐰";
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            animation: hop 2s ease-in-out infinite;
+        }
+
+        .header-red::after {
+            content: "🐰";
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%) scaleX(-1);
+            font-size: 2em;
+            animation: hop 2s ease-in-out infinite 1s;
+        }
+
+        @keyframes hop {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-60%) scale(1.1); }
+        }
+
+        .header-green {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+            margin: 0 -20px 30px -20px;
+            position: relative;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(236, 72, 153, 0.4);
+        }
+
+        .header-green::before,
+        .header-green::after {
+            content: "🌷";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 4em;
+            animation: bloom 3s ease-in-out infinite;
+        }
+
+        .header-green::before { left: 20px; }
+        .header-green::after { right: 20px; }
+
+        @keyframes bloom {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.1); }
+        }
+
+        .edit-header-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255,255,255,0.3);
+            color: white;
+            border: 2px solid white;
+            padding: 6px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: bold;
+            display: none;
+            transition: all 0.2s;
+        }
+
+        .admin-mode .edit-header-btn {
+            display: block;
+        }
+
+        .edit-header-btn:hover {
+            background-color: rgba(255,255,255,0.5);
+            transform: scale(1.05);
+        }
+
+        /* General Notes Section */
+        .general-notes {
+            background: linear-gradient(135deg, #fef9c3 0%, #fde047 100%);
+            border: 4px solid #eab308;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(234, 179, 8, 0.3);
+        }
+
+        .general-notes.alert-red {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border: 4px solid #dc2626;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+        }
+
+        .general-notes-content {
+            color: #78350f;
+            font-size: 1.05em;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+
+        .general-notes.alert-red .general-notes-content {
+            color: #991b1b;
+        }
+
+        .edit-general-notes-btn,
+        .delete-general-notes-btn {
+            position: absolute;
+            top: 10px;
+            background-color: #eab308;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 600;
+            display: none;
+            transition: all 0.2s;
+        }
+
+        .general-notes.alert-red .edit-general-notes-btn,
+        .general-notes.alert-red .delete-general-notes-btn {
+            background-color: #dc2626;
+        }
+
+        .edit-general-notes-btn {
+            right: 80px;
+        }
+
+        .delete-general-notes-btn {
+            right: 10px;
+            background-color: #dc2626;
+        }
+
+        .admin-mode .edit-general-notes-btn,
+        .admin-mode .delete-general-notes-btn {
+            display: block;
+        }
+
+        .edit-general-notes-btn:hover {
+            background-color: #ca8a04;
+            transform: scale(1.05);
+        }
+
+        .general-notes.alert-red .edit-general-notes-btn:hover {
+            background-color: #b91c1c;
+        }
+
+        .delete-general-notes-btn:hover {
+            background-color: #b91c1c;
+            transform: scale(1.05);
+        }
+
+        .insert-note-btn {
+            background: linear-gradient(135deg, #fef9c3 0%, #fde047 100%);
+            border: 3px dashed #eab308;
+            color: #78350f;
+            padding: 12px 20px;
+            margin: 20px 0;
+            width: 100%;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            display: none;
+            transition: all 0.2s;
+        }
+
+        .admin-mode .insert-note-btn {
+            display: block;
+        }
+
+        .insert-note-btn:hover {
+            background: linear-gradient(135deg, #fde047 0%, #fef9c3 100%);
+            transform: scale(1.02);
+        }
+
+        .header-green h1 {
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+        }
+
+        .header-green h2 {
+            font-size: 1.4em;
+            margin-top: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .mass-section {
+            margin-bottom: 30px;
+            border: 4px solid #ec4899;
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.2);
+            transition: transform 0.2s;
+        }
+
+        .mass-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.3);
+        }
+
+        .mass-header {
+            background: linear-gradient(135deg, #fae8ff 0%, #f5d0fe 100%);
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            border-bottom: 3px solid #ec4899;
+        }
+
+        .mass-header::before,
+        .mass-header::after {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            animation: bob 3s ease-in-out infinite;
+        }
+
+        .mass-header::before {
+            left: 20px;
+        }
+
+        .mass-header::after {
+            right: 20px;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes bob {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-55%) scale(1.05); }
+        }
+
+        .edit-mass-btn,
+        .delete-mass-btn,
+        .edit-header-btn {
+            display: none;
+        }
+
+        .edit-mass-btn,
+        .delete-mass-btn {
+            position: absolute;
+            top: 10px;
+            background-color: #16a34a;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .admin-mode .edit-mass-btn,
+        .admin-mode .delete-mass-btn,
+        .admin-mode .edit-header-btn {
+            display: block;
+        }
+
+        .edit-mass-btn {
+            right: 10px;
+        }
+
+        .delete-mass-btn {
+            right: 80px;
+            background-color: #dc2626;
+        }
+
+        .edit-mass-btn:hover {
+            background-color: #15803d;
+            transform: scale(1.05);
+        }
+
+        .delete-mass-btn:hover {
+            background-color: #b91c1c;
+            transform: scale(1.05);
+        }
+
+        .mass-header h3 {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+            color: #701a75;
+            font-weight: bold;
+        }
+
+        .mass-header p {
+            font-size: 1.15em;
+            margin: 5px 0;
+            color: #86198f;
+            font-weight: 600;
+        }
+
+        .announcement-notice {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde047 100%);
+            border: 3px solid #eab308;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 15px 20px;
+            position: relative;
+        }
+
+        .announcement-notice::before {
+            content: "⚠️";
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        .announcement-text {
+            color: #713f12;
+            font-weight: 600;
+            font-size: 1.05em;
+            display: inline;
+        }
+
+        .announcement-cancelled {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border: 3px solid #dc2626;
+        }
+
+        .announcement-cancelled::before {
+            content: "❌";
+        }
+
+        .edit-announcement-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #eab308;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8em;
+            font-weight: 600;
+            display: none;
+            transition: all 0.2s;
+        }
+
+        .admin-mode .edit-announcement-btn {
+            display: block;
+        }
+
+        .edit-announcement-btn:hover {
+            background-color: #ca8a04;
+            transform: scale(1.05);
+        }
+
+        .reorder-btn {
+            position: absolute;
+            left: 10px;
+            background-color: #6b7280;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: 600;
+            display: none;
+            transition: all 0.2s;
+            width: 40px;
+        }
+
+        .reorder-up {
+            top: 10px;
+        }
+
+        .reorder-down {
+            top: 50px;
+        }
+
+        .admin-mode .reorder-btn {
+            display: block;
+        }
+
+        .reorder-btn:hover:not(:disabled) {
+            background-color: #4b5563;
+            transform: scale(1.1);
+        }
+
+        .reorder-btn:disabled {
+            background-color: #d1d5db;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .volunteer-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fefffe;
+        }
+
+        .volunteer-table td {
+            border: 2px solid #16a34a;
+            padding: 15px 10px;
+            font-size: 1em;
+        }
+
+        .volunteer-table td:first-child {
+            width: 60px;
+            text-align: center;
+            font-weight: bold;
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            color: #14532d;
+            font-size: 1.2em;
+        }
+
+        .volunteer-table td:nth-child(2),
+        .volunteer-table td:nth-child(4) {
+            width: 35%;
+        }
+
+        .volunteer-table td:nth-child(3),
+        .volunteer-table td:nth-child(5) {
+            width: 60px;
+            text-align: center;
+            font-weight: bold;
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            color: #14532d;
+            font-size: 1.2em;
+        }
+
+        .volunteer-table td:last-child {
+            width: 35%;
+        }
+
+        .volunteer-name {
+            cursor: pointer;
+            min-height: 25px;
+            padding: 8px;
+            color: #1f2937;
+            transition: all 0.2s;
+            border-radius: 5px;
+        }
+
+        .volunteer-name:hover {
+            background-color: #dcfce7;
+            transform: scale(1.02);
+        }
+
+        .volunteer-name.filled {
+            background: linear-gradient(135deg, #fef9c3 0%, #fde047 100%);
+            font-weight: 600;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid #eab308;
+        }
+
+        .empty-slot {
+            color: #9ca3af;
+            font-style: italic;
+            font-size: 0.9em;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+            border: 5px solid #dc2626;
+            position: relative;
+        }
+
+        .modal-content::before {
+            content: "❄️ 🎄 ❄️";
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            background: white;
+            padding: 0 15px;
+            border-radius: 20px;
+        }
+
+        .modal-header {
+            font-size: 1.5em;
+            margin-bottom: 25px;
+            color: #991b1b;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #14532d;
+            font-size: 1.05em;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 3px solid #16a34a;
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: 'Georgia', serif;
+            transition: all 0.2s;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #15803d;
+            box-shadow: 0 0 10px rgba(22, 163, 74, 0.3);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(22, 163, 74, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: #6b7280;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #4b5563;
+            transform: translateY(-2px);
+        }
+
+        .btn-remove {
+            background-color: #dc2626;
+            color: white;
+            padding: 8px 20px;
+            font-size: 0.95em;
+            margin-top: 10px;
+        }
+
+        .btn-remove:hover {
+            background-color: #b91c1c;
+            transform: translateY(-2px);
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            body::before,
+            body::after {
+                font-size: 16px;
+                padding: 8px;
+            }
+
+            .container {
+                padding: 15px;
+                border-width: 3px;
+            }
+
+            .container::before,
+            .container::after {
+                font-size: 14px;
+                padding: 3px;
+            }
+
+            .header-red {
+                font-size: 1.3em;
+                padding: 20px 15px;
+                margin: 25px -15px 20px -15px;
+            }
+
+            .header-red::before,
+            .header-red::after {
+                display: none;
+            }
+
+            .header-green {
+                padding: 30px 15px;
+                margin: 0 -15px 25px -15px;
+            }
+
+            .header-green h1 {
+                font-size: 1.3em;
+            }
+
+            .header-green h2 {
+                font-size: 1em;
+            }
+
+            .header-green::before,
+            .header-green::after {
+                font-size: 2em;
+                opacity: 0.5;
+            }
+
+            .mass-header {
+                padding: 20px 15px;
+            }
+
+            .mass-header h3 {
+                font-size: 1.1em;
+            }
+
+            .mass-header p {
+                font-size: 1em;
+            }
+
+            .mass-header::before,
+            .mass-header::after {
+                display: none;
+            }
+
+            .volunteer-table td {
+                padding: 10px 5px;
+                font-size: 0.9em;
+            }
+
+            .volunteer-table td:first-child,
+            .volunteer-table td:nth-child(3),
+            .volunteer-table td:nth-child(5) {
+                font-size: 1em;
+                width: 40px;
+            }
+
+            .volunteer-name {
+                padding: 6px;
+                font-size: 0.9em;
+            }
+
+            .empty-slot {
+                font-size: 0.8em;
+            }
+
+            .admin-toggle {
+                width: 55px;
+                height: 55px;
+                font-size: 24px;
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .admin-panel {
+                bottom: 75px;
+                right: 15px;
+                left: 15px;
+                min-width: auto;
+            }
+
+            .modal-content {
+                padding: 25px 20px;
+                margin: 30px auto;
+            }
+
+            .modal-content::before {
+                font-size: 24px;
+                top: -15px;
+            }
+
+            .modal-header {
+                font-size: 1.3em;
+            }
+
+            .modal-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 12px;
+            }
+
+            .admin-mode .mass-header,
+            .admin-mode .header-green {
+                padding-bottom: 50px;
+            }
+
+            .admin-mode .edit-mass-btn,
+            .admin-mode .delete-mass-btn {
+                position: absolute;
+                bottom: 10px;
+            }
+
+            .admin-mode .edit-mass-btn {
+                right: 10px;
+            }
+
+            .admin-mode .delete-mass-btn {
+                right: 80px;
+            }
+
+            .admin-mode .edit-header-btn {
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        /* Extra small phones */
+        @media (max-width: 380px) {
+            .header-green::before,
+            .header-green::after {
+                font-size: 2em;
+            }
+
+            .volunteer-table td {
+                padding: 8px 3px;
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-red">
+            PLEASE SIGN UP
+        </div>
+
+        <div class="header-green">
+            <button class="edit-header-btn" onclick="editHeader()">Edit</button>
+            <h1 id="headerTitle">ASH WEDNESDAY</h1>
+            <h2 id="headerDate">MARCH 5, 2025</h2>
+        </div>
+
+        <div id="loadingMessage" class="loading">Loading sign-ups</div>
+        <div id="errorMessage" class="error-message" style="display: none;"></div>
+        <div id="massesContainer"></div>
+    </div>
+
+    <!-- Hidden Admin Toggle Button -->
+    <button class="admin-toggle" onclick="toggleAdminPanel()" title="Admin Controls">⚙️</button>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-panel">
+        <h3>✝️ Admin Controls</h3>
+        <button onclick="toggleAdminMode()" id="editModeBtn">✏️ Edit Mode</button>
+        <button onclick="addNewMass()">+ Add Mass</button>
+        <button onclick="refreshData()">🔄 Refresh Data</button>
+        <button onclick="clearAllData()">🗑️ Clear All</button>
+    </div>
+
+    <!-- Volunteer Sign-up Modal -->
+    <div id="volunteerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header" id="modalTitle">❄️ Sign Up for Position</div>
+            <form id="volunteerForm">
+                <div class="form-group">
+                    <label for="volunteerName">Your Name:</label>
+                    <input type="text" id="volunteerName" required placeholder="Enter your full name">
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('volunteerModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </div>
+            </form>
+            <div id="removeButtonContainer"></div>
+        </div>
+    </div>
+
+    <!-- Edit Mass Modal -->
+    <div id="editMassModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">🎄 Edit Mass Time</div>
+            <form id="editMassForm">
+                <div class="form-group">
+                    <label for="massDay">Day:</label>
+                    <input type="text" id="massDay" required placeholder="e.g., Tuesday, December 24, 2025">
+                </div>
+                <div class="form-group">
+                    <label for="massTime">Time:</label>
+                    <input type="text" id="massTime" required placeholder="e.g., 4:00 pm">
+                </div>
+                <div class="form-group">
+                    <label for="massNote">Additional Note:</label>
+                    <input type="text" id="massNote" placeholder="e.g., Will have collection (optional)">
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('editMassModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Header Modal -->
+    <div id="editHeaderModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">⭐ Edit Header</div>
+            <form id="editHeaderForm">
+                <div class="form-group">
+                    <label for="headerTitleInput">Title:</label>
+                    <input type="text" id="headerTitleInput" required placeholder="e.g., ASH WEDNESDAY">
+                </div>
+                <div class="form-group">
+                    <label for="headerDateInput">Date:</label>
+                    <input type="text" id="headerDateInput" required placeholder="e.g., MARCH 5, 2025">
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('editHeaderModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Announcement Modal -->
+    <div id="editAnnouncementModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">📢 Edit Announcement</div>
+            <form id="editAnnouncementForm">
+                <div class="form-group">
+                    <label for="announcementText">Announcement Message:</label>
+                    <textarea id="announcementText" placeholder="e.g., ⚠️ Please note: This mass has been cancelled due to weather. or leave blank for no announcement"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="isCancelled" style="width: auto; margin-right: 8px;">
+                        Mark as CANCELLED (red alert)
+                    </label>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('editAnnouncementModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Announcement</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit General Notes Modal -->
+    <div id="editGeneralNotesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">📌 Edit Note</div>
+            <form id="editGeneralNotesForm">
+                <div class="form-group">
+                    <label for="generalNotesInput">Note Content:</label>
+                    <textarea id="generalNotesInput" placeholder="Add information, announcements, or instructions&#10;&#10;Example:&#10;📍 Parking available in the north lot&#10;⏰ Please arrive 15 minutes early&#10;📞 Contact office: (555) 123-4567&#10;&#10;Press Enter to create line breaks" style="min-height: 150px;"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Note Color:</label>
+                    <div style="display: flex; gap: 15px; margin-top: 10px;">
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="radio" name="noteColor" value="yellow" checked style="width: auto; margin-right: 8px;">
+                            <span style="background: linear-gradient(135deg, #fef9c3 0%, #fde047 100%); border: 3px solid #eab308; padding: 8px 15px; border-radius: 8px; font-weight: 600;">📌 Yellow (Info)</span>
+                        </label>
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="radio" name="noteColor" value="red" style="width: auto; margin-right: 8px;">
+                            <span style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border: 3px solid #dc2626; padding: 8px 15px; border-radius: 8px; font-weight: 600;">⚠️ Red (Alert)</span>
+                        </label>
+                    </div>
+                </div>
+                <p style="font-size: 0.9em; color: #6b7280; margin-top: 10px;">
+                    💡 Tip: Use yellow for general info, red for important alerts or cancellations
+                </p>
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('editGeneralNotesModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Note</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // CONFIGURATION - REPLACE THIS URL WITH YOUR GOOGLE SHEETS WEB APP URL
+        // ============================================
+        const GOOGLE_SHEETS_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+        
+        // ============================================
+        // ADMIN PASSWORD - CHANGE THIS TO YOUR OWN PASSWORD
+        // ============================================
+        const ADMIN_PASSWORD = 'ashwednesday2025';  // Change this to your own secure password
+        
+        // ============================================
+        // Global variables
+        // ============================================
+        let currentMass = '';
+        let currentPosition = 0;
+        let currentRow = 0;
+        let currentEditingMassId = '';
+        let currentEditingAnnouncementMassId = '';
+        let currentEditingNoteId = '';
+        let adminModeActive = false;
+        let isAdminAuthenticated = false;
+        let allData = null;
+
+        // Default masses for Ash Wednesday
+        const defaultMasses = [
+            { id: 'ash-630am', day: 'Wednesday, March 5, 2025', time: '6:30 am', note: 'Will have collection', announcement: '' },
+            { id: 'ash-830am', day: 'Wednesday, March 5, 2025', time: '8:30 am', note: 'Will have collection', announcement: '' },
+            { id: 'ash-1015am', day: 'Wednesday, March 5, 2025', time: '10:15 am', note: 'Student Body Mass', announcement: '' },
+            { id: 'ash-1215pm', day: 'Wednesday, March 5, 2025', time: '12:15 pm', note: 'Prayer Service - Will have collection', announcement: '' },
+            { id: 'ash-5pm', day: 'Wednesday, March 5, 2025', time: '5:00 pm', note: 'Will have collection', announcement: '' },
+            { id: 'ash-7pm', day: 'Wednesday, March 5, 2025', time: '7:00 pm', note: 'Spanish Mass - Will have collection', announcement: '' }
+        ];
+
+        const defaultNotes = [
+            // { id: 'note1', content: 'Example note', position: 0, color: 'yellow' }
+            // position: 0 = before first mass, 1 = after first mass, etc.
+        ];
+
+        // ============================================
+        // Google Sheets API Functions
+        // ============================================
+        
+        async function fetchDataFromSheets() {
+            try {
+                const response = await fetch(GOOGLE_SHEETS_URL);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data from Google Sheets');
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                showError('Unable to load data. Please check your internet connection and try again.');
+                return null;
+            }
+        }
+
+        async function saveDataToSheets(data) {
+            try {
+                const response = await fetch(GOOGLE_SHEETS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                return true;
+            } catch (error) {
+                console.error('Error saving data:', error);
+                showError('Unable to save data. Please try again.');
+                return false;
+            }
+        }
+
+        // ============================================
+        // UI Helper Functions
+        // ============================================
+        
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        function hideError() {
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        function showLoading() {
+            document.getElementById('loadingMessage').style.display = 'block';
+            document.getElementById('massesContainer').style.display = 'none';
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingMessage').style.display = 'none';
+            document.getElementById('massesContainer').style.display = 'block';
+        }
+
+        // ============================================
+        // Data Management Functions
+        // ============================================
+        
+        async function loadAllData() {
+            showLoading();
+            hideError();
+            
+            const data = await fetchDataFromSheets();
+            
+            if (data) {
+                allData = data;
+                displayHeader();
+                displayGeneralNotes();
+                displayMasses();
+                hideLoading();
+            } else {
+                allData = {
+                    masses: defaultMasses,
+                    volunteers: {},
+                    header: { title: 'ASH WEDNESDAY', date: 'MARCH 5, 2025' },
+                    notes: defaultNotes
+                };
+                displayHeader();
+                displayGeneralNotes();
+                displayMasses();
+                hideLoading();
+            }
+        }
+
+        async function saveAllData() {
+            const success = await saveDataToSheets(allData);
+            if (success) {
+                await loadAllData();
+            }
+        }
+
+        async function refreshData() {
+            await loadAllData();
+            toggleAdminPanel();
+            alert('✅ Data refreshed!');
+        }
+
+        // ============================================
+        // Display Functions
+        // ============================================
+        
+        function displayHeader() {
+            if (!allData || !allData.header) return;
+            document.getElementById('headerTitle').textContent = allData.header.title;
+            document.getElementById('headerDate').textContent = allData.header.date;
+        }
+
+        function displayGeneralNotes() {
+            // Now handled by displayMassesAndNotes - this is just for backwards compatibility
+            return;
+        }
+
+        function displayMassesAndNotes() {
+            if (!allData || !allData.masses) return;
+            
+            const container = document.getElementById('massesContainer');
+            container.innerHTML = '';
+
+            // Initialize notes array if it doesn't exist
+            if (!allData.notes) {
+                allData.notes = [];
+            }
+
+            // Array of different Lent/Ash Wednesday emoji pairs
+            const emojiPairs = [
+                ['✝️', '✝️'],  // crosses
+                ['🕊️', '🕊️'],  // doves
+                ['⛪', '⛪'],  // churches
+                ['🙏', '🙏'],  // praying hands
+                ['📿', '📿'],  // rosary beads
+                ['🕯️', '🕯️'],  // candles
+            ];
+
+            // Insert note button at position 0 (before first mass)
+            const insertBtn0 = document.createElement('button');
+            insertBtn0.className = 'insert-note-btn';
+            insertBtn0.textContent = '+ Insert Note Here';
+            insertBtn0.onclick = () => insertNoteAt(0);
+            container.appendChild(insertBtn0);
+
+            // Display notes at position 0
+            allData.notes.filter(n => n.position === 0).forEach(note => {
+                container.appendChild(createNoteElement(note));
+            });
+
+            // Display each mass with notes after it
+            allData.masses.forEach((mass, index) => {
+                const emoji = emojiPairs[index % emojiPairs.length];
+                
+                // Check if mass is cancelled
+                const isCancelled = mass.announcement && (
+                    mass.announcement.toLowerCase().includes('cancel') || 
+                    mass.isCancelled === true
+                );
+                
+                // Build announcement HTML if exists
+                let announcementHTML = '';
+                if (mass.announcement) {
+                    announcementHTML = `
+                        <div class="announcement-notice ${isCancelled ? 'announcement-cancelled' : ''}">
+                            <button class="edit-announcement-btn" onclick="editAnnouncement('${mass.id}')">Edit</button>
+                            <span class="announcement-text">${mass.announcement}</span>
+                        </div>
+                    `;
+                }
+                
+                // Build volunteer table HTML only if not cancelled
+                let volunteerTableHTML = '';
+                if (!isCancelled) {
+                    volunteerTableHTML = `
+                        <table class="volunteer-table">
+                            <tr>
+                                <td>1</td>
+                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 1, 0)">
+                                    <span class="slot-content" id="${mass.id}-1-0"></span>
+                                </td>
+                                <td>3</td>
+                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 3, 0)">
+                                    <span class="slot-content" id="${mass.id}-3-0"></span>
+                                </td>
+                                <td>5</td>
+                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 5, 0)">
+                                    <span class="slot-content" id="${mass.id}-5-0"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 2, 0)">
+                                    <span class="slot-content" id="${mass.id}-2-0"></span>
+                                </td>
+                                <td>4</td>
+                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 4, 0)">
+                                    <span class="slot-content" id="${mass.id}-4-0"></span>
+                                </td>
+                                <td>6</td>
+                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 6, 0)">
+                                    <span class="slot-content" id="${mass.id}-6-0"></span>
+                                </td>
+                            </tr>
+                        </table>
+                    `;
+                }
+                
+                // Add reorder buttons (only in admin mode)
+                const reorderButtons = `
+                    <button class="reorder-btn reorder-up" onclick="moveMassUp(${index})" ${index === 0 ? 'disabled' : ''}>↑</button>
+                    <button class="reorder-btn reorder-down" onclick="moveMassDown(${index})" ${index === allData.masses.length - 1 ? 'disabled' : ''}>↓</button>
+                `;
+                
+                const massDiv = document.createElement('div');
+                massDiv.className = 'mass-section';
+                massDiv.id = `mass-${index}`;
+                massDiv.innerHTML = `
+                    <div class="mass-header" data-emoji-left="${emoji[0]}" data-emoji-right="${emoji[1]}">
+                        <style>
+                            #mass-${index} .mass-header::before { content: "${emoji[0]}"; }
+                            #mass-${index} .mass-header::after { content: "${emoji[1]}"; }
+                        </style>
+                        ${reorderButtons}
+                        <button class="delete-mass-btn" onclick="deleteMass('${mass.id}')">Delete</button>
+                        <button class="edit-mass-btn" onclick="editMass('${mass.id}')">Edit</button>
+                        <button class="edit-announcement-btn" onclick="editAnnouncement('${mass.id}')" style="top: 50px; right: 10px;">📢 Note</button>
+                        <h3>${mass.day}</h3>
+                        <p><strong>${mass.time}</strong></p>
+                        ${mass.note ? `<p>${mass.note}</p>` : ''}
+                    </div>
+                    ${announcementHTML}
+                    ${volunteerTableHTML}
+                `;
+                container.appendChild(massDiv);
+
+                // Insert note button at position after this mass
+                const position = index + 1;
+                const insertBtn = document.createElement('button');
+                insertBtn.className = 'insert-note-btn';
+                insertBtn.textContent = '+ Insert Note Here';
+                insertBtn.onclick = () => insertNoteAt(position);
+                container.appendChild(insertBtn);
+
+                // Display notes at this position
+                allData.notes.filter(n => n.position === position).forEach(note => {
+                    container.appendChild(createNoteElement(note));
+                });
+            });
+
+            displayVolunteers();
+        }
+
+        function createNoteElement(note) {
+            const noteDiv = document.createElement('div');
+            const colorClass = note.color === 'red' ? 'alert-red' : '';
+            noteDiv.className = `general-notes ${colorClass}`;
+            noteDiv.innerHTML = `
+                <button class="edit-general-notes-btn" onclick="editNote('${note.id}')">Edit</button>
+                <button class="delete-general-notes-btn" onclick="deleteNote('${note.id}')">Delete</button>
+                <div class="general-notes-content">${note.content}</div>
+            `;
+            return noteDiv;
+        }
+
+        function displayMasses() {
+            // Now handled by displayMassesAndNotes which interleaves notes
+            displayMassesAndNotes();
+        }
+
+        function displayVolunteers() {
+            if (!allData || !allData.volunteers) return;
+            
+            const slots = document.querySelectorAll('.slot-content');
+            
+            slots.forEach(slot => {
+                const id = slot.id;
+                const name = allData.volunteers[id];
+                const parent = slot.parentElement;
+                
+                if (name) {
+                    slot.textContent = name;
+                    parent.classList.add('filled');
+                    parent.classList.remove('empty-slot');
+                } else {
+                    slot.innerHTML = '<span class="empty-slot">Click to sign up</span>';
+                    parent.classList.remove('filled');
+                }
+            });
+        }
+
+        // ============================================
+        // Admin Functions
+        // ============================================
+        
+        function toggleAdminPanel() {
+            // Check if already authenticated
+            if (!isAdminAuthenticated) {
+                const password = prompt('🔒 Enter admin password:');
+                if (password !== ADMIN_PASSWORD) {
+                    alert('❌ Incorrect password. Access denied.');
+                    return;
+                }
+                isAdminAuthenticated = true;
+                alert('✅ Authentication successful!');
+            }
+            
+            const panel = document.getElementById('adminPanel');
+            panel.classList.toggle('show');
+        }
+
+        function toggleAdminMode() {
+            // Require authentication to enter edit mode
+            if (!adminModeActive && !isAdminAuthenticated) {
+                const password = prompt('🔒 Enter admin password to enable edit mode:');
+                if (password !== ADMIN_PASSWORD) {
+                    alert('❌ Incorrect password. Access denied.');
+                    return;
+                }
+                isAdminAuthenticated = true;
+            }
+            
+            adminModeActive = !adminModeActive;
+            const btn = document.getElementById('editModeBtn');
+            
+            if (adminModeActive) {
+                document.body.classList.add('admin-mode');
+                btn.textContent = '✓ Exit Edit Mode';
+                alert('✏️ Edit mode activated! Click "Exit Edit Mode" to hide the edit buttons.');
+            } else {
+                document.body.classList.remove('admin-mode');
+                btn.textContent = '✏️ Edit Mode';
+                alert('Edit mode deactivated.');
+            }
+        }
+
+        async function addNewMass() {
+            const newId = 'mass' + Date.now();
+            allData.masses.push({
+                id: newId,
+                day: 'New Day',
+                time: '12:00 pm',
+                note: '',
+                announcement: ''
+            });
+            await saveAllData();
+            toggleAdminPanel();
+        }
+
+        function editMass(massId) {
+            currentEditingMassId = massId;
+            const mass = allData.masses.find(m => m.id === massId);
+            
+            if (mass) {
+                document.getElementById('massDay').value = mass.day;
+                document.getElementById('massTime').value = mass.time;
+                document.getElementById('massNote').value = mass.note || '';
+                document.getElementById('editMassModal').style.display = 'block';
+            }
+        }
+
+        document.getElementById('editMassForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const massIndex = allData.masses.findIndex(m => m.id === currentEditingMassId);
+            
+            if (massIndex !== -1) {
+                allData.masses[massIndex].day = document.getElementById('massDay').value;
+                allData.masses[massIndex].time = document.getElementById('massTime').value;
+                allData.masses[massIndex].note = document.getElementById('massNote').value;
+                await saveAllData();
+                closeModal('editMassModal');
+            }
+        });
+
+        async function deleteMass(massId) {
+            if (confirm('Are you sure you want to delete this mass time? All volunteer sign-ups for this mass will also be deleted.')) {
+                allData.masses = allData.masses.filter(m => m.id !== massId);
+                
+                Object.keys(allData.volunteers).forEach(key => {
+                    if (key.startsWith(massId + '-')) {
+                        delete allData.volunteers[key];
+                    }
+                });
+                
+                await saveAllData();
+            }
+        }
+
+        async function moveMassUp(index) {
+            if (index > 0) {
+                // Swap with previous item
+                const temp = allData.masses[index];
+                allData.masses[index] = allData.masses[index - 1];
+                allData.masses[index - 1] = temp;
+                await saveAllData();
+            }
+        }
+
+        async function moveMassDown(index) {
+            if (index < allData.masses.length - 1) {
+                // Swap with next item
+                const temp = allData.masses[index];
+                allData.masses[index] = allData.masses[index + 1];
+                allData.masses[index + 1] = temp;
+                await saveAllData();
+            }
+        }
+
+        function editHeader() {
+            document.getElementById('headerTitleInput').value = allData.header.title;
+            document.getElementById('headerDateInput').value = allData.header.date;
+            document.getElementById('editHeaderModal').style.display = 'block';
+        }
+
+        document.getElementById('editHeaderForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            allData.header = {
+                title: document.getElementById('headerTitleInput').value,
+                date: document.getElementById('headerDateInput').value
+            };
+            await saveAllData();
+            closeModal('editHeaderModal');
+        });
+
+        function insertNoteAt(position) {
+            currentEditingNoteId = 'note' + Date.now();
+            document.getElementById('generalNotesInput').value = '';
+            
+            // Reset color to yellow
+            const colorRadios = document.querySelectorAll('input[name="noteColor"]');
+            colorRadios.forEach(radio => {
+                radio.checked = radio.value === 'yellow';
+            });
+            
+            document.getElementById('editGeneralNotesModal').setAttribute('data-position', position);
+            document.getElementById('editGeneralNotesModal').style.display = 'block';
+        }
+
+        function editNote(noteId) {
+            currentEditingNoteId = noteId;
+            const note = allData.notes.find(n => n.id === noteId);
+            if (note) {
+                document.getElementById('generalNotesInput').value = note.content;
+                document.getElementById('editGeneralNotesModal').setAttribute('data-position', note.position);
+                
+                // Set color radio button
+                const colorRadios = document.querySelectorAll('input[name="noteColor"]');
+                colorRadios.forEach(radio => {
+                    radio.checked = radio.value === (note.color || 'yellow');
+                });
+                
+                document.getElementById('editGeneralNotesModal').style.display = 'block';
+            }
+        }
+
+        function deleteNote(noteId) {
+            if (confirm('Are you sure you want to delete this note?')) {
+                allData.notes = allData.notes.filter(n => n.id !== noteId);
+                saveAllData();
+            }
+        }
+
+        document.getElementById('editGeneralNotesForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const content = document.getElementById('generalNotesInput').value.trim();
+            if (!content) {
+                closeModal('editGeneralNotesModal');
+                return;
+            }
+
+            const position = parseInt(document.getElementById('editGeneralNotesModal').getAttribute('data-position'));
+            
+            // Get selected color
+            const selectedColor = document.querySelector('input[name="noteColor"]:checked').value;
+            
+            // Check if editing existing note
+            const existingNoteIndex = allData.notes.findIndex(n => n.id === currentEditingNoteId);
+            
+            if (existingNoteIndex >= 0) {
+                // Update existing note
+                allData.notes[existingNoteIndex].content = content;
+                allData.notes[existingNoteIndex].position = position;
+                allData.notes[existingNoteIndex].color = selectedColor;
+            } else {
+                // Create new note
+                allData.notes.push({
+                    id: currentEditingNoteId,
+                    content: content,
+                    position: position,
+                    color: selectedColor
+                });
+            }
+            
+            await saveAllData();
+            closeModal('editGeneralNotesModal');
+        });
+
+        function editAnnouncement(massId) {
+            currentEditingAnnouncementMassId = massId;
+            const mass = allData.masses.find(m => m.id === massId);
+            
+            if (mass) {
+                document.getElementById('announcementText').value = mass.announcement || '';
+                // Check cancelled checkbox based on flag or text content
+                const isCancelled = mass.isCancelled === true || 
+                    (mass.announcement && mass.announcement.toLowerCase().includes('cancel'));
+                document.getElementById('isCancelled').checked = isCancelled;
+                document.getElementById('editAnnouncementModal').style.display = 'block';
+            }
+        }
+
+        document.getElementById('editAnnouncementForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const massIndex = allData.masses.findIndex(m => m.id === currentEditingAnnouncementMassId);
+            
+            if (massIndex !== -1) {
+                let announcement = document.getElementById('announcementText').value.trim();
+                const isCancelled = document.getElementById('isCancelled').checked;
+                
+                // Add cancelled prefix if checkbox is checked and not already there
+                if (isCancelled && announcement && !announcement.toLowerCase().includes('cancel')) {
+                    announcement = '❌ CANCELLED: ' + announcement;
+                }
+                
+                allData.masses[massIndex].announcement = announcement;
+                allData.masses[massIndex].isCancelled = isCancelled;
+                await saveAllData();
+                closeModal('editAnnouncementModal');
+            }
+        });
+
+        async function clearAllData() {
+            if (confirm('⚠️ Are you sure you want to clear ALL data? This cannot be undone!')) {
+                if (confirm('Really? This will delete all masses and volunteer sign-ups!')) {
+                    allData = {
+                        masses: defaultMasses,
+                        volunteers: {},
+                        header: { title: 'ASH WEDNESDAY', date: 'MARCH 5, 2025' },
+                        notes: []
+                    };
+                    await saveAllData();
+                    alert('✅ All data cleared!');
+                    toggleAdminPanel();
+                }
+            }
+        }
+
+        // ============================================
+        // Volunteer Functions
+        // ============================================
+        
+        function openVolunteerModal(mass, position, row) {
+            currentMass = mass;
+            currentPosition = position;
+            currentRow = row;
+            
+            const slotId = `${mass}-${position}-${row}`;
+            const existingName = allData.volunteers[slotId];
+            
+            const modal = document.getElementById('volunteerModal');
+            const nameInput = document.getElementById('volunteerName');
+            const removeContainer = document.getElementById('removeButtonContainer');
+            
+            document.getElementById('modalTitle').textContent = `❄️ Sign Up for Position ${position}`;
+            
+            if (existingName) {
+                nameInput.value = existingName;
+                removeContainer.innerHTML = `
+                    <button type="button" class="btn btn-remove" onclick="removeVolunteer()">
+                        Remove Sign-up
+                    </button>
+                `;
+            } else {
+                nameInput.value = '';
+                removeContainer.innerHTML = '';
+            }
+            
+            modal.style.display = 'block';
+            nameInput.focus();
+        }
+
+        document.getElementById('volunteerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('volunteerName').value.trim();
+            if (!name) return;
+            
+            const slotId = `${currentMass}-${currentPosition}-${currentRow}`;
+            allData.volunteers[slotId] = name;
+            
+            await saveAllData();
+            closeModal('volunteerModal');
+        });
+
+        async function removeVolunteer() {
+            if (confirm('Are you sure you want to remove this sign-up?')) {
+                const slotId = `${currentMass}-${currentPosition}-${currentRow}`;
+                delete allData.volunteers[slotId];
+                
+                await saveAllData();
+                closeModal('volunteerModal');
+            }
+        }
+
+        // ============================================
+        // Modal Functions
+        // ============================================
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+            if (!event.target.closest('.admin-panel') && !event.target.closest('.admin-toggle')) {
+                document.getElementById('adminPanel').classList.remove('show');
+            }
+        }
+
+        // ============================================
+        // Initialize
+        // ============================================
+        
+        loadAllData();
+        setInterval(loadAllData, 100000);
+    </script>
+</body>
+</html>
