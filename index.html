@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>St. Irenaeus Church Sign Up - Lenten Mission</title>
+    <title>St. Irenaeus Church Sign Up - Holy Week</title>
     <style>
         * {
             margin: 0;
@@ -996,8 +996,8 @@
 
         <div class="header-green">
             <button class="edit-header-btn" onclick="editHeader()">Edit</button>
-            <h1 id="headerTitle">JOURNEY OF TRANSFORMATION</h1>
-            <h2 id="headerDate">MARCH 16-19, 2026</h2>
+            <h1 id="headerTitle">HOLY WEEK</h1>
+            <h2 id="headerDate">MARCH 30-APRIL 3, 2026</h2>
         </div>
 
         <div id="loadingMessage" class="loading">Loading sign-ups</div>
@@ -1067,11 +1067,11 @@
             <form id="editHeaderForm">
                 <div class="form-group">
                     <label for="headerTitleInput">Title:</label>
-                    <input type="text" id="headerTitleInput" required placeholder="e.g., JOURNEY OF TRANSFORMATION">
+                    <input type="text" id="headerTitleInput" required placeholder="e.g., HOLY WEEK">
                 </div>
                 <div class="form-group">
                     <label for="headerDateInput">Date:</label>
-                    <input type="text" id="headerDateInput" required placeholder="e.g., FEBRUARY 18, 2026">
+                    <input type="text" id="headerDateInput" required placeholder="e.g., MARCH 30, 2026">
                 </div>
                 <div class="modal-buttons">
                     <button type="button" class="btn btn-secondary" onclick="closeModal('editHeaderModal')">Cancel</button>
@@ -1255,7 +1255,7 @@
                 allData = {
                     masses: defaultMasses,
                     volunteers: {},
-                    header: { title: 'JOURNEY OF TRANSFORMATION', date: 'MARCH 16-19, 2026' },
+                    header: { title: 'HOLY WEEK', date: 'MARCH 30-APRIL 3, 2026' },
                     notes: defaultNotes
                 };
                 displayHeader();
@@ -1715,7 +1715,7 @@
                     allData = {
                         masses: defaultMasses,
                         volunteers: {},
-                        header: { title: 'JOURNEY OF TRANSFORMATION', date: 'MARCH 16-19, 2026' },
+                        header: { title: 'HOLY WEEK', date: 'MARCH 30-APRIL 3, 2026' },
                         notes: []
                     };
                     await saveAllData();
