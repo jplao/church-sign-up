@@ -1137,16 +1137,12 @@
         </div>
     </div>
 
+    <script src="admin-auth.js"></script>
     <script>
         // ============================================
         // CONFIGURATION - REPLACE THIS URL WITH YOUR GOOGLE SHEETS WEB APP URL
         // ============================================
         const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzXy9HuTccPCca_pfTLAaID5ZJ_RTGdT7trAs6QA_0U-xsEsgtM_qlch6u0Rq-XVhceRA/exec';
-        
-        // ============================================
-        // ADMIN PASSWORD - CHANGE THIS TO YOUR OWN PASSWORD
-        // ============================================
-        const ADMIN_PASSWORD = 'lentenmission2026';  // Change this to your own secure password
         
         // ============================================
         // Global variables
@@ -1158,7 +1154,6 @@
         let currentEditingAnnouncementMassId = '';
         let currentEditingNoteId = '';
         let adminModeActive = false;
-        let isAdminAuthenticated = false;
         let allData = null;
 
         // Default masses for Ash Wednesday
@@ -1471,33 +1466,14 @@
         // Admin Functions
         // ============================================
         
-        function toggleAdminPanel() {
-            // Check if already authenticated
-            if (!isAdminAuthenticated) {
-                const password = prompt('🔒 Enter admin password:');
-                if (password !== ADMIN_PASSWORD) {
-                    alert('❌ Incorrect password. Access denied.');
-                    return;
-                }
-                isAdminAuthenticated = true;
-                alert('✅ Authentication successful!');
-            }
-            
+        async function toggleAdminPanel() {
             const panel = document.getElementById('adminPanel');
+            if (!panel.classList.contains('show') && !(await requireAdmin('🔒 Enter admin password:'))) return;
             panel.classList.toggle('show');
         }
 
-        function toggleAdminMode() {
-            // Require authentication to enter edit mode
-            if (!adminModeActive && !isAdminAuthenticated) {
-                const password = prompt('🔒 Enter admin password to enable edit mode:');
-                if (password !== ADMIN_PASSWORD) {
-                    alert('❌ Incorrect password. Access denied.');
-                    return;
-                }
-                isAdminAuthenticated = true;
-            }
-            
+        async function toggleAdminMode() {
+            if (!adminModeActive && !(await requireAdmin('🔒 Enter admin password to enable edit mode:'))) return;
             adminModeActive = !adminModeActive;
             const btn = document.getElementById('editModeBtn');
             

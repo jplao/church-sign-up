@@ -1129,6 +1129,7 @@
         </div>
     </div>
 
+    <script src="admin-auth.js"></script>
     <script>
         // ============================================
         // CONFIGURATION - REPLACE THIS URL WITH YOUR GOOGLE SHEETS WEB APP URL
@@ -1462,12 +1463,14 @@
         // Admin Functions
         // ============================================
         
-        function toggleAdminPanel() {
+        async function toggleAdminPanel() {
             const panel = document.getElementById('adminPanel');
+            if (!panel.classList.contains('show') && !(await requireAdmin('🔒 Enter admin password:'))) return;
             panel.classList.toggle('show');
         }
 
-        function toggleAdminMode() {
+        async function toggleAdminMode() {
+            if (!adminModeActive && !(await requireAdmin('🔒 Enter admin password to enable edit mode:'))) return;
             adminModeActive = !adminModeActive;
             const btn = document.getElementById('editModeBtn');
             
