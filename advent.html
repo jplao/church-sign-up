@@ -887,8 +887,8 @@
 
         <div class="header-green">
             <button class="edit-header-btn" onclick="editHeader()">Edit</button>
-            <h1 id="headerTitle">CHRISTMAS MASSES</h1>
-            <h2 id="headerDate">DECEMBER 24-25, 2025</h2>
+            <h1 id="headerTitle">ADVENT MASSES</h1>
+            <h2 id="headerDate">DECEMBER 2026</h2>
         </div>
 
         <div id="loadingMessage" class="loading">Loading sign-ups</div>
@@ -933,7 +933,7 @@
             <form id="editMassForm">
                 <div class="form-group">
                     <label for="massDay">Day:</label>
-                    <input type="text" id="massDay" required placeholder="e.g., Tuesday, December 24, 2025">
+                    <input type="text" id="massDay" required placeholder="e.g., Tuesday, December 8, 2026">
                 </div>
                 <div class="form-group">
                     <label for="massTime">Time:</label>
@@ -958,11 +958,11 @@
             <form id="editHeaderForm">
                 <div class="form-group">
                     <label for="headerTitleInput">Title:</label>
-                    <input type="text" id="headerTitleInput" required placeholder="e.g., CHRISTMAS MASSES">
+                    <input type="text" id="headerTitleInput" required placeholder="e.g., ADVENT MASSES">
                 </div>
                 <div class="form-group">
                     <label for="headerDateInput">Date:</label>
-                    <input type="text" id="headerDateInput" required placeholder="e.g., DECEMBER 24-25, 2025">
+                    <input type="text" id="headerDateInput" required placeholder="e.g., DECEMBER 2026">
                 </div>
                 <div class="modal-buttons">
                     <button type="button" class="btn btn-secondary" onclick="closeModal('editHeaderModal')">Cancel</button>
@@ -999,7 +999,7 @@
         // ============================================
         // CONFIGURATION - REPLACE THIS URL WITH YOUR GOOGLE SHEETS WEB APP URL
         // ============================================
-        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzYBkx3enpegMWAtw52yN-AJexvsGyCMY3vY-OaSoutMcwZMazqHmiyuzZBSs0RAt27Wg/exec';
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxPEel3vUbSPTGLLvEeNWg18rbzRTYrv2q0irKGzApe09RlqTPwvbWhkKAK50QOxxkDSA/exec';
         
         // ============================================
         // Global variables
@@ -1014,11 +1014,9 @@
 
         // Default masses
         const defaultMasses = [
-            { id: 'xmas-eve-4pm', day: 'Tuesday, December 24, 2025', time: '4:00 pm', note: 'Christmas Eve - Family Mass', announcement: '' },
-            { id: 'xmas-eve-7pm', day: 'Tuesday, December 24, 2025', time: '7:00 pm', note: 'Christmas Eve', announcement: '' },
-            { id: 'xmas-eve-midnight', day: 'Tuesday, December 24, 2025', time: 'Midnight', note: 'Christmas Eve - Midnight Mass', announcement: '' },
-            { id: 'xmas-day-9am', day: 'Wednesday, December 25, 2025', time: '9:00 am', note: 'Christmas Day', announcement: '' },
-            { id: 'xmas-day-11am', day: 'Wednesday, December 25, 2025', time: '11:00 am', note: 'Christmas Day', announcement: '' }
+            { id: 'dec8-830am', day: 'Tuesday, December 8, 2026', time: '8:30 am', note: 'Day of Obligation - Will have collection', announcement: '' },
+            { id: 'dec8-1215pm', day: 'Tuesday, December 8, 2026', time: '12:15 pm', note: 'Day of Obligation - Will have collection', announcement: '' },
+            { id: 'dec8-5pm', day: 'Tuesday, December 8, 2026', time: '5:00 pm', note: 'Day of Obligation - Will have collection', announcement: '' }
         ];
 
         // ============================================
@@ -1103,7 +1101,7 @@
                 allData = {
                     masses: defaultMasses,
                     volunteers: {},
-                    header: { title: 'CHRISTMAS MASSES', date: 'DECEMBER 24-25, 2025' }
+                    header: { title: 'ADVENT MASSES', date: 'DECEMBER 2026' }
                 };
                 displayHeader();
                 displayMasses();
@@ -1418,7 +1416,7 @@
                     allData = {
                         masses: defaultMasses,
                         volunteers: {},
-                        header: { title: 'CHRISTMAS MASSES', date: 'DECEMBER 24-25, 2025' }
+                        header: { title: 'ADVENT MASSES', date: 'DECEMBER 2026' }
                     };
                     await saveAllData();
                     alert('✅ All data cleared!');
