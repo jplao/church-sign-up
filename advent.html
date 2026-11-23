@@ -867,7 +867,7 @@
         <div class="header-green">
             <button class="edit-header-btn" onclick="editHeader()">Edit</button>
             <h1 id="headerTitle">ADVENT MASSES</h1>
-            <h2 id="headerDate">DECEMBER 2026</h2>
+            <h2 id="headerDate">DECEMBER 1, 2026</h2>
         </div>
 
         <div id="loadingMessage" class="loading">Loading sign-ups</div>
@@ -912,7 +912,7 @@
             <form id="editMassForm">
                 <div class="form-group">
                     <label for="massDay">Day:</label>
-                    <input type="text" id="massDay" required placeholder="e.g., Tuesday, December 8, 2026">
+                    <input type="text" id="massDay" required placeholder="e.g., Tuesday, December 1, 2026">
                 </div>
                 <div class="form-group">
                     <label for="massTime">Time:</label>
@@ -941,7 +941,7 @@
                 </div>
                 <div class="form-group">
                     <label for="headerDateInput">Date:</label>
-                    <input type="text" id="headerDateInput" required placeholder="e.g., DECEMBER 2026">
+                    <input type="text" id="headerDateInput" required placeholder="e.g., DECEMBER 1, 2026">
                 </div>
                 <div class="modal-buttons">
                     <button type="button" class="btn btn-secondary" onclick="closeModal('editHeaderModal')">Cancel</button>
@@ -991,17 +991,12 @@
         let currentEditingAnnouncementMassId = '';
         let adminModeActive = false;
         const SLOTS_PER_MASS = 8;  // sign-up slots per Mass
-        const SLOT_ROWS = 2;       // slots are numbered down each column
+        const SLOT_ROWS = 4;       // 2 across: 1-4 down the left, 5-8 down the right
         let allData = null;
 
         // Default masses
         const defaultMasses = [
-            { id: 'adv-mission', day: 'Wednesday, December 2, 2026', time: '7:00 pm', note: 'Advent Mission - FREE WILL COLLECTION', announcement: '' },
-            { id: 'noel-night', day: 'Friday, December 4, 2026', time: '7:00 pm', note: 'Noel Night - Free will collection', announcement: '' },
-            { id: 'dec8-830am', day: 'Tuesday, December 8, 2026', time: '8:30 am', note: 'Day of Obligation - Will have collection', announcement: 'Note: 6:30 am; 10:15 am (Student body) and 7:00 pm (Spanish)' },
-            { id: 'dec8-1215pm', day: 'Tuesday, December 8, 2026', time: '12:15 pm', note: 'Day of Obligation - Will have collection', announcement: '' },
-            { id: 'dec8-5pm', day: 'Tuesday, December 8, 2026', time: '5:00 pm', note: 'Day of Obligation - Will have collection', announcement: '' },
-            { id: 'penance', day: 'Tuesday, December 15, 2026', time: '7:00 pm', note: 'Advent Penance/Confession - no mass', announcement: '' }
+            { id: 'adv-dec1', day: 'Tuesday, December 1, 2026', time: '7:00 pm', note: 'Advent Mass', announcement: '' }
         ];
 
         // ============================================
@@ -1086,7 +1081,7 @@
                 allData = {
                     masses: defaultMasses,
                     volunteers: {},
-                    header: { title: 'ADVENT MASSES', date: 'DECEMBER 2026' }
+                    header: { title: 'ADVENT MASSES', date: 'DECEMBER 1, 2026' }
                 };
                 displayHeader();
                 displayMasses();
@@ -1383,7 +1378,7 @@
                     allData = {
                         masses: defaultMasses,
                         volunteers: {},
-                        header: { title: 'ADVENT MASSES', date: 'DECEMBER 2026' }
+                        header: { title: 'ADVENT MASSES', date: 'DECEMBER 1, 2026' }
                     };
                     await saveAllData();
                     alert('✅ All data cleared!');
