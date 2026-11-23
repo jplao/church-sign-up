@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>St. Irenaeus Church Sign Up - Thanksgiving</title>
+    <title>St. Irenaeus Church Sign Up - Thanksgiving &amp; Advent</title>
     <style>
         * {
             margin: 0;
@@ -11,24 +11,19 @@
             box-sizing: border-box;
         }
 
+        /* ============================================
+           Page layout (shared by both sections)
+           ============================================ */
         body {
             font-family: 'Georgia', 'Times New Roman', serif;
-            background: 
-                repeating-linear-gradient(
-                    45deg,
-                    #fff5e6 0px,
-                    #fff5e6 20px,
-                    #ffebd4 20px,
-                    #ffebd4 40px
-                ),
-                linear-gradient(135deg, #ffd9a6 0%, #ffcc99 100%);
-            padding: 15px;
+            background: linear-gradient(180deg, #fffaf3 0%, #faf7ff 100%);
+            padding: 75px 15px 80px;
             line-height: 1.6;
             position: relative;
             min-height: 100vh;
         }
 
-        /* Festive background pattern with emojis */
+        /* Thanksgiving emojis pinned to the top of the screen */
         body::before {
             content: "🍂 🦃 🍁 🎃 🌽 🌾 🍂 🦃 🍁 🎃 🌽 🌾 🍂 🦃 🍁 🎃 🌽 🌾";
             position: fixed;
@@ -42,10 +37,13 @@
             border-bottom: 3px solid #d2691e;
             z-index: 0;
             opacity: 0.8;
+            white-space: nowrap;
+            overflow: hidden;
         }
 
+        /* Advent emojis pinned to the bottom of the screen */
         body::after {
-            content: "🍂 🦃 🍁 🎃 🌽 🌾 🍂 🦃 🍁 🎃 🌽 🌾 🍂 🦃 🍁 🎃 🌽 🌾";
+            content: "🕯️ ✝️ 🙏 🕊️ ⭐ 🕯️ ✝️ 🙏 🕊️ ⭐ 🕯️ ✝️ 🙏 🕊️ ⭐ 🕯️ ✝️ 🙏";
             position: fixed;
             bottom: 0;
             left: 0;
@@ -53,95 +51,68 @@
             padding: 10px;
             text-align: center;
             font-size: 24px;
-            background: rgba(255, 255, 255, 0.9);
-            border-top: 3px solid #d2691e;
+            background: rgba(255, 255, 255, 0.95);
+            border-top: 3px solid #be185d;
             z-index: 0;
-            opacity: 0.8;
+            opacity: 0.9;
+            white-space: nowrap;
+            overflow: hidden;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            box-shadow: 0 8px 30px rgba(139, 69, 19, 0.3);
-            border-radius: 20px;
-            border: 5px solid #d2691e;
+        /* Each season gets its own striped background panel */
+        .season-panel {
             position: relative;
             z-index: 1;
+            max-width: 980px;
+            margin: 0 auto 40px;
+            padding: 30px 25px;
+            border-radius: 28px;
         }
 
-        /* Decorative border pattern */
-        .container::before {
-            content: "🍂 🌾 🍁 🎃 🦃 🌽 🍂 🌾 🍁 🎃 🦃 🌽";
-            position: absolute;
-            top: -2px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 20px;
-            background: white;
-            padding: 5px;
-            border-radius: 20px 20px 0 0;
+        .theme-thanksgiving .season-panel {
+            background:
+                repeating-linear-gradient(
+                    45deg,
+                    #fff5e6 0px,
+                    #fff5e6 20px,
+                    #ffebd4 20px,
+                    #ffebd4 40px
+                ),
+                linear-gradient(135deg, #ffd9a6 0%, #ffcc99 100%);
+            border: 4px solid #d2691e;
+            box-shadow: 0 8px 30px rgba(139, 69, 19, 0.25);
         }
 
-        .container::after {
-            content: "🍂 🌾 🍁 🎃 🦃 🌽 🍂 🌾 🍁 🎃 🦃 🌽";
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 20px;
-            background: white;
-            padding: 5px;
-            border-radius: 0 0 20px 20px;
+        .theme-advent .season-panel {
+            background:
+                repeating-linear-gradient(
+                    45deg,
+                    #f5f3ff 0px,
+                    #f5f3ff 20px,
+                    #ede9fe 20px,
+                    #ede9fe 40px
+                ),
+                linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
+            border: 4px solid #7c3aed;
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.25);
         }
 
-        /* Loading indicator */
-        .loading {
-            text-align: center;
-            padding: 40px;
-            font-size: 1.2em;
-            color: #92400e;
-        }
-
-        .loading::after {
-            content: '...';
-            animation: dots 1.5s infinite;
-        }
-
-        @keyframes dots {
-            0%, 20% { content: '.'; }
-            40% { content: '..'; }
-            60%, 100% { content: '...'; }
-        }
-
-        /* Error message */
-        .error-message {
-            background: #fee2e2;
-            border: 2px solid #dc2626;
-            color: #991b1b;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-            text-align: center;
-        }
-
-        /* Hidden admin button */
+        /* ============================================
+           Admin button and panel (one for both sections)
+           ============================================ */
         .admin-toggle {
             position: fixed;
             bottom: 20px;
             right: 20px;
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            background: linear-gradient(135deg, #d97706 0%, #7c3aed 100%);
             color: white;
-            border: 3px solid #92400e;
+            border: 3px solid #4c1d95;
             border-radius: 50%;
             cursor: pointer;
             font-size: 28px;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.5);
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
             z-index: 1001;
             transition: all 0.3s;
             display: flex;
@@ -151,7 +122,7 @@
 
         .admin-toggle:hover {
             transform: scale(1.15) rotate(90deg);
-            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.7);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.6);
         }
 
         .admin-panel {
@@ -160,12 +131,14 @@
             bottom: 90px;
             right: 20px;
             background: white;
-            border: 4px solid #f59e0b;
+            border: 4px solid #7c3aed;
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.3);
             z-index: 1000;
-            min-width: 220px;
+            min-width: 240px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
         }
 
         .admin-panel.show {
@@ -179,15 +152,20 @@
         }
 
         .admin-panel h3 {
-            color: #92400e;
+            color: #4c1d95;
             margin-bottom: 15px;
             font-size: 1.1em;
             text-align: center;
         }
 
+        .admin-panel h4 {
+            font-size: 0.9em;
+            margin: 10px 0 6px;
+            text-align: center;
+        }
+
         .admin-panel button {
             width: 100%;
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             color: white;
             border: none;
             padding: 12px;
@@ -197,429 +175,28 @@
             margin-bottom: 8px;
             font-size: 0.95em;
             transition: all 0.2s;
+            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
         }
 
         .admin-panel button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.4);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
         }
 
-        .header-red {
-            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
-            color: white;
-            text-align: center;
-            padding: 25px 20px;
-            font-size: 2em;
-            font-weight: bold;
-            margin: 30px -20px 25px -20px;
-            border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(220, 38, 38, 0.4);
-            position: relative;
-            overflow: hidden;
+        .admin-panel .tg-btn {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
         }
 
-        .header-red::before {
-            content: "🍂";
-            position: absolute;
-            left: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.5em;
-            animation: bounce 2s infinite;
+        .admin-panel .adv-btn {
+            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
         }
 
-        .header-red::after {
-            content: "🍂";
-            position: absolute;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%) scaleX(-1);
-            font-size: 1.5em;
-            animation: bounce 2s infinite 0.5s;
-        }
+        .admin-panel .tg-heading { color: #92400e; }
+        .admin-panel .adv-heading { color: #5b21b6; }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(-50%) scale(1); }
-            50% { transform: translateY(-60%) scale(1.1); }
-        }
-
-        .header-green {
-            background: linear-gradient(135deg, #d97706 0%, #92400e 100%);
-            color: white;
-            text-align: center;
-            padding: 35px 20px;
-            margin: 0 -20px 30px -20px;
-            position: relative;
-            border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(217, 119, 6, 0.4);
-        }
-
-        .header-green::before,
-        .header-green::after {
-            content: "🦃";
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 4em;
-            animation: wiggle 3s ease-in-out infinite;
-        }
-
-        .header-green::before { left: 20px; }
-        .header-green::after { right: 20px; transform: translateY(-50%) scaleX(-1); }
-
-        @keyframes wiggle {
-            0%, 100% { transform: translateY(-50%) rotate(0deg); }
-            25% { transform: translateY(-50%) rotate(-5deg); }
-            75% { transform: translateY(-50%) rotate(5deg); }
-        }
-
-        .edit-header-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(255,255,255,0.3);
-            color: white;
-            border: 2px solid white;
-            padding: 6px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.85em;
-            font-weight: bold;
-            display: none;
-            transition: all 0.2s;
-        }
-
-        .admin-mode .edit-header-btn {
-            display: block;
-        }
-
-        .edit-header-btn:hover {
-            background-color: rgba(255,255,255,0.5);
-            transform: scale(1.05);
-        }
-
-        .header-green h1 {
-            font-size: 1.8em;
-            margin-bottom: 8px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-            letter-spacing: 1px;
-        }
-
-        .header-green h2 {
-            font-size: 1.4em;
-            margin-top: 8px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .mass-section {
-            margin-bottom: 30px;
-            border: 4px solid #d2691e;
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
-            transition: transform 0.2s;
-        }
-
-        .mass-section:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
-        }
-
-        .mass-header {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            padding: 25px 20px;
-            text-align: center;
-            position: relative;
-            border-bottom: 3px solid #d2691e;
-        }
-
-        .mass-header::before {
-            content: "🌾";
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2em;
-            animation: sway 3s ease-in-out infinite;
-        }
-
-        .mass-header::after {
-            content: "🌾";
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%) scaleX(-1);
-            font-size: 2em;
-            animation: sway 3s ease-in-out infinite 1s;
-        }
-
-        @keyframes sway {
-            0%, 100% { transform: translateY(-50%) rotate(0deg); }
-            50% { transform: translateY(-50%) rotate(10deg); }
-        }
-
-        .edit-mass-btn,
-        .delete-mass-btn,
-        .edit-header-btn {
-            display: none;
-        }
-
-        .edit-mass-btn,
-        .delete-mass-btn {
-            position: absolute;
-            top: 10px;
-            background-color: #d97706;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.85em;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-
-        .admin-mode .edit-mass-btn,
-        .admin-mode .delete-mass-btn,
-        .admin-mode .edit-header-btn {
-            display: block;
-        }
-
-        .edit-mass-btn {
-            right: 10px;
-        }
-
-        .delete-mass-btn {
-            right: 80px;
-            background-color: #dc2626;
-        }
-
-        .edit-mass-btn:hover {
-            background-color: #b45309;
-            transform: scale(1.05);
-        }
-
-        .delete-mass-btn:hover {
-            background-color: #b91c1c;
-            transform: scale(1.05);
-        }
-
-        .mass-header h3 {
-            font-size: 1.4em;
-            margin-bottom: 8px;
-            color: #92400e;
-            font-weight: bold;
-        }
-
-        .mass-header p {
-            font-size: 1.15em;
-            margin: 5px 0;
-            color: #78350f;
-            font-weight: 600;
-        }
-
-        .volunteer-table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #fffef9;
-        }
-
-        .volunteer-table td {
-            border: 2px solid #d2691e;
-            padding: 15px 10px;
-            font-size: 1em;
-        }
-
-        .volunteer-table td:first-child {
-            width: 60px;
-            text-align: center;
-            font-weight: bold;
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            color: #92400e;
-            font-size: 1.2em;
-        }
-
-        .volunteer-table td:nth-child(2),
-        .volunteer-table td:nth-child(4) {
-            width: 35%;
-        }
-
-        .volunteer-table td:nth-child(3),
-        .volunteer-table td:nth-child(5) {
-            width: 60px;
-            text-align: center;
-            font-weight: bold;
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            color: #92400e;
-            font-size: 1.2em;
-        }
-
-        .volunteer-table td:last-child {
-            width: 35%;
-        }
-
-        .volunteer-name {
-            cursor: pointer;
-            min-height: 25px;
-            padding: 8px;
-            color: #1f2937;
-            transition: all 0.2s;
-            border-radius: 5px;
-        }
-
-        .volunteer-name:hover {
-            background-color: #fef3c7;
-            transform: scale(1.02);
-        }
-
-        .volunteer-name.filled {
-            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-            font-weight: 600;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .empty-slot {
-            color: #9ca3af;
-            font-style: italic;
-            font-size: 0.9em;
-        }
-
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.6);
-            overflow-y: auto;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background-color: white;
-            margin: 50px auto;
-            padding: 30px;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-            border: 5px solid #d2691e;
-            position: relative;
-        }
-
-        .modal-content::before {
-            content: "🍂 🦃 🍁";
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 30px;
-            background: white;
-            padding: 0 15px;
-            border-radius: 20px;
-        }
-
-        .modal-header {
-            font-size: 1.5em;
-            margin-bottom: 25px;
-            color: #92400e;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #78350f;
-            font-size: 1.05em;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 3px solid #d2691e;
-            border-radius: 10px;
-            font-size: 1em;
-            font-family: 'Georgia', serif;
-            transition: all 0.2s;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #d97706;
-            box-shadow: 0 0 10px rgba(217, 119, 6, 0.3);
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-            margin-top: 25px;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1em;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #d97706 0%, #92400e 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(217, 119, 6, 0.4);
-        }
-
-        .btn-secondary {
-            background-color: #6b7280;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background-color: #4b5563;
-            transform: translateY(-2px);
-        }
-
-        .btn-remove {
-            background-color: #dc2626;
-            color: white;
-            padding: 8px 20px;
-            font-size: 0.95em;
-            margin-top: 10px;
-        }
-
-        .btn-remove:hover {
-            background-color: #b91c1c;
-            transform: translateY(-2px);
-        }
-
-        /* Mobile optimizations */
         @media (max-width: 768px) {
             body {
-                padding: 10px;
+                padding: 60px 10px 65px;
             }
 
             body::before,
@@ -628,83 +205,11 @@
                 padding: 8px;
             }
 
-            .container {
-                padding: 15px;
+            .season-panel {
+                padding: 20px 10px;
+                border-radius: 20px;
                 border-width: 3px;
-            }
-
-            .container::before,
-            .container::after {
-                font-size: 14px;
-                padding: 3px;
-            }
-
-            .header-red {
-                font-size: 1.3em;
-                padding: 20px 15px;
-                margin: 25px -15px 20px -15px;
-            }
-
-            .header-red::before,
-            .header-red::after {
-                display: none;
-            }
-
-            .header-green {
-                padding: 30px 15px;
-                margin: 0 -15px 25px -15px;
-            }
-
-            .header-green h1 {
-                font-size: 1.3em;
-            }
-
-            .header-green h2 {
-                font-size: 1em;
-            }
-
-            .header-green::before,
-            .header-green::after {
-                font-size: 2em;
-                opacity: 0.5;
-            }
-
-            .mass-header {
-                padding: 20px 15px;
-            }
-
-            .mass-header h3 {
-                font-size: 1.1em;
-            }
-
-            .mass-header p {
-                font-size: 1em;
-            }
-
-            .mass-header::before,
-            .mass-header::after {
-                display: none;
-            }
-
-            .volunteer-table td {
-                padding: 10px 5px;
-                font-size: 0.9em;
-            }
-
-            .volunteer-table td:first-child,
-            .volunteer-table td:nth-child(3),
-            .volunteer-table td:nth-child(5) {
-                font-size: 1em;
-                width: 40px;
-            }
-
-            .volunteer-name {
-                padding: 6px;
-                font-size: 0.9em;
-            }
-
-            .empty-slot {
-                font-size: 0.8em;
+                margin-bottom: 30px;
             }
 
             .admin-toggle {
@@ -721,381 +226,1974 @@
                 left: 15px;
                 min-width: auto;
             }
+        }
 
-            .modal-content {
+        /* ============================================
+           THANKSGIVING section styles (from thanksgiving.html)
+           ============================================ */
+        .theme-thanksgiving .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 8px 30px rgba(139, 69, 19, 0.3);
+            border-radius: 20px;
+            border: 5px solid #d2691e;
+            position: relative;
+            z-index: 1;
+        }
+
+        .theme-thanksgiving .container::before {
+            content: "🍂 🌾 🍁 🎃 🦃 🌽 🍂 🌾 🍁 🎃 🦃 🌽";
+            position: absolute;
+            top: -2px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 20px;
+            background: white;
+            padding: 5px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .theme-thanksgiving .container::after {
+            content: "🍂 🌾 🍁 🎃 🦃 🌽 🍂 🌾 🍁 🎃 🦃 🌽";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 20px;
+            background: white;
+            padding: 5px;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .theme-thanksgiving .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2em;
+            color: #92400e;
+        }
+
+        .theme-thanksgiving .loading::after {
+            content: '...';
+            animation: dots 1.5s infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        .theme-thanksgiving .error-message {
+            background: #fee2e2;
+            border: 2px solid #dc2626;
+            color: #991b1b;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .theme-thanksgiving .header-red {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            color: white;
+            text-align: center;
+            padding: 25px 20px;
+            font-size: 2em;
+            font-weight: bold;
+            margin: 30px -20px 25px -20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(220, 38, 38, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-thanksgiving .header-red::before {
+            content: "🍂";
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5em;
+            animation: bounce 2s infinite;
+        }
+
+        .theme-thanksgiving .header-red::after {
+            content: "🍂";
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%) scaleX(-1);
+            font-size: 1.5em;
+            animation: bounce 2s infinite 0.5s;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-60%) scale(1.1); }
+        }
+
+        .theme-thanksgiving .header-green {
+            background: linear-gradient(135deg, #d97706 0%, #92400e 100%);
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+            margin: 0 -20px 30px -20px;
+            position: relative;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(217, 119, 6, 0.4);
+        }
+
+        .theme-thanksgiving .header-green::before,
+        .theme-thanksgiving .header-green::after {
+            content: "🦃";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 4em;
+            animation: wiggle 3s ease-in-out infinite;
+        }
+
+        .theme-thanksgiving .header-green::before {
+            left: 20px;
+        }
+
+        .theme-thanksgiving .header-green::after {
+            right: 20px; transform: translateY(-50%) scaleX(-1);
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: translateY(-50%) rotate(0deg); }
+            25% { transform: translateY(-50%) rotate(-5deg); }
+            75% { transform: translateY(-50%) rotate(5deg); }
+        }
+
+        .theme-thanksgiving .edit-header-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255,255,255,0.3);
+            color: white;
+            border: 2px solid white;
+            padding: 6px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: bold;
+            display: none;
+            transition: all 0.2s;
+        }
+
+        .admin-mode .theme-thanksgiving .edit-header-btn {
+            display: block;
+        }
+
+        .theme-thanksgiving .edit-header-btn:hover {
+            background-color: rgba(255,255,255,0.5);
+            transform: scale(1.05);
+        }
+
+        .theme-thanksgiving .header-green h1 {
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+        }
+
+        .theme-thanksgiving .header-green h2 {
+            font-size: 1.4em;
+            margin-top: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .theme-thanksgiving .mass-section {
+            margin-bottom: 30px;
+            border: 4px solid #d2691e;
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
+            transition: transform 0.2s;
+        }
+
+        .theme-thanksgiving .mass-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
+        }
+
+        .theme-thanksgiving .mass-header {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            border-bottom: 3px solid #d2691e;
+        }
+
+        .theme-thanksgiving .mass-header::before {
+            content: "🌾";
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            animation: sway 3s ease-in-out infinite;
+        }
+
+        .theme-thanksgiving .mass-header::after {
+            content: "🌾";
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%) scaleX(-1);
+            font-size: 2em;
+            animation: sway 3s ease-in-out infinite 1s;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: translateY(-50%) rotate(0deg); }
+            50% { transform: translateY(-50%) rotate(10deg); }
+        }
+
+        .theme-thanksgiving .edit-mass-btn,
+        .theme-thanksgiving .delete-mass-btn,
+        .theme-thanksgiving .edit-header-btn {
+            display: none;
+        }
+
+        .theme-thanksgiving .edit-mass-btn,
+        .theme-thanksgiving .delete-mass-btn {
+            position: absolute;
+            top: 10px;
+            background-color: #d97706;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .admin-mode .theme-thanksgiving .edit-mass-btn,
+        .admin-mode .theme-thanksgiving .delete-mass-btn,
+        .admin-mode .theme-thanksgiving .edit-header-btn {
+            display: block;
+        }
+
+        .theme-thanksgiving .edit-mass-btn {
+            right: 10px;
+        }
+
+        .theme-thanksgiving .delete-mass-btn {
+            right: 80px;
+            background-color: #dc2626;
+        }
+
+        .theme-thanksgiving .edit-mass-btn:hover {
+            background-color: #b45309;
+            transform: scale(1.05);
+        }
+
+        .theme-thanksgiving .delete-mass-btn:hover {
+            background-color: #b91c1c;
+            transform: scale(1.05);
+        }
+
+        .theme-thanksgiving .mass-header h3 {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+            color: #92400e;
+            font-weight: bold;
+        }
+
+        .theme-thanksgiving .mass-header p {
+            font-size: 1.15em;
+            margin: 5px 0;
+            color: #78350f;
+            font-weight: 600;
+        }
+
+        .theme-thanksgiving .volunteer-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fffef9;
+        }
+
+        .theme-thanksgiving .volunteer-table td {
+            border: 2px solid #d2691e;
+            padding: 15px 10px;
+            font-size: 1em;
+        }
+
+        .theme-thanksgiving .volunteer-table td:first-child {
+            width: 60px;
+            text-align: center;
+            font-weight: bold;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            color: #92400e;
+            font-size: 1.2em;
+        }
+
+        .theme-thanksgiving .volunteer-table td:nth-child(2),
+        .theme-thanksgiving .volunteer-table td:nth-child(4) {
+            width: 35%;
+        }
+
+        .theme-thanksgiving .volunteer-table td:nth-child(3),
+        .theme-thanksgiving .volunteer-table td:nth-child(5) {
+            width: 60px;
+            text-align: center;
+            font-weight: bold;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            color: #92400e;
+            font-size: 1.2em;
+        }
+
+        .theme-thanksgiving .volunteer-table td:last-child {
+            width: 35%;
+        }
+
+        .theme-thanksgiving .volunteer-name {
+            cursor: pointer;
+            min-height: 25px;
+            padding: 8px;
+            color: #1f2937;
+            transition: all 0.2s;
+            border-radius: 5px;
+        }
+
+        .theme-thanksgiving .volunteer-name:hover {
+            background-color: #fef3c7;
+            transform: scale(1.02);
+        }
+
+        .theme-thanksgiving .volunteer-name.filled {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            font-weight: 600;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .theme-thanksgiving .empty-slot {
+            color: #9ca3af;
+            font-style: italic;
+            font-size: 0.9em;
+        }
+
+        .theme-thanksgiving .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .theme-thanksgiving .modal-content {
+            background-color: white;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+            border: 5px solid #d2691e;
+            position: relative;
+        }
+
+        .theme-thanksgiving .modal-content::before {
+            content: "🍂 🦃 🍁";
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            background: white;
+            padding: 0 15px;
+            border-radius: 20px;
+        }
+
+        .theme-thanksgiving .modal-header {
+            font-size: 1.5em;
+            margin-bottom: 25px;
+            color: #92400e;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .theme-thanksgiving .form-group {
+            margin-bottom: 20px;
+        }
+
+        .theme-thanksgiving .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #78350f;
+            font-size: 1.05em;
+        }
+
+        .theme-thanksgiving .form-group input,
+        .theme-thanksgiving .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 3px solid #d2691e;
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: 'Georgia', serif;
+            transition: all 0.2s;
+        }
+
+        .theme-thanksgiving .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .theme-thanksgiving .form-group input:focus,
+        .theme-thanksgiving .form-group textarea:focus {
+            outline: none;
+            border-color: #d97706;
+            box-shadow: 0 0 10px rgba(217, 119, 6, 0.3);
+        }
+
+        .theme-thanksgiving .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 25px;
+        }
+
+        .theme-thanksgiving .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .theme-thanksgiving .btn-primary {
+            background: linear-gradient(135deg, #d97706 0%, #92400e 100%);
+            color: white;
+        }
+
+        .theme-thanksgiving .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(217, 119, 6, 0.4);
+        }
+
+        .theme-thanksgiving .btn-secondary {
+            background-color: #6b7280;
+            color: white;
+        }
+
+        .theme-thanksgiving .btn-secondary:hover {
+            background-color: #4b5563;
+            transform: translateY(-2px);
+        }
+
+        .theme-thanksgiving .btn-remove {
+            background-color: #dc2626;
+            color: white;
+            padding: 8px 20px;
+            font-size: 0.95em;
+            margin-top: 10px;
+        }
+
+        .theme-thanksgiving .btn-remove:hover {
+            background-color: #b91c1c;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .theme-thanksgiving .container {
+                padding: 15px;
+                border-width: 3px;
+            }
+
+            .theme-thanksgiving .container::before,
+            .theme-thanksgiving .container::after {
+                font-size: 14px;
+                padding: 3px;
+            }
+
+            .theme-thanksgiving .header-red {
+                font-size: 1.3em;
+                padding: 20px 15px;
+                margin: 25px -15px 20px -15px;
+            }
+
+            .theme-thanksgiving .header-red::before,
+            .theme-thanksgiving .header-red::after {
+                display: none;
+            }
+
+            .theme-thanksgiving .header-green {
+                padding: 30px 15px;
+                margin: 0 -15px 25px -15px;
+            }
+
+            .theme-thanksgiving .header-green h1 {
+                font-size: 1.3em;
+            }
+
+            .theme-thanksgiving .header-green h2 {
+                font-size: 1em;
+            }
+
+            .theme-thanksgiving .header-green::before,
+            .theme-thanksgiving .header-green::after {
+                font-size: 2em;
+                opacity: 0.5;
+            }
+
+            .theme-thanksgiving .mass-header {
+                padding: 20px 15px;
+            }
+
+            .theme-thanksgiving .mass-header h3 {
+                font-size: 1.1em;
+            }
+
+            .theme-thanksgiving .mass-header p {
+                font-size: 1em;
+            }
+
+            .theme-thanksgiving .mass-header::before,
+            .theme-thanksgiving .mass-header::after {
+                display: none;
+            }
+
+            .theme-thanksgiving .volunteer-table td {
+                padding: 10px 5px;
+                font-size: 0.9em;
+            }
+
+            .theme-thanksgiving .volunteer-table td:first-child,
+            .theme-thanksgiving .volunteer-table td:nth-child(3),
+            .theme-thanksgiving .volunteer-table td:nth-child(5) {
+                font-size: 1em;
+                width: 40px;
+            }
+
+            .theme-thanksgiving .volunteer-name {
+                padding: 6px;
+                font-size: 0.9em;
+            }
+
+            .theme-thanksgiving .empty-slot {
+                font-size: 0.8em;
+            }
+
+            .theme-thanksgiving .modal-content {
                 padding: 25px 20px;
                 margin: 30px auto;
             }
 
-            .modal-content::before {
+            .theme-thanksgiving .modal-content::before {
                 font-size: 24px;
                 top: -15px;
             }
 
-            .modal-header {
+            .theme-thanksgiving .modal-header {
                 font-size: 1.3em;
             }
 
-            .modal-buttons {
+            .theme-thanksgiving .modal-buttons {
                 flex-direction: column;
             }
 
-            .btn {
+            .theme-thanksgiving .btn {
                 width: 100%;
                 padding: 12px;
             }
 
-            .admin-mode .mass-header,
-            .admin-mode .header-green {
+            .admin-mode .theme-thanksgiving .mass-header,
+            .admin-mode .theme-thanksgiving .header-green {
                 padding-bottom: 50px;
             }
 
-            .admin-mode .edit-mass-btn,
-            .admin-mode .delete-mass-btn {
+            .admin-mode .theme-thanksgiving .edit-mass-btn,
+            .admin-mode .theme-thanksgiving .delete-mass-btn {
                 position: absolute;
                 bottom: 10px;
             }
 
-            .admin-mode .edit-mass-btn {
+            .admin-mode .theme-thanksgiving .edit-mass-btn {
                 right: 10px;
             }
 
-            .admin-mode .delete-mass-btn {
+            .admin-mode .theme-thanksgiving .delete-mass-btn {
                 right: 80px;
             }
 
-            .admin-mode .edit-header-btn {
+            .admin-mode .theme-thanksgiving .edit-header-btn {
                 top: 10px;
                 right: 10px;
             }
         }
 
-        /* Extra small phones */
         @media (max-width: 380px) {
-            .header-green::before,
-            .header-green::after {
+            .theme-thanksgiving .header-green::before,
+            .theme-thanksgiving .header-green::after {
                 font-size: 2em;
             }
 
-            .volunteer-table td {
+            .theme-thanksgiving .volunteer-table td {
                 padding: 8px 3px;
                 font-size: 0.85em;
             }
         }
+
+
+        /* ============================================
+           ADVENT section styles (from advent.html)
+           ============================================ */
+        .theme-advent .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.3);
+            border-radius: 20px;
+            border: 5px solid #7c3aed;
+            position: relative;
+            z-index: 1;
+        }
+
+        .theme-advent .container::before {
+            content: "🕯️ 🕯️ 🕯️ 🕯️ ✝️ 🙏 🕊️ ✝️ 🕯️ 🕯️ 🕯️ 🕯️";
+            position: absolute;
+            top: -2px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 20px;
+            background: white;
+            padding: 5px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .theme-advent .container::after {
+            content: "🕯️ 🕯️ 🕯️ 🕯️ ✝️ 🙏 🕊️ ✝️ 🕯️ 🕯️ 🕯️ 🕯️";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 20px;
+            background: white;
+            padding: 5px;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .theme-advent .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2em;
+            color: #5b21b6;
+        }
+
+        .theme-advent .loading::after {
+            content: '...';
+            animation: dots 1.5s infinite;
+        }
+
+        .theme-advent .error-message {
+            background: #ede9fe;
+            border: 2px solid #7c3aed;
+            color: #5b21b6;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .theme-advent .header-red {
+            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+            color: white;
+            text-align: center;
+            padding: 25px 20px;
+            font-size: 2em;
+            font-weight: bold;
+            margin: 30px -20px 25px -20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(124, 58, 237, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-advent .header-red::before {
+            content: "🕯️";
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            animation: flicker 4s ease-in-out infinite;
+        }
+
+        .theme-advent .header-red::after {
+            content: "🕯️";
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            animation: flicker 4s ease-in-out infinite 2s;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+            50% { opacity: 0.75; transform: translateY(-50%) scale(1.08); }
+        }
+
+        .theme-advent .header-green {
+            background: linear-gradient(135deg, #be185d 0%, #9d174d 100%);
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+            margin: 0 -20px 30px -20px;
+            position: relative;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(190, 24, 93, 0.4);
+        }
+
+        .theme-advent .header-green::before,
+        .theme-advent .header-green::after {
+            content: "🙏";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 4em;
+            animation: prance 3s ease-in-out infinite;
+        }
+
+        .theme-advent .header-green::before {
+            left: 20px;
+        }
+
+        .theme-advent .header-green::after {
+            right: 20px; transform: translateY(-50%) scaleX(-1);
+        }
+
+        @keyframes prance {
+            0%, 100% { transform: translateY(-50%) rotate(0deg); }
+            25% { transform: translateY(-55%) rotate(-3deg); }
+            50% { transform: translateY(-50%) rotate(0deg); }
+            75% { transform: translateY(-55%) rotate(3deg); }
+        }
+
+        .theme-advent .edit-header-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255,255,255,0.3);
+            color: white;
+            border: 2px solid white;
+            padding: 6px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: bold;
+            display: none;
+            transition: all 0.2s;
+        }
+
+        .admin-mode .theme-advent .edit-header-btn {
+            display: block;
+        }
+
+        .theme-advent .edit-header-btn:hover {
+            background-color: rgba(255,255,255,0.5);
+            transform: scale(1.05);
+        }
+
+        .theme-advent .header-green h1 {
+            font-size: 1.8em;
+            margin-bottom: 8px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+        }
+
+        .theme-advent .header-green h2 {
+            font-size: 1.4em;
+            margin-top: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .theme-advent .mass-section {
+            margin-bottom: 30px;
+            border: 4px solid #be185d;
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(190, 24, 93, 0.2);
+            transition: transform 0.2s;
+        }
+
+        .theme-advent .mass-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(190, 24, 93, 0.3);
+        }
+
+        .theme-advent .mass-header {
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            border-bottom: 3px solid #be185d;
+        }
+
+        .theme-advent .mass-header::before,
+        .theme-advent .mass-header::after {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            animation: bob 3s ease-in-out infinite;
+        }
+
+        .theme-advent .mass-header::before {
+            left: 20px;
+        }
+
+        .theme-advent .mass-header::after {
+            right: 20px;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes bob {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-55%) scale(1.05); }
+        }
+
+        .theme-advent .edit-mass-btn,
+        .theme-advent .delete-mass-btn,
+        .theme-advent .edit-header-btn {
+            display: none;
+        }
+
+        .theme-advent .edit-mass-btn,
+        .theme-advent .delete-mass-btn {
+            position: absolute;
+            top: 10px;
+            background-color: #be185d;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .admin-mode .theme-advent .edit-mass-btn,
+        .admin-mode .theme-advent .delete-mass-btn,
+        .admin-mode .theme-advent .edit-header-btn {
+            display: block;
+        }
+
+        .theme-advent .edit-mass-btn {
+            right: 10px;
+        }
+
+        .theme-advent .delete-mass-btn {
+            right: 80px;
+            background-color: #7c3aed;
+        }
+
+        .theme-advent .edit-mass-btn:hover {
+            background-color: #9d174d;
+            transform: scale(1.05);
+        }
+
+        .theme-advent .delete-mass-btn:hover {
+            background-color: #6d28d9;
+            transform: scale(1.05);
+        }
+
+        .theme-advent .mass-header h3 {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+            color: #831843;
+            font-weight: bold;
+        }
+
+        .theme-advent .mass-header p {
+            font-size: 1.15em;
+            margin: 5px 0;
+            color: #9d174d;
+            font-weight: 600;
+        }
+
+        .theme-advent .announcement-notice {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde047 100%);
+            border: 3px solid #eab308;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 15px 20px;
+            position: relative;
+        }
+
+        .theme-advent .announcement-notice::before {
+            content: "⚠️";
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        .theme-advent .announcement-text {
+            color: #713f12;
+            font-weight: 600;
+            font-size: 1.05em;
+            display: inline;
+        }
+
+        .theme-advent .announcement-cancelled {
+            background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+            border: 3px solid #7c3aed;
+        }
+
+        .theme-advent .announcement-cancelled::before {
+            content: "❌";
+        }
+
+        .theme-advent .edit-announcement-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #eab308;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8em;
+            font-weight: 600;
+            display: none;
+            transition: all 0.2s;
+        }
+
+        .admin-mode .theme-advent .edit-announcement-btn {
+            display: block;
+        }
+
+        .theme-advent .edit-announcement-btn:hover {
+            background-color: #ca8a04;
+            transform: scale(1.05);
+        }
+
+        .theme-advent .reorder-btn {
+            position: absolute;
+            left: 10px;
+            background-color: #6b7280;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: 600;
+            display: none;
+            transition: all 0.2s;
+            width: 40px;
+        }
+
+        .theme-advent .reorder-up {
+            top: 10px;
+        }
+
+        .theme-advent .reorder-down {
+            top: 50px;
+        }
+
+        .admin-mode .theme-advent .reorder-btn {
+            display: block;
+        }
+
+        .theme-advent .reorder-btn:hover:not(:disabled) {
+            background-color: #4b5563;
+            transform: scale(1.1);
+        }
+
+        .theme-advent .reorder-btn:disabled {
+            background-color: #d1d5db;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .theme-advent .volunteer-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fefffe;
+        }
+
+        .theme-advent .volunteer-table td {
+            border: 2px solid #be185d;
+            padding: 15px 10px;
+            font-size: 1em;
+        }
+
+        .theme-advent .volunteer-table td.slot-num {
+            width: 50px;
+            text-align: center;
+            font-weight: bold;
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            color: #831843;
+            font-size: 1.2em;
+        }
+
+        .theme-advent .volunteer-name {
+            cursor: pointer;
+            min-height: 25px;
+            padding: 8px;
+            color: #1f2937;
+            transition: all 0.2s;
+            border-radius: 5px;
+        }
+
+        .theme-advent .volunteer-name:hover {
+            background-color: #fce7f3;
+            transform: scale(1.02);
+        }
+
+        .theme-advent .volunteer-name.filled {
+            background: linear-gradient(135deg, #fef9c3 0%, #fde047 100%);
+            font-weight: 600;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid #eab308;
+        }
+
+        .theme-advent .empty-slot {
+            color: #9ca3af;
+            font-style: italic;
+            font-size: 0.9em;
+        }
+
+        .theme-advent .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .theme-advent .modal-content {
+            background-color: white;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+            border: 5px solid #7c3aed;
+            position: relative;
+        }
+
+        .theme-advent .modal-content::before {
+            content: "🕯️ ✝️ 🕯️";
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            background: white;
+            padding: 0 15px;
+            border-radius: 20px;
+        }
+
+        .theme-advent .modal-header {
+            font-size: 1.5em;
+            margin-bottom: 25px;
+            color: #5b21b6;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .theme-advent .form-group {
+            margin-bottom: 20px;
+        }
+
+        .theme-advent .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #831843;
+            font-size: 1.05em;
+        }
+
+        .theme-advent .form-group input,
+        .theme-advent .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 3px solid #be185d;
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: 'Georgia', serif;
+            transition: all 0.2s;
+        }
+
+        .theme-advent .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .theme-advent .form-group input:focus,
+        .theme-advent .form-group textarea:focus {
+            outline: none;
+            border-color: #9d174d;
+            box-shadow: 0 0 10px rgba(190, 24, 93, 0.3);
+        }
+
+        .theme-advent .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 25px;
+        }
+
+        .theme-advent .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .theme-advent .btn-primary {
+            background: linear-gradient(135deg, #be185d 0%, #9d174d 100%);
+            color: white;
+        }
+
+        .theme-advent .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(190, 24, 93, 0.4);
+        }
+
+        .theme-advent .btn-secondary {
+            background-color: #6b7280;
+            color: white;
+        }
+
+        .theme-advent .btn-secondary:hover {
+            background-color: #4b5563;
+            transform: translateY(-2px);
+        }
+
+        .theme-advent .btn-remove {
+            background-color: #7c3aed;
+            color: white;
+            padding: 8px 20px;
+            font-size: 0.95em;
+            margin-top: 10px;
+        }
+
+        .theme-advent .btn-remove:hover {
+            background-color: #6d28d9;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .theme-advent .container {
+                padding: 15px;
+                border-width: 3px;
+            }
+
+            .theme-advent .container::before,
+            .theme-advent .container::after {
+                font-size: 14px;
+                padding: 3px;
+            }
+
+            .theme-advent .header-red {
+                font-size: 1.3em;
+                padding: 20px 15px;
+                margin: 25px -15px 20px -15px;
+            }
+
+            .theme-advent .header-red::before,
+            .theme-advent .header-red::after {
+                display: none;
+            }
+
+            .theme-advent .header-green {
+                padding: 30px 15px;
+                margin: 0 -15px 25px -15px;
+            }
+
+            .theme-advent .header-green h1 {
+                font-size: 1.3em;
+            }
+
+            .theme-advent .header-green h2 {
+                font-size: 1em;
+            }
+
+            .theme-advent .header-green::before,
+            .theme-advent .header-green::after {
+                font-size: 2em;
+                opacity: 0.5;
+            }
+
+            .theme-advent .mass-header {
+                padding: 20px 15px;
+            }
+
+            .theme-advent .mass-header h3 {
+                font-size: 1.1em;
+            }
+
+            .theme-advent .mass-header p {
+                font-size: 1em;
+            }
+
+            .theme-advent .mass-header::before,
+            .theme-advent .mass-header::after {
+                display: none;
+            }
+
+            .theme-advent .volunteer-table td {
+                padding: 10px 5px;
+                font-size: 0.9em;
+            }
+
+            .theme-advent .volunteer-table td.slot-num {
+                font-size: 1em;
+                width: 28px;
+            }
+
+            .theme-advent .volunteer-name {
+                padding: 6px;
+                font-size: 0.9em;
+            }
+
+            .theme-advent .empty-slot {
+                font-size: 0.8em;
+            }
+
+            .theme-advent .modal-content {
+                padding: 25px 20px;
+                margin: 30px auto;
+            }
+
+            .theme-advent .modal-content::before {
+                font-size: 24px;
+                top: -15px;
+            }
+
+            .theme-advent .modal-header {
+                font-size: 1.3em;
+            }
+
+            .theme-advent .modal-buttons {
+                flex-direction: column;
+            }
+
+            .theme-advent .btn {
+                width: 100%;
+                padding: 12px;
+            }
+
+            .admin-mode .theme-advent .mass-header,
+            .admin-mode .theme-advent .header-green {
+                padding-bottom: 50px;
+            }
+
+            .admin-mode .theme-advent .edit-mass-btn,
+            .admin-mode .theme-advent .delete-mass-btn {
+                position: absolute;
+                bottom: 10px;
+            }
+
+            .admin-mode .theme-advent .edit-mass-btn {
+                right: 10px;
+            }
+
+            .admin-mode .theme-advent .delete-mass-btn {
+                right: 80px;
+            }
+
+            .admin-mode .theme-advent .edit-header-btn {
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .theme-advent .header-green::before,
+            .theme-advent .header-green::after {
+                font-size: 2em;
+            }
+
+            .theme-advent .volunteer-table td {
+                padding: 8px 3px;
+                font-size: 0.85em;
+            }
+        }
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header-red">
-            PLEASE SIGN UP
+
+    <!-- ==================================================
+         THANKSGIVING SECTION  (saves to the Thanksgiving sheet)
+         ================================================== -->
+    <section class="season theme-thanksgiving" id="thanksgiving">
+        <div class="season-panel">
+            <div class="container">
+                <div class="header-red">
+                    PLEASE SIGN UP
+                </div>
+
+                <div class="header-green">
+                    <button class="edit-header-btn" onclick="sections.tg.editHeader()">Edit</button>
+                    <h1 id="tg-headerTitle">THANKSGIVING MASSES</h1>
+                    <h2 id="tg-headerDate">NOVEMBER 26, 2026</h2>
+                </div>
+
+                <div id="tg-loadingMessage" class="loading">Loading sign-ups</div>
+                <div id="tg-errorMessage" class="error-message" style="display: none;"></div>
+                <div id="tg-massesContainer"></div>
+            </div>
         </div>
 
-        <div class="header-green">
-            <button class="edit-header-btn" onclick="editHeader()">Edit</button>
-            <h1 id="headerTitle">THANKSGIVING MASSES</h1>
-            <h2 id="headerDate">NOVEMBER 26, 2026</h2>
+        <!-- Thanksgiving: Volunteer Sign-up Modal -->
+        <div id="tg-volunteerModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header" id="tg-modalTitle">🍂 Sign Up for Position</div>
+                <form id="tg-volunteerForm">
+                    <div class="form-group">
+                        <label for="tg-volunteerName">Your Name:</label>
+                        <input type="text" id="tg-volunteerName" required placeholder="Enter your full name">
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('tg-volunteerModal')">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                    </div>
+                </form>
+                <div id="tg-removeButtonContainer"></div>
+            </div>
         </div>
 
-        <div id="loadingMessage" class="loading">Loading sign-ups</div>
-        <div id="errorMessage" class="error-message" style="display: none;"></div>
-        <div id="massesContainer"></div>
-    </div>
+        <!-- Thanksgiving: Edit Mass Modal -->
+        <div id="tg-editMassModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">🦃 Edit Mass Time</div>
+                <form id="tg-editMassForm">
+                    <div class="form-group">
+                        <label for="tg-massDay">Day:</label>
+                        <input type="text" id="tg-massDay" required placeholder="e.g., Thursday, November 26, 2026">
+                    </div>
+                    <div class="form-group">
+                        <label for="tg-massTime">Time:</label>
+                        <input type="text" id="tg-massTime" required placeholder="e.g., 9:00 am">
+                    </div>
+                    <div class="form-group">
+                        <label for="tg-massNote">Additional Note:</label>
+                        <input type="text" id="tg-massNote" placeholder="e.g., Will have collection (optional)">
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('tg-editMassModal')">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-    <!-- Hidden Admin Toggle Button -->
+        <!-- Thanksgiving: Edit Header Modal -->
+        <div id="tg-editHeaderModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">🍁 Edit Header</div>
+                <form id="tg-editHeaderForm">
+                    <div class="form-group">
+                        <label for="tg-headerTitleInput">Title:</label>
+                        <input type="text" id="tg-headerTitleInput" required placeholder="e.g., THANKSGIVING MASSES">
+                    </div>
+                    <div class="form-group">
+                        <label for="tg-headerDateInput">Date:</label>
+                        <input type="text" id="tg-headerDateInput" required placeholder="e.g., NOVEMBER 26, 2026">
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('tg-editHeaderModal')">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================================================
+         ADVENT SECTION  (saves to the Advent sheet)
+         ================================================== -->
+    <section class="season theme-advent" id="advent">
+        <div class="season-panel">
+            <div class="container">
+                <div class="header-red">
+                    PLEASE SIGN UP
+                </div>
+
+                <div class="header-green">
+                    <button class="edit-header-btn" onclick="sections.adv.editHeader()">Edit</button>
+                    <h1 id="adv-headerTitle">ADVENT MASSES</h1>
+                    <h2 id="adv-headerDate">DECEMBER 1, 2026</h2>
+                </div>
+
+                <div id="adv-loadingMessage" class="loading">Loading sign-ups</div>
+                <div id="adv-errorMessage" class="error-message" style="display: none;"></div>
+                <div id="adv-massesContainer"></div>
+            </div>
+        </div>
+
+        <!-- Advent: Volunteer Sign-up Modal -->
+        <div id="adv-volunteerModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header" id="adv-modalTitle">🕯️ Sign Up for Position</div>
+                <form id="adv-volunteerForm">
+                    <div class="form-group">
+                        <label for="adv-volunteerName">Your Name:</label>
+                        <input type="text" id="adv-volunteerName" required placeholder="Enter your full name">
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('adv-volunteerModal')">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                    </div>
+                </form>
+                <div id="adv-removeButtonContainer"></div>
+            </div>
+        </div>
+
+        <!-- Advent: Edit Mass Modal -->
+        <div id="adv-editMassModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">✝️ Edit Mass Time</div>
+                <form id="adv-editMassForm">
+                    <div class="form-group">
+                        <label for="adv-massDay">Day:</label>
+                        <input type="text" id="adv-massDay" required placeholder="e.g., Tuesday, December 1, 2026">
+                    </div>
+                    <div class="form-group">
+                        <label for="adv-massTime">Time:</label>
+                        <input type="text" id="adv-massTime" required placeholder="e.g., 4:00 pm">
+                    </div>
+                    <div class="form-group">
+                        <label for="adv-massNote">Additional Note:</label>
+                        <input type="text" id="adv-massNote" placeholder="e.g., Will have collection (optional)">
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('adv-editMassModal')">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Advent: Edit Header Modal -->
+        <div id="adv-editHeaderModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">⭐ Edit Header</div>
+                <form id="adv-editHeaderForm">
+                    <div class="form-group">
+                        <label for="adv-headerTitleInput">Title:</label>
+                        <input type="text" id="adv-headerTitleInput" required placeholder="e.g., ADVENT MASSES">
+                    </div>
+                    <div class="form-group">
+                        <label for="adv-headerDateInput">Date:</label>
+                        <input type="text" id="adv-headerDateInput" required placeholder="e.g., DECEMBER 1, 2026">
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('adv-editHeaderModal')">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Advent: Edit Announcement Modal -->
+        <div id="adv-editAnnouncementModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">📢 Edit Announcement</div>
+                <form id="adv-editAnnouncementForm">
+                    <div class="form-group">
+                        <label for="adv-announcementText">Announcement Message:</label>
+                        <textarea id="adv-announcementText" placeholder="e.g., ⚠️ Please note: This mass has been cancelled due to weather. or leave blank for no announcement"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="adv-isCancelled" style="width: auto; margin-right: 8px;">
+                            Mark as CANCELLED (red alert)
+                        </label>
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('adv-editAnnouncementModal')">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Announcement</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hidden Admin Toggle Button (one for the whole page) -->
     <button class="admin-toggle" onclick="toggleAdminPanel()" title="Admin Controls">⚙️</button>
 
     <!-- Admin Panel -->
     <div id="adminPanel" class="admin-panel">
-        <h3>🦃 Admin Controls</h3>
+        <h3>⛪ Admin Controls</h3>
         <button onclick="toggleAdminMode()" id="editModeBtn">✏️ Edit Mode</button>
-        <button onclick="addNewMass()">+ Add Mass</button>
         <button onclick="refreshData()">🔄 Refresh Data</button>
-        <button onclick="clearAllData()">🗑️ Clear All</button>
-    </div>
-
-    <!-- Volunteer Sign-up Modal -->
-    <div id="volunteerModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header" id="modalTitle">🍂 Sign Up for Position</div>
-            <form id="volunteerForm">
-                <div class="form-group">
-                    <label for="volunteerName">Your Name:</label>
-                    <input type="text" id="volunteerName" required placeholder="Enter your full name">
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn btn-secondary" onclick="closeModal('volunteerModal')">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Sign Up</button>
-                </div>
-            </form>
-            <div id="removeButtonContainer"></div>
-        </div>
-    </div>
-
-    <!-- Edit Mass Modal -->
-    <div id="editMassModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">🦃 Edit Mass Time</div>
-            <form id="editMassForm">
-                <div class="form-group">
-                    <label for="massDay">Day:</label>
-                    <input type="text" id="massDay" required placeholder="e.g., Thursday, November 26, 2026">
-                </div>
-                <div class="form-group">
-                    <label for="massTime">Time:</label>
-                    <input type="text" id="massTime" required placeholder="e.g., 9:00 am">
-                </div>
-                <div class="form-group">
-                    <label for="massNote">Additional Note:</label>
-                    <input type="text" id="massNote" placeholder="e.g., Will have collection (optional)">
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn btn-secondary" onclick="closeModal('editMassModal')">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Edit Header Modal -->
-    <div id="editHeaderModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">🍁 Edit Header</div>
-            <form id="editHeaderForm">
-                <div class="form-group">
-                    <label for="headerTitleInput">Title:</label>
-                    <input type="text" id="headerTitleInput" required placeholder="e.g., THANKSGIVING MASSES">
-                </div>
-                <div class="form-group">
-                    <label for="headerDateInput">Date:</label>
-                    <input type="text" id="headerDateInput" required placeholder="e.g., NOVEMBER 26, 2026">
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="btn btn-secondary" onclick="closeModal('editHeaderModal')">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </div>
-            </form>
-        </div>
+        <h4 class="tg-heading">🦃 Thanksgiving</h4>
+        <button class="tg-btn" onclick="sections.tg.addNewMass()">+ Add Thanksgiving Mass</button>
+        <button class="tg-btn" onclick="sections.tg.clearAllData()">🗑️ Clear Thanksgiving</button>
+        <h4 class="adv-heading">🕯️ Advent</h4>
+        <button class="adv-btn" onclick="sections.adv.addNewMass()">+ Add Advent Mass</button>
+        <button class="adv-btn" onclick="sections.adv.clearAllData()">🗑️ Clear Advent</button>
     </div>
 
     <script src="admin-auth.js"></script>
     <script>
         // ============================================
-        // CONFIGURATION - REPLACE THIS URL WITH YOUR GOOGLE SHEETS WEB APP URL
+        // CONFIGURATION - each section saves to its OWN Google Sheet
         // ============================================
-        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxLX_cszBc8VxSRJZa3tDFvBkX4SR7uNolK8WSom6CzVRAjtjmgatqUTGa8oiL-8jfFLw/exec';
-        
-        // ============================================
-        // Global variables
-        // ============================================
-        let currentMass = '';
-        let currentPosition = 0;
-        let currentRow = 0;
-        let currentEditingMassId = '';
+        const THANKSGIVING_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxLX_cszBc8VxSRJZa3tDFvBkX4SR7uNolK8WSom6CzVRAjtjmgatqUTGa8oiL-8jfFLw/exec';
+        const ADVENT_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxPEel3vUbSPTGLLvEeNWg18rbzRTYrv2q0irKGzApe09RlqTPwvbWhkKAK50QOxxkDSA/exec';
+
         let adminModeActive = false;
-        let allData = null;
-
-        // Default masses
-        const defaultMasses = [
-            { id: 'thu9am', day: 'Thursday, November 26, 2026', time: '9:00 am', note: 'Will have collection' },
-            { id: 'thu11am', day: 'Thursday, November 26, 2026', time: '11:00 am', note: 'Will have collection' }
-        ];
 
         // ============================================
-        // Google Sheets API Functions
+        // Mass card layouts (each season keeps its own)
         // ============================================
-        
-        async function fetchDataFromSheets() {
-            try {
-                const response = await fetch(GOOGLE_SHEETS_URL);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch data from Google Sheets');
-                }
-                const data = await response.json();
-                return data;
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                showError('Unable to load data. Please check your internet connection and try again.');
-                return null;
-            }
-        }
 
-        async function saveDataToSheets(data) {
-            try {
-                const response = await fetch(GOOGLE_SHEETS_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                });
-                
-                // Note: no-cors mode doesn't give us access to the response,
-                // so we assume success and refresh data
-                await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for save
-                return true;
-            } catch (error) {
-                console.error('Error saving data:', error);
-                showError('Unable to save data. Please try again.');
-                return false;
-            }
-        }
-
-        // ============================================
-        // UI Helper Functions
-        // ============================================
-        
-        function showError(message) {
-            const errorDiv = document.getElementById('errorMessage');
-            errorDiv.textContent = message;
-            errorDiv.style.display = 'block';
-        }
-
-        function hideError() {
-            document.getElementById('errorMessage').style.display = 'none';
-        }
-
-        function showLoading() {
-            document.getElementById('loadingMessage').style.display = 'block';
-            document.getElementById('massesContainer').style.display = 'none';
-        }
-
-        function hideLoading() {
-            document.getElementById('loadingMessage').style.display = 'none';
-            document.getElementById('massesContainer').style.display = 'block';
-        }
-
-        // ============================================
-        // Data Management Functions
-        // ============================================
-        
-        async function loadAllData() {
-            showLoading();
-            hideError();
-            
-            const data = await fetchDataFromSheets();
-            
-            if (data) {
-                allData = data;
-                displayHeader();
-                displayMasses();
-                hideLoading();
-            } else {
-                // Use default data if sheets unavailable
-                allData = {
-                    masses: defaultMasses,
-                    volunteers: {},
-                    header: { title: 'THANKSGIVING MASSES', date: 'NOVEMBER 26, 2026' }
-                };
-                displayHeader();
-                displayMasses();
-                hideLoading();
-            }
-        }
-
-        async function saveAllData() {
-            const success = await saveDataToSheets(allData);
-            if (success) {
-                // Refresh to show latest data
-                await loadAllData();
-            }
-        }
-
-        async function refreshData() {
-            await loadAllData();
-            toggleAdminPanel();
-            alert('✅ Data refreshed!');
-        }
-
-        // ============================================
-        // Display Functions
-        // ============================================
-        
-        function displayHeader() {
-            if (!allData || !allData.header) return;
-            document.getElementById('headerTitle').textContent = allData.header.title;
-            document.getElementById('headerDate').textContent = allData.header.date;
-        }
-
-        function displayMasses() {
-            if (!allData || !allData.masses) return;
-            
-            const container = document.getElementById('massesContainer');
-            container.innerHTML = '';
-
-            allData.masses.forEach(mass => {
-                const massDiv = document.createElement('div');
-                massDiv.className = 'mass-section';
-                massDiv.innerHTML = `
+        // Thanksgiving: 6 slots, 3 across (1-3-5 / 2-4-6)
+        function renderThanksgivingMass(section, mass) {
+            const k = section.key;
+            const cell = n => `
+                            <td>${n}</td>
+                            <td class="volunteer-name" onclick="sections.${k}.openVolunteerModal('${mass.id}', ${n}, 0)">
+                                <span class="slot-content" data-slot="${mass.id}-${n}-0"></span>
+                            </td>`;
+            const massDiv = document.createElement('div');
+            massDiv.className = 'mass-section';
+            massDiv.innerHTML = `
                     <div class="mass-header">
-                        <button class="delete-mass-btn" onclick="deleteMass('${mass.id}')">Delete</button>
-                        <button class="edit-mass-btn" onclick="editMass('${mass.id}')">Edit</button>
+                        <button class="delete-mass-btn" onclick="sections.${k}.deleteMass('${mass.id}')">Delete</button>
+                        <button class="edit-mass-btn" onclick="sections.${k}.editMass('${mass.id}')">Edit</button>
                         <h3>${mass.day}</h3>
                         <p><strong>${mass.time}</strong></p>
                         ${mass.note ? `<p>${mass.note}</p>` : ''}
                     </div>
                     <table class="volunteer-table">
-                        <tr>
-                            <td>1</td>
-                            <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 1, 0)">
-                                <span class="slot-content" id="${mass.id}-1-0"></span>
-                            </td>
-                            <td>3</td>
-                            <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 3, 0)">
-                                <span class="slot-content" id="${mass.id}-3-0"></span>
-                            </td>
-                            <td>5</td>
-                            <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 5, 0)">
-                                <span class="slot-content" id="${mass.id}-5-0"></span>
-                            </td>
+                        <tr>${cell(1)}${cell(3)}${cell(5)}
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 2, 0)">
-                                <span class="slot-content" id="${mass.id}-2-0"></span>
-                            </td>
-                            <td>4</td>
-                            <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 4, 0)">
-                                <span class="slot-content" id="${mass.id}-4-0"></span>
-                            </td>
-                            <td>6</td>
-                            <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 6, 0)">
-                                <span class="slot-content" id="${mass.id}-6-0"></span>
-                            </td>
+                        <tr>${cell(2)}${cell(4)}${cell(6)}
                         </tr>
                     </table>
                 `;
-                container.appendChild(massDiv);
-            });
-
-            displayVolunteers();
+            return massDiv;
         }
 
-        function displayVolunteers() {
-            if (!allData || !allData.volunteers) return;
-            
-            const slots = document.querySelectorAll('.slot-content');
-            
-            slots.forEach(slot => {
-                const id = slot.id;
-                const name = allData.volunteers[id];
-                const parent = slot.parentElement;
-                
-                if (name) {
-                    slot.textContent = name;
-                    parent.classList.add('filled');
-                    parent.classList.remove('empty-slot');
-                } else {
-                    slot.innerHTML = '<span class="empty-slot">Click to sign up</span>';
-                    parent.classList.remove('filled');
+        // Advent: 8 slots, 2 across (1-4 down the left, 5-8 down the right),
+        // with announcements and up/down reordering
+        const ADVENT_SLOTS_PER_MASS = 8;
+        const ADVENT_SLOT_ROWS = 4;
+        const adventEmojiPairs = [
+            ['🕯️', '🕯️'],  // Advent candles
+            ['⭐', '⭐'],  // star
+            ['🕊️', '🕊️'],  // dove
+            ['✝️', '✝️'],  // cross
+            ['⛪', '⛪'],  // church
+            ['📖', '📖']   // scripture
+        ];
+
+        function renderAdventMass(section, mass, index, masses) {
+            const k = section.key;
+            const massDiv = document.createElement('div');
+            massDiv.className = 'mass-section';
+            massDiv.id = `${k}-mass-${index}`;
+
+            const isConfession = /penance|confession|reconciliation/i.test((mass.note || '') + ' ' + (mass.time || ''));
+            const emoji = isConfession ? ['🙏', '🙏'] : adventEmojiPairs[index % adventEmojiPairs.length];
+
+            const isCancelled = mass.announcement && (
+                mass.announcement.toLowerCase().includes('cancel') ||
+                mass.isCancelled === true
+            );
+
+            let announcementHTML = '';
+            if (mass.announcement) {
+                announcementHTML = `
+                        <div class="announcement-notice ${isCancelled ? 'announcement-cancelled' : ''}">
+                            <button class="edit-announcement-btn" onclick="sections.${k}.editAnnouncement('${mass.id}')">Edit</button>
+                            <span class="announcement-text">${mass.announcement}</span>
+                        </div>
+                    `;
+            }
+
+            let volunteerTableHTML = '';
+            if (!isCancelled) {
+                let rowsHTML = '';
+                for (let r = 1; r <= ADVENT_SLOT_ROWS; r++) {
+                    rowsHTML += '<tr>';
+                    for (let c = 0; c < ADVENT_SLOTS_PER_MASS / ADVENT_SLOT_ROWS; c++) {
+                        const n = c * ADVENT_SLOT_ROWS + r;
+                        rowsHTML += `
+                                <td class="slot-num">${n}</td>
+                                <td class="volunteer-name" onclick="sections.${k}.openVolunteerModal('${mass.id}', ${n}, 0)">
+                                    <span class="slot-content" data-slot="${mass.id}-${n}-0"></span>
+                                </td>`;
+                    }
+                    rowsHTML += '</tr>';
+                }
+                volunteerTableHTML = `<table class="volunteer-table">${rowsHTML}</table>`;
+            }
+
+            const reorderButtons = `
+                    <button class="reorder-btn reorder-up" onclick="sections.${k}.moveMass(${index}, -1)" ${index === 0 ? 'disabled' : ''}>↑</button>
+                    <button class="reorder-btn reorder-down" onclick="sections.${k}.moveMass(${index}, 1)" ${index === masses.length - 1 ? 'disabled' : ''}>↓</button>
+                `;
+
+            massDiv.innerHTML = `
+                    <div class="mass-header">
+                        <style>
+                            #${k}-mass-${index} .mass-header::before { content: "${emoji[0]}"; }
+                            #${k}-mass-${index} .mass-header::after { content: "${emoji[1]}"; }
+                        </style>
+                        ${reorderButtons}
+                        <button class="delete-mass-btn" onclick="sections.${k}.deleteMass('${mass.id}')">Delete</button>
+                        <button class="edit-mass-btn" onclick="sections.${k}.editMass('${mass.id}')">Edit</button>
+                        <button class="edit-announcement-btn" onclick="sections.${k}.editAnnouncement('${mass.id}')" style="top: 50px; right: 10px;">📢 Note</button>
+                        <h3>${mass.day}</h3>
+                        <p><strong>${mass.time}</strong></p>
+                        ${mass.note ? `<p>${mass.note}</p>` : ''}
+                    </div>
+                    ${announcementHTML}
+                    ${volunteerTableHTML}
+                `;
+            return massDiv;
+        }
+
+        // ============================================
+        // One sign-up section = one Google Sheet.
+        // Everything a section reads or saves goes only to its own sheetsUrl.
+        // ============================================
+        function createSignupSection(cfg) {
+            const k = cfg.key;
+            const el = id => document.getElementById(`${k}-${id}`);
+            let allData = null;
+            let currentMass = '';
+            let currentPosition = 0;
+            let currentRow = 0;
+            let currentEditingMassId = '';
+            let currentEditingAnnouncementMassId = '';
+
+            const defaultData = () => ({
+                masses: JSON.parse(JSON.stringify(cfg.defaultMasses)),
+                volunteers: {},
+                header: { ...cfg.defaultHeader }
+            });
+
+            // ---------- Google Sheets ----------
+            async function fetchDataFromSheets() {
+                try {
+                    const response = await fetch(cfg.sheetsUrl);
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch data from Google Sheets');
+                    }
+                    return await response.json();
+                } catch (error) {
+                    console.error(`[${cfg.name}] Error fetching data:`, error);
+                    showError('Unable to load data. Please check your internet connection and try again.');
+                    return null;
+                }
+            }
+
+            async function saveDataToSheets(data) {
+                try {
+                    await fetch(cfg.sheetsUrl, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                    // no-cors mode doesn't give us the response, so wait and then refresh
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    return true;
+                } catch (error) {
+                    console.error(`[${cfg.name}] Error saving data:`, error);
+                    showError('Unable to save data. Please try again.');
+                    return false;
+                }
+            }
+
+            // ---------- UI helpers ----------
+            function showError(message) {
+                const errorDiv = el('errorMessage');
+                errorDiv.textContent = message;
+                errorDiv.style.display = 'block';
+            }
+
+            function hideError() {
+                el('errorMessage').style.display = 'none';
+            }
+
+            function showLoading() {
+                el('loadingMessage').style.display = 'block';
+                el('massesContainer').style.display = 'none';
+            }
+
+            function hideLoading() {
+                el('loadingMessage').style.display = 'none';
+                el('massesContainer').style.display = 'block';
+            }
+
+            // ---------- Data ----------
+            async function loadAllData() {
+                // Only show "Loading" the first time. Background refreshes update in place
+                // so the page doesn't jump around while someone is scrolling.
+                if (!allData) showLoading();
+                hideError();
+
+                const data = await fetchDataFromSheets();
+                if (data) {
+                    allData = data;
+                } else if (!allData) {
+                    allData = defaultData();
+                }
+                displayHeader();
+                displayMasses();
+                hideLoading();
+            }
+
+            async function saveAllData() {
+                const success = await saveDataToSheets(allData);
+                if (success) {
+                    await loadAllData();
+                }
+            }
+
+            // ---------- Display ----------
+            function displayHeader() {
+                if (!allData || !allData.header) return;
+                el('headerTitle').textContent = allData.header.title;
+                el('headerDate').textContent = allData.header.date;
+            }
+
+            function displayMasses() {
+                if (!allData || !allData.masses) return;
+                const container = el('massesContainer');
+                container.innerHTML = '';
+                allData.masses.forEach((mass, index) => {
+                    container.appendChild(cfg.renderMass(api, mass, index, allData.masses));
+                });
+                displayVolunteers();
+            }
+
+            function displayVolunteers() {
+                if (!allData || !allData.volunteers) return;
+                el('massesContainer').querySelectorAll('.slot-content').forEach(slot => {
+                    const name = allData.volunteers[slot.dataset.slot];
+                    const parent = slot.parentElement;
+                    if (name) {
+                        slot.textContent = name;
+                        parent.classList.add('filled');
+                        parent.classList.remove('empty-slot');
+                    } else {
+                        slot.innerHTML = '<span class="empty-slot">Click to sign up</span>';
+                        parent.classList.remove('filled');
+                    }
+                });
+            }
+
+            // ---------- Admin ----------
+            async function addNewMass() {
+                const mass = { id: 'mass' + Date.now(), day: 'New Day', time: '12:00 pm', note: '' };
+                if (cfg.hasAnnouncements) mass.announcement = '';
+                allData.masses.push(mass);
+                await saveAllData();
+                toggleAdminPanel();
+            }
+
+            function editMass(massId) {
+                currentEditingMassId = massId;
+                const mass = allData.masses.find(m => m.id === massId);
+                if (mass) {
+                    el('massDay').value = mass.day;
+                    el('massTime').value = mass.time;
+                    el('massNote').value = mass.note || '';
+                    el('editMassModal').style.display = 'block';
+                }
+            }
+
+            el('editMassForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const massIndex = allData.masses.findIndex(m => m.id === currentEditingMassId);
+                if (massIndex !== -1) {
+                    allData.masses[massIndex].day = el('massDay').value;
+                    allData.masses[massIndex].time = el('massTime').value;
+                    allData.masses[massIndex].note = el('massNote').value;
+                    await saveAllData();
+                    closeModal(`${k}-editMassModal`);
                 }
             });
+
+            async function deleteMass(massId) {
+                if (confirm('Are you sure you want to delete this mass time? All volunteer sign-ups for this mass will also be deleted.')) {
+                    allData.masses = allData.masses.filter(m => m.id !== massId);
+                    Object.keys(allData.volunteers).forEach(key => {
+                        if (key.startsWith(massId + '-')) {
+                            delete allData.volunteers[key];
+                        }
+                    });
+                    await saveAllData();
+                }
+            }
+
+            async function moveMass(index, direction) {
+                const target = index + direction;
+                if (target < 0 || target >= allData.masses.length) return;
+                const temp = allData.masses[index];
+                allData.masses[index] = allData.masses[target];
+                allData.masses[target] = temp;
+                await saveAllData();
+            }
+
+            function editHeader() {
+                el('headerTitleInput').value = allData.header.title;
+                el('headerDateInput').value = allData.header.date;
+                el('editHeaderModal').style.display = 'block';
+            }
+
+            el('editHeaderForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                allData.header = {
+                    title: el('headerTitleInput').value,
+                    date: el('headerDateInput').value
+                };
+                await saveAllData();
+                closeModal(`${k}-editHeaderModal`);
+            });
+
+            function editAnnouncement(massId) {
+                currentEditingAnnouncementMassId = massId;
+                const mass = allData.masses.find(m => m.id === massId);
+                if (mass) {
+                    el('announcementText').value = mass.announcement || '';
+                    el('isCancelled').checked = mass.isCancelled === true ||
+                        (mass.announcement && mass.announcement.toLowerCase().includes('cancel'));
+                    el('editAnnouncementModal').style.display = 'block';
+                }
+            }
+
+            if (cfg.hasAnnouncements) {
+                el('editAnnouncementForm').addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const massIndex = allData.masses.findIndex(m => m.id === currentEditingAnnouncementMassId);
+                    if (massIndex !== -1) {
+                        let announcement = el('announcementText').value.trim();
+                        const isCancelled = el('isCancelled').checked;
+                        if (isCancelled && announcement && !announcement.toLowerCase().includes('cancel')) {
+                            announcement = '❌ CANCELLED: ' + announcement;
+                        }
+                        allData.masses[massIndex].announcement = announcement;
+                        allData.masses[massIndex].isCancelled = isCancelled;
+                        await saveAllData();
+                        closeModal(`${k}-editAnnouncementModal`);
+                    }
+                });
+            }
+
+            async function clearAllData() {
+                if (confirm(`⚠️ Are you sure you want to clear ALL ${cfg.name} data? This cannot be undone!`)) {
+                    if (confirm(`Really? This will delete all ${cfg.name} masses and volunteer sign-ups!`)) {
+                        allData = defaultData();
+                        await saveAllData();
+                        alert(`✅ All ${cfg.name} data cleared!`);
+                        toggleAdminPanel();
+                    }
+                }
+            }
+
+            // ---------- Volunteers ----------
+            function openVolunteerModal(mass, position, row) {
+                currentMass = mass;
+                currentPosition = position;
+                currentRow = row;
+
+                const existingName = allData.volunteers[`${mass}-${position}-${row}`];
+                const nameInput = el('volunteerName');
+                const removeContainer = el('removeButtonContainer');
+
+                el('modalTitle').textContent = `${cfg.icon} Sign Up for Position ${position}`;
+
+                if (existingName) {
+                    nameInput.value = existingName;
+                    removeContainer.innerHTML = `
+                        <button type="button" class="btn btn-remove" onclick="sections.${k}.removeVolunteer()">
+                            Remove Sign-up
+                        </button>
+                    `;
+                } else {
+                    nameInput.value = '';
+                    removeContainer.innerHTML = '';
+                }
+
+                el('volunteerModal').style.display = 'block';
+                nameInput.focus();
+            }
+
+            el('volunteerForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const name = el('volunteerName').value.trim();
+                if (!name) return;
+                allData.volunteers[`${currentMass}-${currentPosition}-${currentRow}`] = name;
+                await saveAllData();
+                closeModal(`${k}-volunteerModal`);
+            });
+
+            async function removeVolunteer() {
+                if (confirm('Are you sure you want to remove this sign-up?')) {
+                    delete allData.volunteers[`${currentMass}-${currentPosition}-${currentRow}`];
+                    await saveAllData();
+                    closeModal(`${k}-volunteerModal`);
+                }
+            }
+
+            const api = {
+                key: k,
+                loadAllData,
+                addNewMass,
+                editMass,
+                deleteMass,
+                moveMass,
+                editHeader,
+                editAnnouncement,
+                clearAllData,
+                openVolunteerModal,
+                removeVolunteer
+            };
+
+            loadAllData();
+            setInterval(loadAllData, cfg.refreshMs);
+            return api;
         }
 
         // ============================================
-        // Admin Functions
+        // Shared admin + modal functions
         // ============================================
-        
         async function toggleAdminPanel() {
             const panel = document.getElementById('adminPanel');
             if (!panel.classList.contains('show') && !(await requireAdmin('🔒 Enter admin password:'))) return;
@@ -1106,11 +2204,10 @@
             if (!adminModeActive && !(await requireAdmin('🔒 Enter admin password to enable edit mode:'))) return;
             adminModeActive = !adminModeActive;
             const btn = document.getElementById('editModeBtn');
-            
             if (adminModeActive) {
                 document.body.classList.add('admin-mode');
                 btn.textContent = '✓ Exit Edit Mode';
-                alert('✏️ Edit mode activated! Click "Exit Edit Mode" to hide the edit buttons.');
+                alert('✏️ Edit mode activated for Thanksgiving and Advent! Click "Exit Edit Mode" to hide the edit buttons.');
             } else {
                 document.body.classList.remove('admin-mode');
                 btn.textContent = '✏️ Edit Mode';
@@ -1118,152 +2215,12 @@
             }
         }
 
-        async function addNewMass() {
-            const newId = 'mass' + Date.now();
-            allData.masses.push({
-                id: newId,
-                day: 'New Day',
-                time: '12:00 pm',
-                note: ''
-            });
-            await saveAllData();
+        async function refreshData() {
+            await Promise.all([sections.tg.loadAllData(), sections.adv.loadAllData()]);
             toggleAdminPanel();
+            alert('✅ Data refreshed!');
         }
 
-        function editMass(massId) {
-            currentEditingMassId = massId;
-            const mass = allData.masses.find(m => m.id === massId);
-            
-            if (mass) {
-                document.getElementById('massDay').value = mass.day;
-                document.getElementById('massTime').value = mass.time;
-                document.getElementById('massNote').value = mass.note || '';
-                document.getElementById('editMassModal').style.display = 'block';
-            }
-        }
-
-        document.getElementById('editMassForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const massIndex = allData.masses.findIndex(m => m.id === currentEditingMassId);
-            
-            if (massIndex !== -1) {
-                allData.masses[massIndex].day = document.getElementById('massDay').value;
-                allData.masses[massIndex].time = document.getElementById('massTime').value;
-                allData.masses[massIndex].note = document.getElementById('massNote').value;
-                await saveAllData();
-                closeModal('editMassModal');
-            }
-        });
-
-        async function deleteMass(massId) {
-            if (confirm('Are you sure you want to delete this mass time? All volunteer sign-ups for this mass will also be deleted.')) {
-                // Remove mass
-                allData.masses = allData.masses.filter(m => m.id !== massId);
-                
-                // Remove volunteers for this mass
-                Object.keys(allData.volunteers).forEach(key => {
-                    if (key.startsWith(massId + '-')) {
-                        delete allData.volunteers[key];
-                    }
-                });
-                
-                await saveAllData();
-            }
-        }
-
-        function editHeader() {
-            document.getElementById('headerTitleInput').value = allData.header.title;
-            document.getElementById('headerDateInput').value = allData.header.date;
-            document.getElementById('editHeaderModal').style.display = 'block';
-        }
-
-        document.getElementById('editHeaderForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            allData.header = {
-                title: document.getElementById('headerTitleInput').value,
-                date: document.getElementById('headerDateInput').value
-            };
-            await saveAllData();
-            closeModal('editHeaderModal');
-        });
-
-        async function clearAllData() {
-            if (confirm('⚠️ Are you sure you want to clear ALL data? This cannot be undone!')) {
-                if (confirm('Really? This will delete all masses and volunteer sign-ups!')) {
-                    allData = {
-                        masses: defaultMasses,
-                        volunteers: {},
-                        header: { title: 'THANKSGIVING MASSES', date: 'NOVEMBER 26, 2026' }
-                    };
-                    await saveAllData();
-                    alert('✅ All data cleared!');
-                    toggleAdminPanel();
-                }
-            }
-        }
-
-        // ============================================
-        // Volunteer Functions
-        // ============================================
-        
-        function openVolunteerModal(mass, position, row) {
-            currentMass = mass;
-            currentPosition = position;
-            currentRow = row;
-            
-            const slotId = `${mass}-${position}-${row}`;
-            const existingName = allData.volunteers[slotId];
-            
-            const modal = document.getElementById('volunteerModal');
-            const nameInput = document.getElementById('volunteerName');
-            const removeContainer = document.getElementById('removeButtonContainer');
-            
-            document.getElementById('modalTitle').textContent = `🍂 Sign Up for Position ${position}`;
-            
-            if (existingName) {
-                nameInput.value = existingName;
-                removeContainer.innerHTML = `
-                    <button type="button" class="btn btn-remove" onclick="removeVolunteer()">
-                        Remove Sign-up
-                    </button>
-                `;
-            } else {
-                nameInput.value = '';
-                removeContainer.innerHTML = '';
-            }
-            
-            modal.style.display = 'block';
-            nameInput.focus();
-        }
-
-        document.getElementById('volunteerForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('volunteerName').value.trim();
-            if (!name) return;
-            
-            const slotId = `${currentMass}-${currentPosition}-${currentRow}`;
-            allData.volunteers[slotId] = name;
-            
-            await saveAllData();
-            closeModal('volunteerModal');
-        });
-
-        async function removeVolunteer() {
-            if (confirm('Are you sure you want to remove this sign-up?')) {
-                const slotId = `${currentMass}-${currentPosition}-${currentRow}`;
-                delete allData.volunteers[slotId];
-                
-                await saveAllData();
-                closeModal('volunteerModal');
-            }
-        }
-
-        // ============================================
-        // Modal Functions
-        // ============================================
-        
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
         }
@@ -1275,17 +2232,41 @@
             if (!event.target.closest('.admin-panel') && !event.target.closest('.admin-toggle')) {
                 document.getElementById('adminPanel').classList.remove('show');
             }
-        }
+        };
 
         // ============================================
-        // Initialize
+        // Initialize both sections
         // ============================================
-        
-        // Load data when page loads
-        loadAllData();
-        
-        // Refresh data every 30 seconds to show updates from other users
-        setInterval(loadAllData, 30000);
+        const sections = {};
+
+        sections.tg = createSignupSection({
+            key: 'tg',
+            name: 'Thanksgiving',
+            icon: '🍂',
+            sheetsUrl: THANKSGIVING_SHEETS_URL,
+            refreshMs: 30000,
+            hasAnnouncements: false,
+            renderMass: renderThanksgivingMass,
+            defaultHeader: { title: 'THANKSGIVING MASSES', date: 'NOVEMBER 26, 2026' },
+            defaultMasses: [
+                { id: 'thu9am', day: 'Thursday, November 26, 2026', time: '9:00 am', note: 'Will have collection' },
+                { id: 'thu11am', day: 'Thursday, November 26, 2026', time: '11:00 am', note: 'Will have collection' }
+            ]
+        });
+
+        sections.adv = createSignupSection({
+            key: 'adv',
+            name: 'Advent',
+            icon: '🕯️',
+            sheetsUrl: ADVENT_SHEETS_URL,
+            refreshMs: 100000,
+            hasAnnouncements: true,
+            renderMass: renderAdventMass,
+            defaultHeader: { title: 'ADVENT MASSES', date: 'DECEMBER 1, 2026' },
+            defaultMasses: [
+                { id: 'adv-dec1', day: 'Tuesday, December 1, 2026', time: '7:00 pm', note: 'Advent Mass', announcement: '' }
+            ]
+        });
     </script>
 </body>
 </html>
