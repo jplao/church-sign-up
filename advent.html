@@ -16,12 +16,12 @@
             background: 
                 repeating-linear-gradient(
                     45deg,
-                    #fef3f3 0px,
-                    #fef3f3 20px,
-                    #fee2e2 20px,
-                    #fee2e2 40px
+                    #f5f3ff 0px,
+                    #f5f3ff 20px,
+                    #ede9fe 20px,
+                    #ede9fe 40px
                 ),
-                linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+                linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
             padding: 15px;
             line-height: 1.6;
             position: relative;
@@ -30,7 +30,7 @@
 
         /* Festive background pattern with emojis */
         body::before {
-            content: "❄️ 🎄 🦌 ⛄ ⭐ ❄️ 🎄 🦌 ⛄ ⭐ ❄️ 🎄 🦌 ⛄ ⭐ ❄️ 🎄 🦌";
+            content: "🕯️ ✝️ 🙏 🕊️ ⭐ 🕯️ ✝️ 🙏 🕊️ ⭐ 🕯️ ✝️ 🙏 🕊️ ⭐ 🕯️ ✝️ 🙏";
             position: fixed;
             top: 0;
             left: 0;
@@ -39,13 +39,13 @@
             text-align: center;
             font-size: 24px;
             background: rgba(255, 255, 255, 0.95);
-            border-bottom: 3px solid #dc2626;
+            border-bottom: 3px solid #7c3aed;
             z-index: 0;
             opacity: 0.9;
         }
 
         body::after {
-            content: "❄️ 🎄 🦌 ⛄ ⭐ ❄️ 🎄 🦌 ⛄ ⭐ ❄️ 🎄 🦌 ⛄ ⭐ ❄️ 🎄 🦌";
+            content: "🕯️ ✝️ 🙏 🕊️ ⭐ 🕯️ ✝️ 🙏 🕊️ ⭐ 🕯️ ✝️ 🙏 🕊️ ⭐ 🕯️ ✝️ 🙏";
             position: fixed;
             bottom: 0;
             left: 0;
@@ -54,7 +54,7 @@
             text-align: center;
             font-size: 24px;
             background: rgba(255, 255, 255, 0.95);
-            border-top: 3px solid #16a34a;
+            border-top: 3px solid #be185d;
             z-index: 0;
             opacity: 0.9;
         }
@@ -64,16 +64,16 @@
             margin: 0 auto;
             background: white;
             padding: 20px;
-            box-shadow: 0 8px 30px rgba(220, 38, 38, 0.3);
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.3);
             border-radius: 20px;
-            border: 5px solid #dc2626;
+            border: 5px solid #7c3aed;
             position: relative;
             z-index: 1;
         }
 
         /* Decorative border pattern */
         .container::before {
-            content: "⛄ 🎄 ❄️ 🦌 ⭐ 🎁 ⛄ 🎄 ❄️ 🦌 ⭐ 🎁";
+            content: "🕯️ 🕯️ 🕯️ 🕯️ ✝️ 🙏 🕊️ ✝️ 🕯️ 🕯️ 🕯️ 🕯️";
             position: absolute;
             top: -2px;
             left: 0;
@@ -86,7 +86,7 @@
         }
 
         .container::after {
-            content: "⛄ 🎄 ❄️ 🦌 ⭐ 🎁 ⛄ 🎄 ❄️ 🦌 ⭐ 🎁";
+            content: "🕯️ 🕯️ 🕯️ 🕯️ ✝️ 🙏 🕊️ ✝️ 🕯️ 🕯️ 🕯️ 🕯️";
             position: absolute;
             bottom: -2px;
             left: 0;
@@ -103,7 +103,7 @@
             text-align: center;
             padding: 40px;
             font-size: 1.2em;
-            color: #991b1b;
+            color: #5b21b6;
         }
 
         .loading::after {
@@ -119,9 +119,9 @@
 
         /* Error message */
         .error-message {
-            background: #fee2e2;
-            border: 2px solid #dc2626;
-            color: #991b1b;
+            background: #ede9fe;
+            border: 2px solid #7c3aed;
+            color: #5b21b6;
             padding: 20px;
             border-radius: 10px;
             margin: 20px 0;
@@ -135,13 +135,13 @@
             right: 20px;
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
             color: white;
-            border: 3px solid #7f1d1d;
+            border: 3px solid #4c1d95;
             border-radius: 50%;
             cursor: pointer;
             font-size: 28px;
-            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.5);
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.5);
             z-index: 1001;
             transition: all 0.3s;
             display: flex;
@@ -151,7 +151,7 @@
 
         .admin-toggle:hover {
             transform: scale(1.15) rotate(90deg);
-            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.7);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.7);
         }
 
         .admin-panel {
@@ -160,7 +160,7 @@
             bottom: 90px;
             right: 20px;
             background: white;
-            border: 4px solid #dc2626;
+            border: 4px solid #7c3aed;
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.3);
@@ -179,7 +179,7 @@
         }
 
         .admin-panel h3 {
-            color: #991b1b;
+            color: #5b21b6;
             margin-bottom: 15px;
             font-size: 1.1em;
             text-align: center;
@@ -187,7 +187,7 @@
 
         .admin-panel button {
             width: 100%;
-            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
             color: white;
             border: none;
             padding: 12px;
@@ -201,11 +201,11 @@
 
         .admin-panel button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(220, 38, 38, 0.4);
+            box-shadow: 0 4px 10px rgba(124, 58, 237, 0.4);
         }
 
         .header-red {
-            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
             color: white;
             text-align: center;
             padding: 25px 20px;
@@ -213,50 +213,50 @@
             font-weight: bold;
             margin: 30px -20px 25px -20px;
             border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(220, 38, 38, 0.4);
+            box-shadow: 0 6px 15px rgba(124, 58, 237, 0.4);
             position: relative;
             overflow: hidden;
         }
 
         .header-red::before {
-            content: "❄️";
+            content: "🕯️";
             position: absolute;
             left: 30px;
             top: 50%;
             transform: translateY(-50%);
             font-size: 2em;
-            animation: snowfall 4s ease-in-out infinite;
+            animation: flicker 4s ease-in-out infinite;
         }
 
         .header-red::after {
-            content: "❄️";
+            content: "🕯️";
             position: absolute;
             right: 30px;
             top: 50%;
             transform: translateY(-50%);
             font-size: 2em;
-            animation: snowfall 4s ease-in-out infinite 2s;
+            animation: flicker 4s ease-in-out infinite 2s;
         }
 
-        @keyframes snowfall {
-            0%, 100% { opacity: 1; transform: translateY(-50%) rotate(0deg); }
-            50% { opacity: 0.7; transform: translateY(-40%) rotate(180deg); }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+            50% { opacity: 0.75; transform: translateY(-50%) scale(1.08); }
         }
 
         .header-green {
-            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            background: linear-gradient(135deg, #be185d 0%, #9d174d 100%);
             color: white;
             text-align: center;
             padding: 35px 20px;
             margin: 0 -20px 30px -20px;
             position: relative;
             border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(22, 163, 74, 0.4);
+            box-shadow: 0 6px 15px rgba(190, 24, 93, 0.4);
         }
 
         .header-green::before,
         .header-green::after {
-            content: "🦌";
+            content: "🙏";
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
@@ -314,25 +314,25 @@
 
         .mass-section {
             margin-bottom: 30px;
-            border: 4px solid #16a34a;
+            border: 4px solid #be185d;
             position: relative;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.2);
+            box-shadow: 0 4px 12px rgba(190, 24, 93, 0.2);
             transition: transform 0.2s;
         }
 
         .mass-section:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(22, 163, 74, 0.3);
+            box-shadow: 0 6px 20px rgba(190, 24, 93, 0.3);
         }
 
         .mass-header {
-            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
             padding: 25px 20px;
             text-align: center;
             position: relative;
-            border-bottom: 3px solid #16a34a;
+            border-bottom: 3px solid #be185d;
         }
 
         .mass-header::before,
@@ -368,7 +368,7 @@
         .delete-mass-btn {
             position: absolute;
             top: 10px;
-            background-color: #16a34a;
+            background-color: #be185d;
             color: white;
             border: none;
             padding: 6px 12px;
@@ -391,30 +391,30 @@
 
         .delete-mass-btn {
             right: 80px;
-            background-color: #dc2626;
+            background-color: #7c3aed;
         }
 
         .edit-mass-btn:hover {
-            background-color: #15803d;
+            background-color: #9d174d;
             transform: scale(1.05);
         }
 
         .delete-mass-btn:hover {
-            background-color: #b91c1c;
+            background-color: #6d28d9;
             transform: scale(1.05);
         }
 
         .mass-header h3 {
             font-size: 1.4em;
             margin-bottom: 8px;
-            color: #14532d;
+            color: #831843;
             font-weight: bold;
         }
 
         .mass-header p {
             font-size: 1.15em;
             margin: 5px 0;
-            color: #166534;
+            color: #9d174d;
             font-weight: 600;
         }
 
@@ -441,8 +441,8 @@
         }
 
         .announcement-cancelled {
-            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-            border: 3px solid #dc2626;
+            background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+            border: 3px solid #7c3aed;
         }
 
         .announcement-cancelled::before {
@@ -520,7 +520,7 @@
         }
 
         .volunteer-table td {
-            border: 2px solid #16a34a;
+            border: 2px solid #be185d;
             padding: 15px 10px;
             font-size: 1em;
         }
@@ -529,8 +529,8 @@
             width: 60px;
             text-align: center;
             font-weight: bold;
-            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
-            color: #14532d;
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            color: #831843;
             font-size: 1.2em;
         }
 
@@ -544,8 +544,8 @@
             width: 60px;
             text-align: center;
             font-weight: bold;
-            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
-            color: #14532d;
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            color: #831843;
             font-size: 1.2em;
         }
 
@@ -563,7 +563,7 @@
         }
 
         .volunteer-name:hover {
-            background-color: #dcfce7;
+            background-color: #fce7f3;
             transform: scale(1.02);
         }
 
@@ -602,12 +602,12 @@
             width: 90%;
             max-width: 500px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-            border: 5px solid #dc2626;
+            border: 5px solid #7c3aed;
             position: relative;
         }
 
         .modal-content::before {
-            content: "❄️ 🎄 ❄️";
+            content: "🕯️ ✝️ 🕯️";
             position: absolute;
             top: -20px;
             left: 50%;
@@ -621,7 +621,7 @@
         .modal-header {
             font-size: 1.5em;
             margin-bottom: 25px;
-            color: #991b1b;
+            color: #5b21b6;
             font-weight: bold;
             text-align: center;
         }
@@ -634,7 +634,7 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: #14532d;
+            color: #831843;
             font-size: 1.05em;
         }
 
@@ -642,7 +642,7 @@
         .form-group textarea {
             width: 100%;
             padding: 12px;
-            border: 3px solid #16a34a;
+            border: 3px solid #be185d;
             border-radius: 10px;
             font-size: 1em;
             font-family: 'Georgia', serif;
@@ -657,8 +657,8 @@
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #15803d;
-            box-shadow: 0 0 10px rgba(22, 163, 74, 0.3);
+            border-color: #9d174d;
+            box-shadow: 0 0 10px rgba(190, 24, 93, 0.3);
         }
 
         .modal-buttons {
@@ -679,13 +679,13 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            background: linear-gradient(135deg, #be185d 0%, #9d174d 100%);
             color: white;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(22, 163, 74, 0.4);
+            box-shadow: 0 4px 10px rgba(190, 24, 93, 0.4);
         }
 
         .btn-secondary {
@@ -699,7 +699,7 @@
         }
 
         .btn-remove {
-            background-color: #dc2626;
+            background-color: #7c3aed;
             color: white;
             padding: 8px 20px;
             font-size: 0.95em;
@@ -707,7 +707,7 @@
         }
 
         .btn-remove:hover {
-            background-color: #b91c1c;
+            background-color: #6d28d9;
             transform: translateY(-2px);
         }
 
@@ -901,7 +901,7 @@
 
     <!-- Admin Panel -->
     <div id="adminPanel" class="admin-panel">
-        <h3>🎅 Admin Controls</h3>
+        <h3>⛪ Admin Controls</h3>
         <button onclick="toggleAdminMode()" id="editModeBtn">✏️ Edit Mode</button>
         <button onclick="addNewMass()">+ Add Mass</button>
         <button onclick="refreshData()">🔄 Refresh Data</button>
@@ -911,7 +911,7 @@
     <!-- Volunteer Sign-up Modal -->
     <div id="volunteerModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header" id="modalTitle">❄️ Sign Up for Position</div>
+            <div class="modal-header" id="modalTitle">🕯️ Sign Up for Position</div>
             <form id="volunteerForm">
                 <div class="form-group">
                     <label for="volunteerName">Your Name:</label>
@@ -929,7 +929,7 @@
     <!-- Edit Mass Modal -->
     <div id="editMassModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">🎄 Edit Mass Time</div>
+            <div class="modal-header">✝️ Edit Mass Time</div>
             <form id="editMassForm">
                 <div class="form-group">
                     <label for="massDay">Day:</label>
@@ -1141,24 +1141,22 @@
             const container = document.getElementById('massesContainer');
             container.innerHTML = '';
 
-            // Array of different winter/Christmas emoji pairs
+            // Advent emoji pairs (cycles); confession/penance cards get praying hands
             const emojiPairs = [
-                ['⛄', '⛄'],  // snowmen
-                ['🦌', '🦌'],  // reindeer
-                ['❄️', '❄️'],  // snowflakes
-                ['⭐', '⭐'],  // stars
-                ['🎄', '🎄'],  // trees
-                ['🎁', '🎁'],  // gifts
-                ['🕯️', '🕯️'],  // candles
-                ['🔔', '🔔']   // bells
+                ['🕯️', '🕯️'],  // Advent candles
+                ['⭐', '⭐'],  // star
+                ['🕊️', '🕊️'],  // dove
+                ['✝️', '✝️'],  // cross
+                ['⛪', '⛪'],  // church
+                ['📖', '📖']   // scripture
             ];
 
             allData.masses.forEach((mass, index) => {
                 const massDiv = document.createElement('div');
                 massDiv.className = 'mass-section';
                 
-                // Select emoji pair for this mass (cycles through the array)
-                const emoji = emojiPairs[index % emojiPairs.length];
+                const isConfession = /penance|confession|reconciliation/i.test((mass.note || '') + ' ' + (mass.time || ''));
+                const emoji = isConfession ? ['🙏', '🙏'] : emojiPairs[index % emojiPairs.length];
                 
                 // Check if mass is cancelled
                 const isCancelled = mass.announcement && (
@@ -1444,7 +1442,7 @@
             const nameInput = document.getElementById('volunteerName');
             const removeContainer = document.getElementById('removeButtonContainer');
             
-            document.getElementById('modalTitle').textContent = `❄️ Sign Up for Position ${position}`;
+            document.getElementById('modalTitle').textContent = `🕯️ Sign Up for Position ${position}`;
             
             if (existingName) {
                 nameInput.value = existingName;
