@@ -793,7 +793,7 @@
         <div class="header-green">
             <button class="edit-header-btn" onclick="editHeader()">Edit</button>
             <h1 id="headerTitle">THANKSGIVING MASSES</h1>
-            <h2 id="headerDate">NOVEMBER 26-27, 2026</h2>
+            <h2 id="headerDate">NOVEMBER 26, 2026</h2>
         </div>
 
         <div id="loadingMessage" class="loading">Loading sign-ups</div>
@@ -867,7 +867,7 @@
                 </div>
                 <div class="form-group">
                     <label for="headerDateInput">Date:</label>
-                    <input type="text" id="headerDateInput" required placeholder="e.g., NOVEMBER 26-27, 2026">
+                    <input type="text" id="headerDateInput" required placeholder="e.g., NOVEMBER 26, 2026">
                 </div>
                 <div class="modal-buttons">
                     <button type="button" class="btn btn-secondary" onclick="closeModal('editHeaderModal')">Cancel</button>
@@ -897,9 +897,7 @@
         // Default masses
         const defaultMasses = [
             { id: 'thu9am', day: 'Thursday, November 26, 2026', time: '9:00 am', note: 'Will have collection' },
-            { id: 'thu11am', day: 'Thursday, November 26, 2026', time: '11:00 am', note: 'Will have collection' },
-            { id: 'fri9am', day: 'Friday, November 27, 2026', time: '9:00 am', note: 'Will have collection' },
-            { id: 'fri5pm', day: 'Friday, November 27, 2026', time: '5:00 pm', note: 'Will have collection' }
+            { id: 'thu11am', day: 'Thursday, November 26, 2026', time: '11:00 am', note: 'Will have collection' }
         ];
 
         // ============================================
@@ -987,7 +985,7 @@
                 allData = {
                     masses: defaultMasses,
                     volunteers: {},
-                    header: { title: 'THANKSGIVING MASSES', date: 'NOVEMBER 26-27, 2026' }
+                    header: { title: 'THANKSGIVING MASSES', date: 'NOVEMBER 26, 2026' }
                 };
                 displayHeader();
                 displayMasses();
@@ -1196,7 +1194,7 @@
                     allData = {
                         masses: defaultMasses,
                         volunteers: {},
-                        header: { title: 'THANKSGIVING MASSES', date: 'NOVEMBER 26-27, 2026' }
+                        header: { title: 'THANKSGIVING MASSES', date: 'NOVEMBER 26, 2026' }
                     };
                     await saveAllData();
                     alert('✅ All data cleared!');

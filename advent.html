@@ -525,32 +525,13 @@
             font-size: 1em;
         }
 
-        .volunteer-table td:first-child {
-            width: 60px;
+        .volunteer-table td.slot-num {
+            width: 50px;
             text-align: center;
             font-weight: bold;
             background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
             color: #831843;
             font-size: 1.2em;
-        }
-
-        .volunteer-table td:nth-child(2),
-        .volunteer-table td:nth-child(4) {
-            width: 35%;
-        }
-
-        .volunteer-table td:nth-child(3),
-        .volunteer-table td:nth-child(5) {
-            width: 60px;
-            text-align: center;
-            font-weight: bold;
-            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
-            color: #831843;
-            font-size: 1.2em;
-        }
-
-        .volunteer-table td:last-child {
-            width: 35%;
         }
 
         .volunteer-name {
@@ -786,11 +767,9 @@
                 font-size: 0.9em;
             }
 
-            .volunteer-table td:first-child,
-            .volunteer-table td:nth-child(3),
-            .volunteer-table td:nth-child(5) {
+            .volunteer-table td.slot-num {
                 font-size: 1em;
-                width: 40px;
+                width: 28px;
             }
 
             .volunteer-name {
@@ -1011,6 +990,8 @@
         let currentEditingMassId = '';
         let currentEditingAnnouncementMassId = '';
         let adminModeActive = false;
+        const SLOTS_PER_MASS = 8;  // sign-up slots per Mass
+        const SLOT_ROWS = 2;       // slots are numbered down each column
         let allData = null;
 
         // Default masses
@@ -1179,38 +1160,20 @@
                 // Build volunteer table HTML only if not cancelled
                 let volunteerTableHTML = '';
                 if (!isCancelled) {
-                    volunteerTableHTML = `
-                        <table class="volunteer-table">
-                            <tr>
-                                <td>1</td>
-                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 1, 0)">
-                                    <span class="slot-content" id="${mass.id}-1-0"></span>
-                                </td>
-                                <td>3</td>
-                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 3, 0)">
-                                    <span class="slot-content" id="${mass.id}-3-0"></span>
-                                </td>
-                                <td>5</td>
-                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 5, 0)">
-                                    <span class="slot-content" id="${mass.id}-5-0"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 2, 0)">
-                                    <span class="slot-content" id="${mass.id}-2-0"></span>
-                                </td>
-                                <td>4</td>
-                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 4, 0)">
-                                    <span class="slot-content" id="${mass.id}-4-0"></span>
-                                </td>
-                                <td>6</td>
-                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 6, 0)">
-                                    <span class="slot-content" id="${mass.id}-6-0"></span>
-                                </td>
-                            </tr>
-                        </table>
-                    `;
+                    let rowsHTML = '';
+                    for (let r = 1; r <= SLOT_ROWS; r++) {
+                        rowsHTML += '<tr>';
+                        for (let c = 0; c < SLOTS_PER_MASS / SLOT_ROWS; c++) {
+                            const n = c * SLOT_ROWS + r;
+                            rowsHTML += `
+                                <td class="slot-num">${n}</td>
+                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', ${n}, 0)">
+                                    <span class="slot-content" id="${mass.id}-${n}-0"></span>
+                                </td>`;
+                        }
+                        rowsHTML += '</tr>';
+                    }
+                    volunteerTableHTML = `<table class="volunteer-table">${rowsHTML}</table>`;
                 }
                 
                 // Add reorder buttons (only in admin mode)
