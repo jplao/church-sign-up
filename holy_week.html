@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>St. Irenaeus Church Sign Up - Thanksgiving</title>
+    <title>St. Irenaeus Church Sign Up - Holy Week</title>
     <style>
         * {
             margin: 0;
@@ -16,12 +16,12 @@
             background: 
                 repeating-linear-gradient(
                     45deg,
-                    #fff5e6 0px,
-                    #fff5e6 20px,
-                    #ffebd4 20px,
-                    #ffebd4 40px
+                    #e9d5ff 0px,
+                    #e9d5ff 20px,
+                    #f3e8ff 20px,
+                    #f3e8ff 40px
                 ),
-                linear-gradient(135deg, #ffd9a6 0%, #ffcc99 100%);
+                linear-gradient(135deg, #ddd6fe 0%, #c4b5fd 100%);
             padding: 15px;
             line-height: 1.6;
             position: relative;
@@ -30,7 +30,7 @@
 
         /* Festive background pattern with emojis */
         body::before {
-            content: "🍂 🦃 🍁 🎃 🌽 🌾 🍂 🦃 🍁 🎃 🌽 🌾 🍂 🦃 🍁 🎃 🌽 🌾";
+            content: "✝️ ✞ 🕊️ ✟ ⛪ ✝️ ✞ 🕊️ ✟ ⛪ ✝️ ✞ 🕊️ ✟ ⛪";
             position: fixed;
             top: 0;
             left: 0;
@@ -38,14 +38,15 @@
             padding: 10px;
             text-align: center;
             font-size: 24px;
-            background: rgba(255, 255, 255, 0.9);
-            border-bottom: 3px solid #d2691e;
+            background: rgba(233, 213, 255, 0.95);
+            border-bottom: 3px solid #5b21b6;
+            color: #5b21b6;
             z-index: 0;
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
         body::after {
-            content: "🍂 🦃 🍁 🎃 🌽 🌾 🍂 🦃 🍁 🎃 🌽 🌾 🍂 🦃 🍁 🎃 🌽 🌾";
+            content: "✝️ ✞ 🕊️ ✟ ⛪ ✝️ ✞ 🕊️ ✟ ⛪ ✝️ ✞ 🕊️ ✟ ⛪";
             position: fixed;
             bottom: 0;
             left: 0;
@@ -53,10 +54,11 @@
             padding: 10px;
             text-align: center;
             font-size: 24px;
-            background: rgba(255, 255, 255, 0.9);
-            border-top: 3px solid #d2691e;
+            background: rgba(233, 213, 255, 0.95);
+            border-top: 3px solid #5b21b6;
+            color: #5b21b6;
             z-index: 0;
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
         .container {
@@ -64,16 +66,16 @@
             margin: 0 auto;
             background: white;
             padding: 20px;
-            box-shadow: 0 8px 30px rgba(139, 69, 19, 0.3);
+            box-shadow: 0 8px 30px rgba(147, 51, 234, 0.3);
             border-radius: 20px;
-            border: 5px solid #d2691e;
+            border: 5px solid #6b21a8;
             position: relative;
             z-index: 1;
         }
 
         /* Decorative border pattern */
         .container::before {
-            content: "🍂 🌾 🍁 🎃 🦃 🌽 🍂 🌾 🍁 🎃 🦃 🌽";
+            content: "✝️ ✞ 🕊️ ✟ ⛪ ✝️ ✞ 🕊️ ✟ ⛪";
             position: absolute;
             top: -2px;
             left: 0;
@@ -86,7 +88,7 @@
         }
 
         .container::after {
-            content: "🍂 🌾 🍁 🎃 🦃 🌽 🍂 🌾 🍁 🎃 🦃 🌽";
+            content: "✝️ ✞ 🕊️ ✟ ⛪ ✝️ ✞ 🕊️ ✟ ⛪";
             position: absolute;
             bottom: -2px;
             left: 0;
@@ -103,7 +105,7 @@
             text-align: center;
             padding: 40px;
             font-size: 1.2em;
-            color: #92400e;
+            color: #991b1b;
         }
 
         .loading::after {
@@ -135,13 +137,13 @@
             right: 20px;
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            background: linear-gradient(135deg, #6b21a8 0%, #7e22ce 100%);
             color: white;
-            border: 3px solid #92400e;
+            border: 3px solid #6b21a8;
             border-radius: 50%;
             cursor: pointer;
             font-size: 28px;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.5);
+            box-shadow: 0 4px 15px rgba(147, 51, 234, 0.5);
             z-index: 1001;
             transition: all 0.3s;
             display: flex;
@@ -151,7 +153,7 @@
 
         .admin-toggle:hover {
             transform: scale(1.15) rotate(90deg);
-            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.7);
+            box-shadow: 0 6px 20px rgba(147, 51, 234, 0.7);
         }
 
         .admin-panel {
@@ -160,7 +162,7 @@
             bottom: 90px;
             right: 20px;
             background: white;
-            border: 4px solid #f59e0b;
+            border: 4px solid #6b21a8;
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.3);
@@ -179,7 +181,7 @@
         }
 
         .admin-panel h3 {
-            color: #92400e;
+            color: #7e22ce;
             margin-bottom: 15px;
             font-size: 1.1em;
             text-align: center;
@@ -187,7 +189,7 @@
 
         .admin-panel button {
             width: 100%;
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            background: linear-gradient(135deg, #6b21a8 0%, #7e22ce 100%);
             color: white;
             border: none;
             padding: 12px;
@@ -201,76 +203,83 @@
 
         .admin-panel button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.4);
+            box-shadow: 0 4px 10px rgba(147, 51, 234, 0.4);
         }
 
         .header-red {
-            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
-            color: white;
+            background: linear-gradient(135deg, #5b21b6 0%, #6b21a8 100%);
+            color: #fef3c7;
             text-align: center;
             padding: 25px 20px;
             font-size: 2em;
             font-weight: bold;
             margin: 30px -20px 25px -20px;
             border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(220, 38, 38, 0.4);
+            box-shadow: 0 6px 15px rgba(91, 33, 182, 0.4);
             position: relative;
             overflow: hidden;
+            border: 3px solid #fbbf24;
         }
 
         .header-red::before {
-            content: "🍂";
+            content: "✞";
             position: absolute;
             left: 30px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 1.5em;
-            animation: bounce 2s infinite;
+            font-size: 3em;
+            color: #fbbf24;
+            opacity: 0.7;
+            animation: fadeInOut 3s ease-in-out infinite;
         }
 
         .header-red::after {
-            content: "🍂";
+            content: "✞";
             position: absolute;
             right: 30px;
             top: 50%;
-            transform: translateY(-50%) scaleX(-1);
-            font-size: 1.5em;
-            animation: bounce 2s infinite 0.5s;
+            transform: translateY(-50%);
+            font-size: 3em;
+            color: #fbbf24;
+            opacity: 0.7;
+            animation: fadeInOut 3s ease-in-out infinite 1.5s;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(-50%) scale(1); }
-            50% { transform: translateY(-60%) scale(1.1); }
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.9; }
         }
 
         .header-green {
-            background: linear-gradient(135deg, #d97706 0%, #92400e 100%);
+            background: linear-gradient(135deg, #6b21a8 0%, #7c3aed 100%);
             color: white;
             text-align: center;
             padding: 35px 20px;
             margin: 0 -20px 30px -20px;
             position: relative;
             border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(217, 119, 6, 0.4);
+            box-shadow: 0 6px 15px rgba(107, 33, 168, 0.4);
+            border: 3px solid #c4b5fd;
         }
 
         .header-green::before,
         .header-green::after {
-            content: "🦃";
+            content: "✝️";
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
             font-size: 4em;
-            animation: wiggle 3s ease-in-out infinite;
+            opacity: 0.4;
+            filter: drop-shadow(0 0 5px #fbbf24);
+            animation: pulse 4s ease-in-out infinite;
         }
 
         .header-green::before { left: 20px; }
-        .header-green::after { right: 20px; transform: translateY(-50%) scaleX(-1); }
+        .header-green::after { right: 20px; }
 
-        @keyframes wiggle {
-            0%, 100% { transform: translateY(-50%) rotate(0deg); }
-            25% { transform: translateY(-50%) rotate(-5deg); }
-            75% { transform: translateY(-50%) rotate(5deg); }
+        @keyframes pulse {
+            0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.3; }
+            50% { transform: translateY(-50%) scale(1.05); opacity: 0.6; }
         }
 
         .edit-header-btn {
@@ -298,6 +307,107 @@
             transform: scale(1.05);
         }
 
+        /* General Notes Section */
+        .general-notes {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 4px solid #eab308;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(234, 179, 8, 0.3);
+        }
+
+        .general-notes.alert-red {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border: 4px solid #dc2626;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+        }
+
+        .general-notes-content {
+            color: #78350f;
+            font-size: 1.05em;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+
+        .general-notes.alert-red .general-notes-content {
+            color: #991b1b;
+        }
+
+        .edit-general-notes-btn,
+        .delete-general-notes-btn {
+            position: absolute;
+            top: 10px;
+            background-color: #eab308;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 600;
+            display: none;
+            transition: all 0.2s;
+        }
+
+        .general-notes.alert-red .edit-general-notes-btn,
+        .general-notes.alert-red .delete-general-notes-btn {
+            background-color: #dc2626;
+        }
+
+        .edit-general-notes-btn {
+            right: 80px;
+        }
+
+        .delete-general-notes-btn {
+            right: 10px;
+            background-color: #dc2626;
+        }
+
+        .admin-mode .edit-general-notes-btn,
+        .admin-mode .delete-general-notes-btn {
+            display: block;
+        }
+
+        .edit-general-notes-btn:hover {
+            background-color: #ca8a04;
+            transform: scale(1.05);
+        }
+
+        .general-notes.alert-red .edit-general-notes-btn:hover {
+            background-color: #b91c1c;
+        }
+
+        .delete-general-notes-btn:hover {
+            background-color: #b91c1c;
+            transform: scale(1.05);
+        }
+
+        .insert-note-btn {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 3px dashed #eab308;
+            color: #78350f;
+            padding: 12px 20px;
+            margin: 20px 0;
+            width: 100%;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            display: none;
+            transition: all 0.2s;
+        }
+
+        .admin-mode .insert-note-btn {
+            display: block;
+        }
+
+        .insert-note-btn:hover {
+            background: linear-gradient(135deg, #fde68a 0%, #fef3c7 100%);
+            transform: scale(1.02);
+        }
+
         .header-green h1 {
             font-size: 1.8em;
             margin-bottom: 8px;
@@ -313,50 +423,48 @@
 
         .mass-section {
             margin-bottom: 30px;
-            border: 4px solid #d2691e;
+            border: 4px solid #6b21a8;
             position: relative;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2);
+            box-shadow: 0 4px 12px rgba(107, 33, 168, 0.3);
             transition: transform 0.2s;
         }
 
         .mass-section:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
+            box-shadow: 0 6px 20px rgba(107, 33, 168, 0.4), 0 0 15px rgba(251, 191, 36, 0.2);
         }
 
         .mass-header {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            background: linear-gradient(135deg, #e9d5ff 0%, #ddd6fe 100%);
             padding: 25px 20px;
             text-align: center;
             position: relative;
-            border-bottom: 3px solid #d2691e;
+            border-bottom: 3px solid #6b21a8;
         }
 
-        .mass-header::before {
-            content: "🌾";
+        .mass-header::before,
+        .mass-header::after {
             position: absolute;
-            left: 20px;
             top: 50%;
             transform: translateY(-50%);
             font-size: 2em;
-            animation: sway 3s ease-in-out infinite;
+            animation: bob 3s ease-in-out infinite;
+        }
+
+        .mass-header::before {
+            left: 20px;
         }
 
         .mass-header::after {
-            content: "🌾";
-            position: absolute;
             right: 20px;
-            top: 50%;
-            transform: translateY(-50%) scaleX(-1);
-            font-size: 2em;
-            animation: sway 3s ease-in-out infinite 1s;
+            animation-delay: 1.5s;
         }
 
-        @keyframes sway {
-            0%, 100% { transform: translateY(-50%) rotate(0deg); }
-            50% { transform: translateY(-50%) rotate(10deg); }
+        @keyframes bob {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-55%) scale(1.05); }
         }
 
         .edit-mass-btn,
@@ -369,7 +477,7 @@
         .delete-mass-btn {
             position: absolute;
             top: 10px;
-            background-color: #d97706;
+            background-color: #16a34a;
             color: white;
             border: none;
             padding: 6px 12px;
@@ -396,7 +504,7 @@
         }
 
         .edit-mass-btn:hover {
-            background-color: #b45309;
+            background-color: #15803d;
             transform: scale(1.05);
         }
 
@@ -408,25 +516,120 @@
         .mass-header h3 {
             font-size: 1.4em;
             margin-bottom: 8px;
-            color: #92400e;
+            color: #701a75;
             font-weight: bold;
         }
 
         .mass-header p {
             font-size: 1.15em;
             margin: 5px 0;
-            color: #78350f;
+            color: #86198f;
             font-weight: 600;
+        }
+
+        .announcement-notice {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 3px solid #eab308;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 15px 20px;
+            position: relative;
+        }
+
+        .announcement-notice::before {
+            content: "⚠️";
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        .announcement-text {
+            color: #713f12;
+            font-weight: 600;
+            font-size: 1.05em;
+            display: inline;
+        }
+
+        .announcement-cancelled {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border: 3px solid #dc2626;
+        }
+
+        .announcement-cancelled::before {
+            content: "❌";
+        }
+
+        .edit-announcement-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #eab308;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8em;
+            font-weight: 600;
+            display: none;
+            transition: all 0.2s;
+        }
+
+        .admin-mode .edit-announcement-btn {
+            display: block;
+        }
+
+        .edit-announcement-btn:hover {
+            background-color: #ca8a04;
+            transform: scale(1.05);
+        }
+
+        .reorder-btn {
+            position: absolute;
+            left: 10px;
+            background-color: #6b7280;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: 600;
+            display: none;
+            transition: all 0.2s;
+            width: 40px;
+        }
+
+        .reorder-up {
+            top: 10px;
+        }
+
+        .reorder-down {
+            top: 50px;
+        }
+
+        .admin-mode .reorder-btn {
+            display: block;
+        }
+
+        .reorder-btn:hover:not(:disabled) {
+            background-color: #4b5563;
+            transform: scale(1.1);
+        }
+
+        .reorder-btn:disabled {
+            background-color: #d1d5db;
+            cursor: not-allowed;
+            opacity: 0.5;
         }
 
         .volunteer-table {
             width: 100%;
             border-collapse: collapse;
-            background-color: #fffef9;
+            background-color: #fefffe;
         }
 
         .volunteer-table td {
-            border: 2px solid #d2691e;
+            border: 2px solid #6b21a8;
             padding: 15px 10px;
             font-size: 1em;
         }
@@ -435,8 +638,8 @@
             width: 60px;
             text-align: center;
             font-weight: bold;
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            color: #92400e;
+            background: linear-gradient(135deg, #6b21a8 0%, #7c3aed 100%);
+            color: white;
             font-size: 1.2em;
         }
 
@@ -450,8 +653,8 @@
             width: 60px;
             text-align: center;
             font-weight: bold;
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            color: #92400e;
+            background: linear-gradient(135deg, #6b21a8 0%, #7c3aed 100%);
+            color: white;
             font-size: 1.2em;
         }
 
@@ -474,9 +677,10 @@
         }
 
         .volunteer-name.filled {
-            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
             font-weight: 600;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid #eab308;
         }
 
         .empty-slot {
@@ -507,12 +711,12 @@
             width: 90%;
             max-width: 500px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-            border: 5px solid #d2691e;
+            border: 5px solid #dc2626;
             position: relative;
         }
 
         .modal-content::before {
-            content: "🍂 🦃 🍁";
+            content: "❄️ 🎄 ❄️";
             position: absolute;
             top: -20px;
             left: 50%;
@@ -526,7 +730,7 @@
         .modal-header {
             font-size: 1.5em;
             margin-bottom: 25px;
-            color: #92400e;
+            color: #991b1b;
             font-weight: bold;
             text-align: center;
         }
@@ -539,7 +743,7 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: #78350f;
+            color: #14532d;
             font-size: 1.05em;
         }
 
@@ -547,7 +751,7 @@
         .form-group textarea {
             width: 100%;
             padding: 12px;
-            border: 3px solid #d2691e;
+            border: 3px solid #16a34a;
             border-radius: 10px;
             font-size: 1em;
             font-family: 'Georgia', serif;
@@ -562,8 +766,8 @@
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #d97706;
-            box-shadow: 0 0 10px rgba(217, 119, 6, 0.3);
+            border-color: #15803d;
+            box-shadow: 0 0 10px rgba(22, 163, 74, 0.3);
         }
 
         .modal-buttons {
@@ -584,13 +788,13 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #d97706 0%, #92400e 100%);
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
             color: white;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(217, 119, 6, 0.4);
+            box-shadow: 0 4px 10px rgba(22, 163, 74, 0.4);
         }
 
         .btn-secondary {
@@ -792,8 +996,8 @@
 
         <div class="header-green">
             <button class="edit-header-btn" onclick="editHeader()">Edit</button>
-            <h1 id="headerTitle">THANKSGIVING MASSES</h1>
-            <h2 id="headerDate">NOVEMBER 27-28, 2025</h2>
+            <h1 id="headerTitle">HOLY WEEK</h1>
+            <h2 id="headerDate">MARCH 30-APRIL 3, 2026</h2>
         </div>
 
         <div id="loadingMessage" class="loading">Loading sign-ups</div>
@@ -806,7 +1010,7 @@
 
     <!-- Admin Panel -->
     <div id="adminPanel" class="admin-panel">
-        <h3>🦃 Admin Controls</h3>
+        <h3>✝️ Admin Controls</h3>
         <button onclick="toggleAdminMode()" id="editModeBtn">✏️ Edit Mode</button>
         <button onclick="addNewMass()">+ Add Mass</button>
         <button onclick="refreshData()">🔄 Refresh Data</button>
@@ -816,7 +1020,7 @@
     <!-- Volunteer Sign-up Modal -->
     <div id="volunteerModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header" id="modalTitle">🍂 Sign Up for Position</div>
+            <div class="modal-header" id="modalTitle">❄️ Sign Up for Position</div>
             <form id="volunteerForm">
                 <div class="form-group">
                     <label for="volunteerName">Your Name:</label>
@@ -834,15 +1038,15 @@
     <!-- Edit Mass Modal -->
     <div id="editMassModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">🦃 Edit Mass Time</div>
+            <div class="modal-header">🎄 Edit Mass Time</div>
             <form id="editMassForm">
                 <div class="form-group">
                     <label for="massDay">Day:</label>
-                    <input type="text" id="massDay" required placeholder="e.g., Thursday, November 27, 2025">
+                    <input type="text" id="massDay" required placeholder="e.g., Tuesday, December 24, 2026">
                 </div>
                 <div class="form-group">
                     <label for="massTime">Time:</label>
-                    <input type="text" id="massTime" required placeholder="e.g., 9:00 am">
+                    <input type="text" id="massTime" required placeholder="e.g., 4:00 pm">
                 </div>
                 <div class="form-group">
                     <label for="massNote">Additional Note:</label>
@@ -859,15 +1063,15 @@
     <!-- Edit Header Modal -->
     <div id="editHeaderModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">🍁 Edit Header</div>
+            <div class="modal-header">⭐ Edit Header</div>
             <form id="editHeaderForm">
                 <div class="form-group">
                     <label for="headerTitleInput">Title:</label>
-                    <input type="text" id="headerTitleInput" required placeholder="e.g., THANKSGIVING MASSES">
+                    <input type="text" id="headerTitleInput" required placeholder="e.g., HOLY WEEK">
                 </div>
                 <div class="form-group">
                     <label for="headerDateInput">Date:</label>
-                    <input type="text" id="headerDateInput" required placeholder="e.g., NOVEMBER 27-28, 2025">
+                    <input type="text" id="headerDateInput" required placeholder="e.g., MARCH 30, 2026">
                 </div>
                 <div class="modal-buttons">
                     <button type="button" class="btn btn-secondary" onclick="closeModal('editHeaderModal')">Cancel</button>
@@ -877,11 +1081,72 @@
         </div>
     </div>
 
+    <!-- Edit Announcement Modal -->
+    <div id="editAnnouncementModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">📢 Edit Announcement</div>
+            <form id="editAnnouncementForm">
+                <div class="form-group">
+                    <label for="announcementText">Announcement Message:</label>
+                    <textarea id="announcementText" placeholder="e.g., ⚠️ Please note: This mass has been cancelled due to weather. or leave blank for no announcement"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="isCancelled" style="width: auto; margin-right: 8px;">
+                        Mark as CANCELLED (red alert)
+                    </label>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('editAnnouncementModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Announcement</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit General Notes Modal -->
+    <div id="editGeneralNotesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">📌 Edit Note</div>
+            <form id="editGeneralNotesForm">
+                <div class="form-group">
+                    <label for="generalNotesInput">Note Content:</label>
+                    <textarea id="generalNotesInput" placeholder="Add information, announcements, or instructions&#10;&#10;Example:&#10;📍 Parking available in the north lot&#10;⏰ Please arrive 15 minutes early&#10;📞 Contact office: (555) 123-4567&#10;&#10;Press Enter to create line breaks" style="min-height: 150px;"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Note Color:</label>
+                    <div style="display: flex; gap: 15px; margin-top: 10px;">
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="radio" name="noteColor" value="yellow" checked style="width: auto; margin-right: 8px;">
+                            <span style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 3px solid #eab308; padding: 8px 15px; border-radius: 8px; font-weight: 600;">📌 Yellow (Info)</span>
+                        </label>
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="radio" name="noteColor" value="red" style="width: auto; margin-right: 8px;">
+                            <span style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border: 3px solid #dc2626; padding: 8px 15px; border-radius: 8px; font-weight: 600;">⚠️ Red (Alert)</span>
+                        </label>
+                    </div>
+                </div>
+                <p style="font-size: 0.9em; color: #6b7280; margin-top: 10px;">
+                    💡 Tip: Use yellow for general info, red for important alerts or cancellations
+                </p>
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('editGeneralNotesModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Note</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
         // ============================================
         // CONFIGURATION - REPLACE THIS URL WITH YOUR GOOGLE SHEETS WEB APP URL
         // ============================================
-        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzLqT2EoyOaaKBF7kNVeG02asyj4rZSvXHyK0HywZO7SpP2MCglpuodpvFMWbO1aRl66A/exec';
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzXy9HuTccPCca_pfTLAaID5ZJ_RTGdT7trAs6QA_0U-xsEsgtM_qlch6u0Rq-XVhceRA/exec';
+        
+        // ============================================
+        // ADMIN PASSWORD - CHANGE THIS TO YOUR OWN PASSWORD
+        // ============================================
+        const ADMIN_PASSWORD = 'lentenmission2026';  // Change this to your own secure password
         
         // ============================================
         // Global variables
@@ -890,15 +1155,21 @@
         let currentPosition = 0;
         let currentRow = 0;
         let currentEditingMassId = '';
+        let currentEditingAnnouncementMassId = '';
+        let currentEditingNoteId = '';
         let adminModeActive = false;
+        let isAdminAuthenticated = false;
         let allData = null;
 
-        // Default masses
+        // Default masses for Ash Wednesday
         const defaultMasses = [
-            { id: 'thu9am', day: 'Thursday, November 27, 2025', time: '9:00 am', note: 'Will have collection' },
-            { id: 'thu11am', day: 'Thursday, November 27, 2025', time: '11:00 am', note: 'Will have collection' },
-            { id: 'fri9am', day: 'Friday, November 28, 2025', time: '9:00 am', note: 'Will have collection' },
-            { id: 'fri5pm', day: 'Friday, November 28, 2025', time: '5:00 pm', note: 'Will have collection' }
+            { id: 'mission-mar16', day: 'Sunday, March 16, 2026', time: '7:00 pm', note: 'In English', announcement: '' },
+            { id: 'mission-mar17', day: 'Monday, March 17, 2026', time: '7:00 pm', note: 'In English', announcement: '' }
+        ];
+
+        const defaultNotes = [
+            { id: 'note-mar18', content: '✝️ Marzo 18, 2026 - 7:00 pm en Español', position: 2, color: 'yellow' },
+            { id: 'note-mar19', content: '✝️ Marzo 19, 2026 - 7:00 pm en Español', position: 2, color: 'yellow' }
         ];
 
         // ============================================
@@ -931,9 +1202,7 @@
                     body: JSON.stringify(data)
                 });
                 
-                // Note: no-cors mode doesn't give us access to the response,
-                // so we assume success and refresh data
-                await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for save
+                await new Promise(resolve => setTimeout(resolve, 1000));
                 return true;
             } catch (error) {
                 console.error('Error saving data:', error);
@@ -979,16 +1248,18 @@
             if (data) {
                 allData = data;
                 displayHeader();
+                displayGeneralNotes();
                 displayMasses();
                 hideLoading();
             } else {
-                // Use default data if sheets unavailable
                 allData = {
                     masses: defaultMasses,
                     volunteers: {},
-                    header: { title: 'THANKSGIVING MASSES', date: 'NOVEMBER 27-28, 2025' }
+                    header: { title: 'HOLY WEEK', date: 'MARCH 30-APRIL 3, 2026' },
+                    notes: defaultNotes
                 };
                 displayHeader();
+                displayGeneralNotes();
                 displayMasses();
                 hideLoading();
             }
@@ -997,7 +1268,6 @@
         async function saveAllData() {
             const success = await saveDataToSheets(allData);
             if (success) {
-                // Refresh to show latest data
                 await loadAllData();
             }
         }
@@ -1018,58 +1288,162 @@
             document.getElementById('headerDate').textContent = allData.header.date;
         }
 
-        function displayMasses() {
+        function displayGeneralNotes() {
+            // Now handled by displayMassesAndNotes - this is just for backwards compatibility
+            return;
+        }
+
+        function displayMassesAndNotes() {
             if (!allData || !allData.masses) return;
             
             const container = document.getElementById('massesContainer');
             container.innerHTML = '';
 
-            allData.masses.forEach(mass => {
+            // Initialize notes array if it doesn't exist
+            if (!allData.notes) {
+                allData.notes = [];
+            }
+
+            // Array of different Lent/Ash Wednesday emoji pairs
+            const emojiPairs = [
+                ['✝️', '✝️'],  // Latin cross
+                ['✞', '✞'],    // Cross outline
+                ['✟', '✟'],    // Orthodox cross
+                ['🕊️', '🕊️'],  // doves
+                ['⛪', '⛪'],  // churches
+                ['🕯️', '🕯️'],  // candles
+            ];
+
+            // Insert note button at position 0 (before first mass)
+            const insertBtn0 = document.createElement('button');
+            insertBtn0.className = 'insert-note-btn';
+            insertBtn0.textContent = '+ Insert Note Here';
+            insertBtn0.onclick = () => insertNoteAt(0);
+            container.appendChild(insertBtn0);
+
+            // Display notes at position 0
+            allData.notes.filter(n => n.position === 0).forEach(note => {
+                container.appendChild(createNoteElement(note));
+            });
+
+            // Display each mass with notes after it
+            allData.masses.forEach((mass, index) => {
+                const emoji = emojiPairs[index % emojiPairs.length];
+                
+                // Check if mass is cancelled
+                const isCancelled = mass.announcement && (
+                    mass.announcement.toLowerCase().includes('cancel') || 
+                    mass.isCancelled === true
+                );
+                
+                // Build announcement HTML if exists
+                let announcementHTML = '';
+                if (mass.announcement) {
+                    announcementHTML = `
+                        <div class="announcement-notice ${isCancelled ? 'announcement-cancelled' : ''}">
+                            <button class="edit-announcement-btn" onclick="editAnnouncement('${mass.id}')">Edit</button>
+                            <span class="announcement-text">${mass.announcement}</span>
+                        </div>
+                    `;
+                }
+                
+                // Build volunteer table HTML only if not cancelled
+                let volunteerTableHTML = '';
+                if (!isCancelled) {
+                    volunteerTableHTML = `
+                        <table class="volunteer-table">
+                            <tr>
+                                <td>1</td>
+                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 1, 0)">
+                                    <span class="slot-content" id="${mass.id}-1-0"></span>
+                                </td>
+                                <td>3</td>
+                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 3, 0)">
+                                    <span class="slot-content" id="${mass.id}-3-0"></span>
+                                </td>
+                                <td>5</td>
+                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 5, 0)">
+                                    <span class="slot-content" id="${mass.id}-5-0"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 2, 0)">
+                                    <span class="slot-content" id="${mass.id}-2-0"></span>
+                                </td>
+                                <td>4</td>
+                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 4, 0)">
+                                    <span class="slot-content" id="${mass.id}-4-0"></span>
+                                </td>
+                                <td>6</td>
+                                <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 6, 0)">
+                                    <span class="slot-content" id="${mass.id}-6-0"></span>
+                                </td>
+                            </tr>
+                        </table>
+                    `;
+                }
+                
+                // Add reorder buttons (only in admin mode)
+                const reorderButtons = `
+                    <button class="reorder-btn reorder-up" onclick="moveMassUp(${index})" ${index === 0 ? 'disabled' : ''}>↑</button>
+                    <button class="reorder-btn reorder-down" onclick="moveMassDown(${index})" ${index === allData.masses.length - 1 ? 'disabled' : ''}>↓</button>
+                `;
+                
                 const massDiv = document.createElement('div');
                 massDiv.className = 'mass-section';
+                massDiv.id = `mass-${index}`;
                 massDiv.innerHTML = `
-                    <div class="mass-header">
+                    <div class="mass-header" data-emoji-left="${emoji[0]}" data-emoji-right="${emoji[1]}">
+                        <style>
+                            #mass-${index} .mass-header::before { content: "${emoji[0]}"; }
+                            #mass-${index} .mass-header::after { content: "${emoji[1]}"; }
+                        </style>
+                        ${reorderButtons}
                         <button class="delete-mass-btn" onclick="deleteMass('${mass.id}')">Delete</button>
                         <button class="edit-mass-btn" onclick="editMass('${mass.id}')">Edit</button>
+                        <button class="edit-announcement-btn" onclick="editAnnouncement('${mass.id}')" style="top: 50px; right: 10px;">📢 Note</button>
                         <h3>${mass.day}</h3>
                         <p><strong>${mass.time}</strong></p>
                         ${mass.note ? `<p>${mass.note}</p>` : ''}
                     </div>
-                    <table class="volunteer-table">
-                        <tr>
-                            <td>1</td>
-                            <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 1, 0)">
-                                <span class="slot-content" id="${mass.id}-1-0"></span>
-                            </td>
-                            <td>3</td>
-                            <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 3, 0)">
-                                <span class="slot-content" id="${mass.id}-3-0"></span>
-                            </td>
-                            <td>5</td>
-                            <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 5, 0)">
-                                <span class="slot-content" id="${mass.id}-5-0"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 2, 0)">
-                                <span class="slot-content" id="${mass.id}-2-0"></span>
-                            </td>
-                            <td>4</td>
-                            <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 4, 0)">
-                                <span class="slot-content" id="${mass.id}-4-0"></span>
-                            </td>
-                            <td>6</td>
-                            <td class="volunteer-name" onclick="openVolunteerModal('${mass.id}', 6, 0)">
-                                <span class="slot-content" id="${mass.id}-6-0"></span>
-                            </td>
-                        </tr>
-                    </table>
+                    ${announcementHTML}
+                    ${volunteerTableHTML}
                 `;
                 container.appendChild(massDiv);
+
+                // Insert note button at position after this mass
+                const position = index + 1;
+                const insertBtn = document.createElement('button');
+                insertBtn.className = 'insert-note-btn';
+                insertBtn.textContent = '+ Insert Note Here';
+                insertBtn.onclick = () => insertNoteAt(position);
+                container.appendChild(insertBtn);
+
+                // Display notes at this position
+                allData.notes.filter(n => n.position === position).forEach(note => {
+                    container.appendChild(createNoteElement(note));
+                });
             });
 
             displayVolunteers();
+        }
+
+        function createNoteElement(note) {
+            const noteDiv = document.createElement('div');
+            const colorClass = note.color === 'red' ? 'alert-red' : '';
+            noteDiv.className = `general-notes ${colorClass}`;
+            noteDiv.innerHTML = `
+                <button class="edit-general-notes-btn" onclick="editNote('${note.id}')">Edit</button>
+                <button class="delete-general-notes-btn" onclick="deleteNote('${note.id}')">Delete</button>
+                <div class="general-notes-content">${note.content}</div>
+            `;
+            return noteDiv;
+        }
+
+        function displayMasses() {
+            // Now handled by displayMassesAndNotes which interleaves notes
+            displayMassesAndNotes();
         }
 
         function displayVolunteers() {
@@ -1098,11 +1472,32 @@
         // ============================================
         
         function toggleAdminPanel() {
+            // Check if already authenticated
+            if (!isAdminAuthenticated) {
+                const password = prompt('🔒 Enter admin password:');
+                if (password !== ADMIN_PASSWORD) {
+                    alert('❌ Incorrect password. Access denied.');
+                    return;
+                }
+                isAdminAuthenticated = true;
+                alert('✅ Authentication successful!');
+            }
+            
             const panel = document.getElementById('adminPanel');
             panel.classList.toggle('show');
         }
 
         function toggleAdminMode() {
+            // Require authentication to enter edit mode
+            if (!adminModeActive && !isAdminAuthenticated) {
+                const password = prompt('🔒 Enter admin password to enable edit mode:');
+                if (password !== ADMIN_PASSWORD) {
+                    alert('❌ Incorrect password. Access denied.');
+                    return;
+                }
+                isAdminAuthenticated = true;
+            }
+            
             adminModeActive = !adminModeActive;
             const btn = document.getElementById('editModeBtn');
             
@@ -1123,7 +1518,8 @@
                 id: newId,
                 day: 'New Day',
                 time: '12:00 pm',
-                note: ''
+                note: '',
+                announcement: ''
             });
             await saveAllData();
             toggleAdminPanel();
@@ -1157,16 +1553,34 @@
 
         async function deleteMass(massId) {
             if (confirm('Are you sure you want to delete this mass time? All volunteer sign-ups for this mass will also be deleted.')) {
-                // Remove mass
                 allData.masses = allData.masses.filter(m => m.id !== massId);
                 
-                // Remove volunteers for this mass
                 Object.keys(allData.volunteers).forEach(key => {
                     if (key.startsWith(massId + '-')) {
                         delete allData.volunteers[key];
                     }
                 });
                 
+                await saveAllData();
+            }
+        }
+
+        async function moveMassUp(index) {
+            if (index > 0) {
+                // Swap with previous item
+                const temp = allData.masses[index];
+                allData.masses[index] = allData.masses[index - 1];
+                allData.masses[index - 1] = temp;
+                await saveAllData();
+            }
+        }
+
+        async function moveMassDown(index) {
+            if (index < allData.masses.length - 1) {
+                // Swap with next item
+                const temp = allData.masses[index];
+                allData.masses[index] = allData.masses[index + 1];
+                allData.masses[index + 1] = temp;
                 await saveAllData();
             }
         }
@@ -1187,13 +1601,122 @@
             closeModal('editHeaderModal');
         });
 
+        function insertNoteAt(position) {
+            currentEditingNoteId = 'note' + Date.now();
+            document.getElementById('generalNotesInput').value = '';
+            
+            // Reset color to yellow
+            const colorRadios = document.querySelectorAll('input[name="noteColor"]');
+            colorRadios.forEach(radio => {
+                radio.checked = radio.value === 'yellow';
+            });
+            
+            document.getElementById('editGeneralNotesModal').setAttribute('data-position', position);
+            document.getElementById('editGeneralNotesModal').style.display = 'block';
+        }
+
+        function editNote(noteId) {
+            currentEditingNoteId = noteId;
+            const note = allData.notes.find(n => n.id === noteId);
+            if (note) {
+                document.getElementById('generalNotesInput').value = note.content;
+                document.getElementById('editGeneralNotesModal').setAttribute('data-position', note.position);
+                
+                // Set color radio button
+                const colorRadios = document.querySelectorAll('input[name="noteColor"]');
+                colorRadios.forEach(radio => {
+                    radio.checked = radio.value === (note.color || 'yellow');
+                });
+                
+                document.getElementById('editGeneralNotesModal').style.display = 'block';
+            }
+        }
+
+        function deleteNote(noteId) {
+            if (confirm('Are you sure you want to delete this note?')) {
+                allData.notes = allData.notes.filter(n => n.id !== noteId);
+                saveAllData();
+            }
+        }
+
+        document.getElementById('editGeneralNotesForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const content = document.getElementById('generalNotesInput').value.trim();
+            if (!content) {
+                closeModal('editGeneralNotesModal');
+                return;
+            }
+
+            const position = parseInt(document.getElementById('editGeneralNotesModal').getAttribute('data-position'));
+            
+            // Get selected color
+            const selectedColor = document.querySelector('input[name="noteColor"]:checked').value;
+            
+            // Check if editing existing note
+            const existingNoteIndex = allData.notes.findIndex(n => n.id === currentEditingNoteId);
+            
+            if (existingNoteIndex >= 0) {
+                // Update existing note
+                allData.notes[existingNoteIndex].content = content;
+                allData.notes[existingNoteIndex].position = position;
+                allData.notes[existingNoteIndex].color = selectedColor;
+            } else {
+                // Create new note
+                allData.notes.push({
+                    id: currentEditingNoteId,
+                    content: content,
+                    position: position,
+                    color: selectedColor
+                });
+            }
+            
+            await saveAllData();
+            closeModal('editGeneralNotesModal');
+        });
+
+        function editAnnouncement(massId) {
+            currentEditingAnnouncementMassId = massId;
+            const mass = allData.masses.find(m => m.id === massId);
+            
+            if (mass) {
+                document.getElementById('announcementText').value = mass.announcement || '';
+                // Check cancelled checkbox based on flag or text content
+                const isCancelled = mass.isCancelled === true || 
+                    (mass.announcement && mass.announcement.toLowerCase().includes('cancel'));
+                document.getElementById('isCancelled').checked = isCancelled;
+                document.getElementById('editAnnouncementModal').style.display = 'block';
+            }
+        }
+
+        document.getElementById('editAnnouncementForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const massIndex = allData.masses.findIndex(m => m.id === currentEditingAnnouncementMassId);
+            
+            if (massIndex !== -1) {
+                let announcement = document.getElementById('announcementText').value.trim();
+                const isCancelled = document.getElementById('isCancelled').checked;
+                
+                // Add cancelled prefix if checkbox is checked and not already there
+                if (isCancelled && announcement && !announcement.toLowerCase().includes('cancel')) {
+                    announcement = '❌ CANCELLED: ' + announcement;
+                }
+                
+                allData.masses[massIndex].announcement = announcement;
+                allData.masses[massIndex].isCancelled = isCancelled;
+                await saveAllData();
+                closeModal('editAnnouncementModal');
+            }
+        });
+
         async function clearAllData() {
             if (confirm('⚠️ Are you sure you want to clear ALL data? This cannot be undone!')) {
                 if (confirm('Really? This will delete all masses and volunteer sign-ups!')) {
                     allData = {
                         masses: defaultMasses,
                         volunteers: {},
-                        header: { title: 'THANKSGIVING MASSES', date: 'NOVEMBER 27-28, 2025' }
+                        header: { title: 'HOLY WEEK', date: 'MARCH 30-APRIL 3, 2026' },
+                        notes: []
                     };
                     await saveAllData();
                     alert('✅ All data cleared!');
@@ -1218,7 +1741,7 @@
             const nameInput = document.getElementById('volunteerName');
             const removeContainer = document.getElementById('removeButtonContainer');
             
-            document.getElementById('modalTitle').textContent = `🍂 Sign Up for Position ${position}`;
+            document.getElementById('modalTitle').textContent = `❄️ Sign Up for Position ${position}`;
             
             if (existingName) {
                 nameInput.value = existingName;
@@ -1280,11 +1803,8 @@
         // Initialize
         // ============================================
         
-        // Load data when page loads
         loadAllData();
-        
-        // Refresh data every 30 seconds to show updates from other users
-        setInterval(loadAllData, 30000);
+        setInterval(loadAllData, 300000);
     </script>
 </body>
 </html>
